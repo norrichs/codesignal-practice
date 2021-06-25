@@ -564,6 +564,62 @@
 //     console.log('result',avoidObstacles(test))  
 // })
 
-function boxBlur(image) {
+// function boxBlur(image) {
+//     const w = image[0].length
+//     const h = image.length
+//     let res = []
+//     for(let i=1;i<h-1;i++){
+//         res.push([])
+//         for(let j=1; j<w-1;j++){
+//             res[i-1].push( Math.floor((image[i-1][j-1] + image[i-1][j] + image[i-1][j+1] +
+//                          image[i][j-1]   + image[i][j]   + image[i][j+1]   +
+//                          image[i+1][j-1] + image[i+1][j] + image[i+1][j+1]) / 9 ))
+
+//         }
+//     }
+//     return res
+// }
+
+// const tests = [
+//     [
+//         [7, 4, 0, 1], 
+//         [5, 6, 2, 2], 
+//         [6, 10, 7, 8], 
+//         [1, 4, 2, 0]
+//     ],
+//     [
+//         [1, 1, 1], 
+//         [1, 7, 1], 
+//         [1, 1, 1]
+//     ]
+// ]
+
+// tests.forEach((test)=>{
+//     console.log('test',boxBlur(test))
+// })
+
+
+
+// // boxBlur(image) = [[5, 4], 
+// //                   [4, 4]]
+
+// //          image = [[1, 1, 1], 
+// //          [1, 7, 1], 
+// //          [1, 1, 1]]
+
+// //          boxBlur(image) = [[1]]
+
+function minesweeper(matrix) {
 
 }
+
+// For
+
+// matrix = [[true, false, false],
+//           [false, true, false],
+//           [false, false, false]]
+// the output should be
+
+// minesweeper(matrix) = [[1, 2, 1],
+//                        [2, 1, 1],
+//                        [1, 1, 1]]
