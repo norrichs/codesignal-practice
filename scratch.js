@@ -664,14 +664,40 @@
 
 // console.log(alphabeticShift('crazy'))
 
-function chessBoardCellColor(cell1, cell2) {
-	return ((cell1[0].toLowerCase().charCodeAt()-97)%2 ===
-			parseInt(cell1[1]-1)%2) ===
-		((cell2[0].toLowerCase().charCodeAt()-97)%2 ===
-			parseInt(cell2[1]-1)%2)
+// function chessBoardCellColor(cell1, cell2) {
+// 	return ((cell1[0].toLowerCase().charCodeAt()-97)%2 ===
+// 			parseInt(cell1[1]-1)%2) ===
+// 		((cell2[0].toLowerCase().charCodeAt()-97)%2 ===
+// 			parseInt(cell2[1]-1)%2)
 	
 	
 
+// }
+
+// console.log(chessBoardCellColor('a1', 'f3'))
+
+
+
+
+// Given a sorted array of integers a, your task is to determine 
+// which element of a is closest to all other values of a. In 
+// other words, find the element x in a, which minimizes the following sum:
+
+//   abs(a[0] - x) + abs(a[1] - x) + ... + abs(a[a.length - 1] - x)
+
+//  If there are several possible answers, output the smallest one.
+// https://app.codesignal.com/arcade/intro/level-7/ZFnQkq9RmMiyE6qtq
+
+
+function absoluteValuesSumMinimization(a) {
+	
+	let absSums = a.map(x => a.reduce((acc,val)=>{return acc+ Math.abs(val-x)},0))
+	let minAbsSum = [absSums[0],a[0]]
+	for(let i=1;i<a.length;i++){
+		if(absSums[i] < minAbsSum[0]) minAbsSum = [absSums[i], a[i]] 
+		else if(absSums[i] === minAbsSum && a[i] < minAbsSum[1]) minAbsSum[1] = a[i]
+	}
+	return minAbsSum[1]
 }
 
-console.log(chessBoardCellColor('a1', 'f3'))
+console.log(absoluteValuesSumMinimization([2,4,7]))
