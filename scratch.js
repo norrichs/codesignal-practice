@@ -643,11 +643,23 @@
 
 
 // Correct variable names consist only of English letters, digits and underscores and they can't start with a digit.
-function variableName(name) {
-	return !name.match(/[^_0-9a-zA-Z]/g) && !name.match(/^\d/g) == true
+// function variableName(name) {
+// 	return !name.match(/[^_0-9a-zA-Z]/g) && !name.match(/^\d/g) == true
+// }
+
+// tests = ['var_1__Int', 'qq-q', '2w2']
+
+// tests.forEach(test=>console.log(variableName(test)))
+
+// alphabetic shift
+function alphabeticShift(inputString){
+	let resultString = ''
+	for(let c of inputString){
+		resultString = resultString.concat(
+				String.fromCharCode((c.charCodeAt()-96)%26+97)
+			)	}
+	return resultString
+
 }
 
-tests = ['var_1__Int', 'qq-q', '2w2']
-
-tests.forEach(test=>console.log(variableName(test)))
-
+console.log(alphabeticShift('crazy'))
