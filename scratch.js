@@ -609,35 +609,45 @@
 
 // //          boxBlur(image) = [[1]]
 
-function minesweeper(matrix) {
-	let total = []
-	for(let i = 0; i < matrix.length; i++){
-		total.push([])
-		for(let j = 0; j< matrix[0].length; j++){
-			total[i].push((matrix[i-1] ? (matrix[i-1][j-1] ? 1 : 0) : 0)+
-				(matrix[i-1] ? (matrix[i-1][j  ] ? 1 : 0) : 0)+
-				(matrix[i-1] ? (matrix[i-1][j+1] ? 1 : 0) : 0)+
-				(matrix[i  ] ? (matrix[i  ][j-1] ? 1 : 0) : 0)+
-				(matrix[i  ] ? (matrix[i  ][j+1] ? 1 : 0) : 0)+
-				(matrix[i+1] ? (matrix[i+1][j-1] ? 1 : 0) : 0)+
-				(matrix[i+1] ? (matrix[i+1][j  ] ? 1 : 0) : 0)+
-				(matrix[i+1] ? (matrix[i+1][j+1] ? 1 : 0) : 0))
+// function minesweeper(matrix) {
+// 	let total = []
+// 	for(let i = 0; i < matrix.length; i++){
+// 		total.push([])
+// 		for(let j = 0; j< matrix[0].length; j++){
+// 			total[i].push((matrix[i-1] ? (matrix[i-1][j-1] ? 1 : 0) : 0)+
+// 				(matrix[i-1] ? (matrix[i-1][j  ] ? 1 : 0) : 0)+
+// 				(matrix[i-1] ? (matrix[i-1][j+1] ? 1 : 0) : 0)+
+// 				(matrix[i  ] ? (matrix[i  ][j-1] ? 1 : 0) : 0)+
+// 				(matrix[i  ] ? (matrix[i  ][j+1] ? 1 : 0) : 0)+
+// 				(matrix[i+1] ? (matrix[i+1][j-1] ? 1 : 0) : 0)+
+// 				(matrix[i+1] ? (matrix[i+1][j  ] ? 1 : 0) : 0)+
+// 				(matrix[i+1] ? (matrix[i+1][j+1] ? 1 : 0) : 0))
 			
-		}
-	}
-	return total
+// 		}
+// 	}
+// 	return total
+// }
+
+// // For
+
+// matrix = [[true, false, false],
+//           [false, true, false],
+//           [false, false, false]]
+// // the output should be
+
+// // minesweeper(matrix) = [[1, 2, 1],
+// //                        [2, 1, 1],
+// //                        [1, 1, 1]]
+
+// console.dir(minesweeper(matrix))
+
+
+// Correct variable names consist only of English letters, digits and underscores and they can't start with a digit.
+function variableName(name) {
+	return !name.match(/[^_0-9a-zA-Z]/g) && !name.match(/^\d/g) == true
 }
 
-// For
+tests = ['var_1__Int', 'qq-q', '2w2']
 
-matrix = [[true, false, false],
-          [false, true, false],
-          [false, false, false]]
-// the output should be
-
-// minesweeper(matrix) = [[1, 2, 1],
-//                        [2, 1, 1],
-//                        [1, 1, 1]]
-
-console.dir(minesweeper(matrix))
+tests.forEach(test=>console.log(variableName(test)))
 
