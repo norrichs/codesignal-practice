@@ -1,9 +1,9 @@
 // function adjacentElementsProduct(inputArray) {
 //     let max = 0;
 //     for(let i=0; i<inputArray.length-1; i++){
-// 		console.log(inputArray[i],inputArray[i+1])
+// 		(inputArray[i],inputArray[i+1])
 // 		if(inputArray[i]*inputArray[i+1] > max){
-//             console.log("ismax",inputArray[i]*inputArray[i+1])
+//             ("ismax",inputArray[i]*inputArray[i+1])
 //             max = inputArray[i]*inputArray[i+1]
 //         }
 //     }
@@ -21,7 +21,7 @@
 // }
 
 // [1,2,3,4,5].forEach((i) => {
-// 	console.log(shapeArea(i))
+// 	(shapeArea(i))
 // })
 
 // function makeArrayConsecutive2(statues) {
@@ -31,11 +31,11 @@
 // 		if(statue < min) min = statue
 // 		if(statue > max) max = statue
 // 	}
-// 	console.log(max, min, statues.length)
+// 	(max, min, statues.length)
 // 	return max - min - statues.length + 1
 // }
 
-// console.log(makeArrayConsecutive2([0,3]))
+// (makeArrayConsecutive2([0,3]))
 
 //  Too long execution
 ////////////////////////////////////////////////////////
@@ -78,11 +78,11 @@
 // (doesn't work)
 
 // function almostIncreasingSequence(sequence) {
-// 	console.log(sequence)
+// 	(sequence)
 // 	if(sequence.length < 3) return true
 // 	if(sequence.length === 3){
 // 		if(sequence[0] < sequence[1] || sequence[0] < sequence[2] || sequence[1] < sequence[2]) {
-// 			console.log('3, true')
+// 			('3, true')
 // 			return true
 // 		}else return false
 // 	}else{
@@ -123,7 +123,7 @@
 //	RETURN true
 
 // function almostIncreasingSequence(s){
-// 	console.log('start:',s)
+// 	('start:',s)
 // 	if(s.length < 3) return true
 // 	if(s.length === 3){
 // 		if(s[0] < s[1] || s[0] < s[2] || s[1] < s[2]) return true
@@ -132,10 +132,10 @@
 // 		let removed = 0
 // 		let i = 1
 // 		while( i<s.length ){
-// 			// console.log('i='+i,s)
+// 			// ('i='+i,s)
 // 			if (s[i-1]>=s[i]){
 // 				removed+=1
-// 				// console.log("removed="+removed)
+// 				// ("removed="+removed)
 // 				if(removed>1) return false
 // 				else{
 // 					if( i === s.length-1 || s[i-1] < s[i+1]){		// IF remove [i] resolves, remove
@@ -145,7 +145,7 @@
 // 					}else{						// ELSE return false
 // 						return false
 // 					}
-// 					// console.log("new s=",s)
+// 					// ("new s=",s)
 // 				}
 // 			}else i+=1
 // 		}
@@ -169,7 +169,7 @@
 // 	[3,5,67,98,3]	//false
 // ]
 // tests.forEach((test) => {
-// 	console.log(almostIncreasingSequence(test))
+// 	(almostIncreasingSequence(test))
 // })
 
 // 	SET hauntedArray = array of length matrix width, filled w/ zeros
@@ -215,7 +215,7 @@
 // ]
 
 // test.forEach((arr) => {
-// 	console.log(matrixElementsSum(arr))
+// 	(matrixElementsSum(arr))
 // })
 
 // function commonCharacterCount(s1, s2) {
@@ -225,7 +225,7 @@
 //     for(let i=0; i<arr1.length; i++){
 //         for(let j=0; j<arr2.length; j++){
 //             if( arr1[i] === arr2[j] ){
-// 				console.log(i,arr1[i],j,arr2[j],arr2)
+// 				(i,arr1[i],j,arr2[j],arr2)
 //                 count += 1
 // 				arr2.splice(j,1)
 // 				j = arr2.length
@@ -235,20 +235,20 @@
 // 	return count
 // }
 
-// console.log(commonCharacterCount('aabcc', 'adcaa'))
+// (commonCharacterCount('aabcc', 'adcaa'))
 
 // let test = 'abcde'
-// console.log(
+// (
 // test[2].toUpperCase(),
 // test
 // )
 
 // function isLucky(n) {
 //     const str  = n.toString()
-// 	console.log(str, str.substr(0, str.length/2).split('').reduce((tot,num) =>{return tot + parseInt(num)},0))
+// 	(str, str.substr(0, str.length/2).split('').reduce((tot,num) =>{return tot + parseInt(num)},0))
 //     return str.substr(0, str.length/2).split('').reduce((tot,num) =>{return tot + parseInt(num)},0) === str.substr(str.length/2, str.length).split('').reduce((tot,num) =>{return tot + parseInt(num)},0)
 // }
-// console.log(isLucky(1230))
+// (isLucky(1230))
 
 // function sortByHeight(a){
 // 	let people = []
@@ -267,7 +267,7 @@
 // }
 
 // let test = [4, 2, 9, 11, 2, 16]
-// console.log(sortByHeight(test))
+// (sortByHeight(test))
 
 //	reverseInParentheses
 //	SET start = 0, end = 0, result = "", revStr =''
@@ -303,25 +303,25 @@
 //				inputString.slice(0,index-1).slice('').reverse().join('')
 
 // function reverseInParentheses(inputString) {
-// 	console.log("RIP inputstring", inputString);
+// 	("RIP inputstring", inputString);
 // 	let newString = inputString
 // 	for (let i = 0; i < newString.length; i++) {
-// 		console.log('for loop ',i,newString[i])
+// 		('for loop ',i,newString[i])
 // 		if (newString[i] === "(") {
 // 			let revString = reverseInParentheses(newString.slice(i+1))
-// 			console.log('input',newString,'rev',revString, 'i', i)
+// 			('input',newString,'rev',revString, 'i', i)
 // 			newString = newString.split('')
-// 			console.log('newString array 1',newString)
+// 			('newString array 1',newString)
 // 			newString.splice(i+1,revString.length,...revString.split(''))
 
-// 			console.log('newString array 2', newString)
+// 			('newString array 2', newString)
 // 			newString = newString.join('')
-// 			console.log('newString', newString)
+// 			('newString', newString)
 // 			i+=revString.length+1
-// 			console.log(i)
+// 			(i)
 // 		} else if (newString[i] === ")") {
 // 			let result = newString.slice(0, i).split("").reverse().join("");
-// 			console.log('reversed, result', result)
+// 			('reversed, result', result)
 // 			return result;
 // 		}
 // 	}
@@ -353,7 +353,7 @@
 // 			if (arr[i] === "(") {
 // 				// At beginning of reversible section.  Get section from here to end, including parens
 // 				let revArr = rev(arr.slice(i + 1)).split("");
-// 				// console.log('arr:',arr,'revArr',revArr)
+// 				// ('arr:',arr,'revArr',revArr)
 // 				arr.splice(i + 1, revArr.length, ...revArr);
 // 				i += revArr.length + 1;
 // 			} else if (arr[i] === ")") {
@@ -378,7 +378,7 @@
 // let test = "foo(bar)baz(blah)blip(bl(klop)f)";
 
 // test = "1(((23)45)67)890";
-// console.log("test", reverseInParentheses(test));
+// ("test", reverseInParentheses(test));
 
 
 // function addBorder(picture) {
@@ -389,7 +389,7 @@
 
 // }
 
-// console.log(addBorder([
+// (addBorder([
 // 	"abcd",
 // 	"efgh",
 // 	"ijkl"
@@ -398,14 +398,14 @@
 
 // var twoSum = function(nums, target) {
 //     for(let i=0;i<nums.length;i++){
-// 		console.log(nums.slice(i+1))
+// 		(nums.slice(i+1))
 //         if(nums.slice(i+1).indexOf(target-nums[i]) !== -1){
 //             return [i, i+1 + nums.slice(i+1).indexOf(target-nums[i])]
 //         }
 //     }
 // };
 
-// console.log(twoSum([3,2,4,4,3,5,7,9],6))
+// (twoSum([3,2,4,4,3,5,7,9],6))
 
 
 //* https://app.codesignal.com/arcade/intro/level-4/xYXfzQmnhBvEKJwXP
@@ -434,7 +434,7 @@
 //     else return false
 // }
 
-// console.log(areSimilar([1,2,3],[1,3,2]))
+// (areSimilar([1,2,3],[1,3,2]))
 
 
 
@@ -451,11 +451,11 @@
 //     return tot
 // }
 
-// console.log(arrayChange([-5,1,0,-3,1]))
+// (arrayChange([-5,1,0,-3,1]))
 
 // function palindromeRearranging(inputString) {
 //     const arr = inputString.split('').sort()
-//     console.log(arr)
+//     (arr)
 //     for(let i=0;i<arr.length-1;i+=2){
 //         if(arr[i] !== arr[i+1]) return false
 //     }
@@ -472,7 +472,7 @@
 // function palindromeRearranging(inputString){
 //     const arr = inputString.split('').sort()
 
-//     console.log(arr)
+//     (arr)
 //     let letterCount = 1;
 //     let oddCount = 0;
 //     for(let i=1; i<arr.length; i++){
@@ -485,7 +485,7 @@
 //             }
 //             letterCount = 1
 //         }
-//         console.log(arr[i-1], arr[i], letterCount, oddCount)
+//         (arr[i-1], arr[i], letterCount, oddCount)
 //     }
 //     if(letterCount%2 === 1) {
 //         oddCount+=1
@@ -494,22 +494,22 @@
 //     return true
 // }
 
-// console.log(palindromeRearranging('afabbccd'))
+// (palindromeRearranging('afabbccd'))
 
 
 // function isIPv4Address(inputString) {
 //     const arr = inputString.split('.')
-//     console.log(arr)
+//     (arr)
 //     if(arr.length === 4) {
 //         for(n of arr){
-//             console.log(n.split('').forEach((d)=>{
-//                 console.log('digit',d);
+//             (n.split('').forEach((d)=>{
+//                 ('digit',d);
 //                 return parseInt(d)}))
 //         }
 //         return true
 //     }else return false
 // }
-// console.log(isIPv4Address('1.1.1.1a'))
+// (isIPv4Address('1.1.1.1a'))
 
 ///////////////////////////////////////////////////
 // 
@@ -520,18 +520,18 @@
 // unoptimized, works
 // function avoidObstacles(inputArray){
 //     inputArray.sort((a,b)=>a-b)
-//     console.log(inputArray)
+//     (inputArray)
 //     const max = inputArray[inputArray.length-1]+1
 //     for(let i=2; i<=max; i++){
-//         console.log('i=',i)
+//         ('i=',i)
 //         let complies = ()=>{
 //             for(let j=i; j<=max; j+=i ){
-//                 console.log('j',j)
+//                 ('j',j)
 //                 if(inputArray.includes(j)) return false
 //             }
 //             return true
 //         }
-//         console.log('complies', i, complies())
+//         ('complies', i, complies())
 //         if(complies()) return i
         
 //     }
@@ -561,7 +561,7 @@
 //     [2,3]
 // ]
 // tests.forEach(test=>{
-//     console.log('result',avoidObstacles(test))  
+//     ('result',avoidObstacles(test))  
 // })
 
 // function boxBlur(image) {
@@ -595,7 +595,7 @@
 // ]
 
 // tests.forEach((test)=>{
-//     console.log('test',boxBlur(test))
+//     ('test',boxBlur(test))
 // })
 
 
@@ -610,16 +610,34 @@
 // //          boxBlur(image) = [[1]]
 
 function minesweeper(matrix) {
-
+	let total = []
+	for(let i = 0; i < matrix.length; i++){
+		total.push([])
+		for(let j = 0; j< matrix[0].length; j++){
+			total[i].push((matrix[i-1] ? (matrix[i-1][j-1] ? 1 : 0) : 0)+
+				(matrix[i-1] ? (matrix[i-1][j  ] ? 1 : 0) : 0)+
+				(matrix[i-1] ? (matrix[i-1][j+1] ? 1 : 0) : 0)+
+				(matrix[i  ] ? (matrix[i  ][j-1] ? 1 : 0) : 0)+
+				(matrix[i  ] ? (matrix[i  ][j+1] ? 1 : 0) : 0)+
+				(matrix[i+1] ? (matrix[i+1][j-1] ? 1 : 0) : 0)+
+				(matrix[i+1] ? (matrix[i+1][j  ] ? 1 : 0) : 0)+
+				(matrix[i+1] ? (matrix[i+1][j+1] ? 1 : 0) : 0))
+			
+		}
+	}
+	return total
 }
 
 // For
 
-// matrix = [[true, false, false],
-//           [false, true, false],
-//           [false, false, false]]
+matrix = [[true, false, false],
+          [false, true, false],
+          [false, false, false]]
 // the output should be
 
 // minesweeper(matrix) = [[1, 2, 1],
 //                        [2, 1, 1],
 //                        [1, 1, 1]]
+
+console.dir(minesweeper(matrix))
+
