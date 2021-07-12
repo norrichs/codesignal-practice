@@ -652,14 +652,26 @@
 // tests.forEach(test=>console.log(variableName(test)))
 
 // alphabetic shift
-function alphabeticShift(inputString){
-	let resultString = ''
-	for(let c of inputString){
-		resultString = resultString.concat(
-				String.fromCharCode((c.charCodeAt()-96)%26+97)
-			)	}
-	return resultString
+// function alphabeticShift(inputString){
+// 	let resultString = ''
+// 	for(let c of inputString){
+// 		resultString = resultString.concat(
+// 				String.fromCharCode((c.charCodeAt()-96)%26+97)
+// 			)	}
+// 	return resultString
+
+// }
+
+// console.log(alphabeticShift('crazy'))
+
+function chessBoardCellColor(cell1, cell2) {
+	return ((cell1[0].toLowerCase().charCodeAt()-97)%2 ===
+			parseInt(cell1[1]-1)%2) ===
+		((cell2[0].toLowerCase().charCodeAt()-97)%2 ===
+			parseInt(cell2[1]-1)%2)
+	
+	
 
 }
 
-console.log(alphabeticShift('crazy'))
+console.log(chessBoardCellColor('a1', 'f3'))
