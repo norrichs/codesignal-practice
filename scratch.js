@@ -832,7 +832,6 @@ Use subfunction
 // 	const spaceArray = new Array(level)
 // 	const spaceStr = spaceArray.fill("-").join('')
 
-
 // 	if (inputArray.length === 1) return true;
 // 	for (let i = 0; i < inputArray.length; i++) {
 // 		const arr = [...inputArray];
@@ -851,7 +850,6 @@ Use subfunction
 // };
 
 // recursive permutation
-
 
 //	recursive( input )
 //		FOR first:last
@@ -872,7 +870,7 @@ Use subfunction
 // 		if(isOffByOne(prev, input[0])) return true
 // 		else return false
 // 	}
-	
+
 // 	for( let i=0; i<input.length; i++){
 // 		const rest = [...input]
 // 		const first = rest.splice(i,1)[0]
@@ -891,20 +889,18 @@ Use subfunction
 // 	return offBy === 1;
 // };
 
-
 // console.log(stringsRearrangement(
 // 	[
-// 		"142", 
-// 		"112", 
-// 		"113", 
+// 		"142",
+// 		"112",
+// 		"113",
 // 		"121"
 // 	]
 // ));
 
-// algo - 
+// algo -
 // non recursive?
 // sort the array throug all permutations, testing w/ each example
-
 
 // function extractEachKth(inputArray, k) {
 //     console.log(inputArray, k)
@@ -960,7 +956,6 @@ Use subfunction
 
 // console.log( arrayMaxConsecutiveSum( [ 1,2,3,4,5,6,20],3))
 
-
 // function growingPlant(upSpeed, downSpeed, desiredHeight) {
 // 	let height = 0;
 // 	let days = 1
@@ -971,7 +966,6 @@ Use subfunction
 // 		days += 1
 // 	}
 // }
-
 
 // function knapsackLight(value1, weight1, value2, weight2, maxW) {
 // 	if( weight1 + weight2 <= maxW) return value1 + value2
@@ -991,18 +985,79 @@ Use subfunction
 // 	return prefix
 // }
 
-function digitDegree(n) {
-    let reduced = n.toString()
-	let degree = 0
-	while(reduced.length > 1 ){
-		let sum = 0
-		for(char of reduced){
-			sum += parseInt(char)
-		}
-		reduced = sum.toString()
-		degree += 1
+// function digitDegree(n) {
+//     let reduced = n.toString()
+// 	let degree = 0
+// 	while(reduced.length > 1 ){
+// 		let sum = 0
+// 		for(char of reduced){
+// 			sum += parseInt(char)
+// 		}
+// 		reduced = sum.toString()
+// 		degree += 1
+// 	}
+// 	return degree
+// }
+
+// console.log(digitDegree(5))
+
+// function bishopAndPawn(bishop, pawn) {
+//     const cols = { a: 1, b: 2, c: 3, d: 4, e: 5, f: 6, g: 7, h: 8}
+//     const deltaCols = Math.max(cols[bishop[0]], cols[pawn[0]]) - Math.min(cols[bishop[0]], cols[pawn[0]])
+// 	const deltaRows = Math.max( parseInt(bishop[1]), parseInt(pawn[1]) ) - Math.min( parseInt(bishop[1]), parseInt(pawn[1]) )
+// 	return deltaRows === deltaCols
+// }
+
+// console.log(bishopAndPawn('a1', 'c3'))
+
+// function isBeautifulString(inputString) {
+// 	const alphabet = "abcdefghijklmnopqrstuvwxyz".split('')
+// 	arr = inputString.split('').sort()
+// 	console.log(arr)
+// 	let count = 1
+// 	let prevCount = 0
+// 	let prev = arr[0]
+// 	for(let i=1; i<arr.length; i++){
+// 		if(prev === arr[i]){
+
+// 			count += 1
+// 			if(count > prevCount && prevCount > 0) return false
+// 		}else{
+// 			prevCount = count
+// 			count = 1
+// 		}
+// 		console.log(arr[i], 'count',count,'prevCount', prevCount)
+// 		prev = arr[i]
+// 	}
+// 	return true
+// }
+
+// function isBeautifulString(inputString) {
+// 	const alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
+// 	arr = inputString.split("").sort();
+// 	let count, prevCount
+// 	prevCount = arr.filter(char => char===alphabet[0]).length
+// 	for(let i=1; i<alphabet.length; i++){
+// 		count = arr.filter(char => char===alphabet[i]).length
+// 		if(count > prevCount) return false
+// 		prevCount = count
+// 	}
+// 	return true
+// }
+
+// console.log(
+// 	isBeautifulString("abcdefghijklmnopqrstuvwxyzqwertuiopasdfghjklxcvbnm")
+// );
+
+
+function findEmailDomain(address) {
+	while(address.includes("\"")){
+		startQuote = address.indexOf("\"")
+		endQuote = address.substr(startQuote+1).indexOf("\"")
+		address = address.substr(endQuote + 2)
 	}
-	return degree
+	return address.split('@')[1]
 }
 
-console.log(digitDegree(5))
+
+console.log( findEmailDomain( "\"what.theHell@Dude!\"@domain.com"))
