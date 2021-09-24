@@ -1121,16 +1121,37 @@ Use subfunction
 
 // console.log(electionsWinners([40, 50, 52, 20], 3));
 
-function isMAC48Address(inputString) {
-	validChar = "0123456789ABCDEF"
-	const arr = inputString.split("-")
-	if(arr.length !== 6) return false
-	for(str of arr){
-		if(str.length !== 2) return false
-		if(!validChar.includes(str[0]) || !validChar.includes(str[1])) return false
+// function isMAC48Address(inputString) {
+// 	validChar = "0123456789ABCDEF"
+// 	const arr = inputString.split("-")
+// 	if(arr.length !== 6) return false
+// 	for(str of arr){
+// 		if(str.length !== 2) return false
+// 		if(!validChar.includes(str[0]) || !validChar.includes(str[1])) return false
+// 	}
+// 	return true
+// }
+
+// console.log(isMAC48Address("00-1B-63-84-45-E6"))
+// console.log(isMAC48Address("Z1-1B-63-84-45-E6"))
+
+
+function lineEncoding(s) {
+	let prev = s[0]
+	let word = s[0]
+	let encoded = ''
+	for( let i=1; i<s.length; i++){
+		if(s[i] === prev){
+			word = word + s[i]
+		}else{
+			encoded = encoded + (word.length === 1 ? word[0] : word.length + word[0])
+			word = [s[i]]
+		}
+		prev = s[i]
 	}
-	return true
+	encoded = encoded + (word.length === 1 ? word[0] : word.length + word[0])
+	return encoded
+	
 }
 
-console.log(isMAC48Address("00-1B-63-84-45-E6"))
-console.log(isMAC48Address("Z1-1B-63-84-45-E6"))
+console.log(lineEncoding('aaaabbbyxxxxxxccddddd'))
