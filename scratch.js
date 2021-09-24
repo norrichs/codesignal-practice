@@ -1049,7 +1049,6 @@ Use subfunction
 // 	isBeautifulString("abcdefghijklmnopqrstuvwxyzqwertuiopasdfghjklxcvbnm")
 // );
 
-
 // function findEmailDomain(address) {
 // 	while(address.includes("\"")){
 // 		startQuote = address.indexOf("\"")
@@ -1059,18 +1058,65 @@ Use subfunction
 // 	return address.split('@')[1]
 // }
 
-
 // console.log( findEmailDomain( "\"what.theHell@Dude!\"@domain.com"))
 
-function buildPalindrome(st) {
-	console.log('start string', st)
-	let testStr
-	for(let i=0; i<st.length; i++){
-		testStr = st + st.substr(0,i).split('').reverse().join('')
-		if(testStr.split('').reverse().join('') === testStr) return testStr
-		console.log(testStr)
+// function buildPalindrome(st) {
+// 	console.log('start string', st)
+// 	let testStr
+// 	for(let i=0; i<st.length; i++){
+// 		testStr = st + st.substr(0,i).split('').reverse().join('')
+// 		if(testStr.split('').reverse().join('') === testStr) return testStr
+// 		console.log(testStr)
+// 	}
+// }
+
+// console.log(buildPalindrome('abcdc'))
+
+// function electionsWinners(votes, k) {
+// 	return votes.filter((thisOldCount, i, all)=>{
+// 		return isWinner(thisOldCount + k, all.filter((elem, j)=>j!==i))
+// 	}).length
+// }
+
+// const isWinner = (final, votes) => {
+// 	console.log(final, votes)
+// 	for( let i=0; i<votes.length; i++){
+// 		if(final <= votes[i]) return false
+// 	}
+// 	return true
+// }
+
+
+
+// function electionsWinners(votes, k){
+// 	if(k===0 ){
+// 		if(votes.filter(count=>count === Math.max(...votes)).length === 1) return 1
+// 		else return 0
+// 	}
+// 	let winnerCount = 0;
+// 	let final
+// 	for(let i=0; i<votes.length; i++){
+// 		final = votes[i]+k
+// 		if(Math.max(...votes) < final){
+// 			winnerCount += 1
+// 		}
+
+// 	}
+// 	console.log('got some winners')
+// 	return winnerCount
+
+// }
+
+function electionsWinners(votes, k){
+	if(k===0 ){
+		if(votes.filter(count=>count === Math.max(...votes)).length === 1) return 1
+		else return 0
 	}
+	const maxVotes = Math.max(...votes)
+	return votes.filter(count=>count + k > maxVotes).length
 }
 
 
-console.log(buildPalindrome('abcdc'))
+
+
+console.log(electionsWinners([40, 50, 52, 20], 3));
