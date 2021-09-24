@@ -944,8 +944,18 @@ Use subfunction
 // 	return uniqueArray.length
 // }
 
-console.log(differentSymbolsNaive('ben is pretty cool'))
+// console.log(differentSymbolsNaive('ben is pretty cool'))
 
-function arrayMaxConsecutiveSum(inputArray, k) {
+// function arrayMaxConsecutiveSum(inputArray, k) {
+// 	let max = 0;
+// 	for(let i=0; i<=inputArray.length - k; i++){
+// 		let sum = 0
+// 		for(let j=0; j<k; j++){
+// 			sum += inputArray[i+j]
+// 		}
+// 		if( sum > max) max = sum
+// 	}
+// 	return max
+// }
 
-}
+// console.log( arrayMaxConsecutiveSum( [ 1,2,3,4,5,6,20],3))
