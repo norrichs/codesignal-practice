@@ -959,13 +959,24 @@ Use subfunction
 // }
 
 // console.log( arrayMaxConsecutiveSum( [ 1,2,3,4,5,6,20],3))
-function growingPlant(upSpeed, downSpeed, desiredHeight) {
-	let height = 0;
-	let days = 1
-	while( height < desiredHeight){
-		height += upSpeed
-		if( height >= desiredHeight) return days
-		height -= downSpeed
-		days += 1
-	}
+
+
+// function growingPlant(upSpeed, downSpeed, desiredHeight) {
+// 	let height = 0;
+// 	let days = 1
+// 	while( height < desiredHeight){
+// 		height += upSpeed
+// 		if( height >= desiredHeight) return days
+// 		height -= downSpeed
+// 		days += 1
+// 	}
+// }
+
+
+function knapsackLight(value1, weight1, value2, weight2, maxW) {
+	if( weight1 + weight2 <= maxW) return value1 + value2
+	else if( weight1 <= maxW && weight2 <= maxW) return Math.max( value1, value2)
+	else if( weight1 <= maxW) return value1
+	else if( weight2 <= maxW) return value2
+	else return 0
 }
