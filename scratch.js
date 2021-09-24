@@ -981,12 +981,28 @@ Use subfunction
 // 	else return 0
 // }
 
-function longestDigitsPrefix(inputString) {
-	const digits = ['0','1','2','3','4','5','6','7','8','9']
-	let prefix = ''
-	for(char of inputString){
-		if(digits.includes(char)) prefix = prefix + char
-		else return prefix
+// function longestDigitsPrefix(inputString) {
+// 	const digits = ['0','1','2','3','4','5','6','7','8','9']
+// 	let prefix = ''
+// 	for(char of inputString){
+// 		if(digits.includes(char)) prefix = prefix + char
+// 		else return prefix
+// 	}
+// 	return prefix
+// }
+
+function digitDegree(n) {
+    let reduced = n.toString()
+	let degree = 0
+	while(reduced.length > 1 ){
+		let sum = 0
+		for(char of reduced){
+			sum += parseInt(char)
+		}
+		reduced = sum.toString()
+		degree += 1
 	}
-	return prefix
+	return degree
 }
+
+console.log(digitDegree(5))
