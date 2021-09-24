@@ -1086,8 +1086,6 @@ Use subfunction
 // 	return true
 // }
 
-
-
 // function electionsWinners(votes, k){
 // 	if(k===0 ){
 // 		if(votes.filter(count=>count === Math.max(...votes)).length === 1) return 1
@@ -1116,9 +1114,6 @@ Use subfunction
 // 	return votes.filter(count=>count + k > maxVotes).length
 // }
 
-
-
-
 // console.log(electionsWinners([40, 50, 52, 20], 3));
 
 // function isMAC48Address(inputString) {
@@ -1135,23 +1130,77 @@ Use subfunction
 // console.log(isMAC48Address("00-1B-63-84-45-E6"))
 // console.log(isMAC48Address("Z1-1B-63-84-45-E6"))
 
+// function lineEncoding(s) {
+// 	let prev = s[0]
+// 	let word = s[0]
+// 	let encoded = ''
+// 	for( let i=1; i<s.length; i++){
+// 		if(s[i] === prev){
+// 			word = word + s[i]
+// 		}else{
+// 			encoded = encoded + (word.length === 1 ? word[0] : word.length + word[0])
+// 			word = [s[i]]
+// 		}
+// 		prev = s[i]
+// 	}
+// 	encoded = encoded + (word.length === 1 ? word[0] : word.length + word[0])
+// 	return encoded
 
-function lineEncoding(s) {
-	let prev = s[0]
-	let word = s[0]
-	let encoded = ''
-	for( let i=1; i<s.length; i++){
-		if(s[i] === prev){
-			word = word + s[i]
-		}else{
-			encoded = encoded + (word.length === 1 ? word[0] : word.length + word[0])
-			word = [s[i]]
-		}
-		prev = s[i]
-	}
-	encoded = encoded + (word.length === 1 ? word[0] : word.length + word[0])
-	return encoded
-	
+// }
+
+// console.log(lineEncoding('aaaabbbyxxxxxxccddddd'))
+
+// function chessKnight(cell) {
+// 	const cols = { a: 1, b: 2, c: 3, d: 4, e: 5, f: 6, g: 7, h: 8 };
+// 	const col = cols[cell[0]];
+// 	const row = parseInt(cell[1]);
+// 	const relativeMoves = [
+// 		{ row: 1, col: 2 },
+// 		{ row: 1, col: -2 },
+// 		{ row: -1, col: 2 },
+// 		{ row: -1, col: -2 },
+// 		{ row: 2, col: 1 },
+// 		{ row: 2, col: -1 },
+// 		{ row: -2, col: 1 },
+// 		{ row: -2, col: -1 },
+// 	];
+// 	return relativeMoves
+// 		.map((m) => {
+// 			return { row: m.row + row, col: m.col + col };
+// 		})
+// 		.filter((m) => {
+// 			return m.row > 0 && m.row < 9 && m.col > 0 && m.col < 9;
+// 		}).length;
+// }
+
+// console.log(chessKnight("g6"));
+
+// function deleteDigit(n) {
+// 	nArr = n.toString().split("").map(d=>parseInt(d));
+
+// 	const sums = nArr.map((d, i, all) => {
+// 		return all.reduce((acc, val, j) => {
+// 			if(i===j) return acc
+// 			else return acc  + val
+// 		}, 0);
+// 	});
+// 	console.log(sums);
+// 	return Math.max(...sums)
+// }
+
+
+function deleteDigit(n) {
+	nArr = n.toString().split("").map(d=>parseInt(d));
+
+	const subNumbers = nArr.map((d, i, all) => {
+		const sub = [...all]
+		sub.splice(i,1)
+		return parseInt(sub.join(''))
+	});
+	console.log(subNumbers);
+	return Math.max(...subNumbers)
 }
 
-console.log(lineEncoding('aaaabbbyxxxxxxccddddd'))
+
+
+console.log(deleteDigit(212));
