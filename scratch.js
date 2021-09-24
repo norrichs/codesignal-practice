@@ -857,50 +857,95 @@ Use subfunction
 //		FOR first:last
 //			console log( [first, recursive( rest )])
 
-const stringsRearrangement = function(input){
-	for( let i=0; i<input.length; i++){
-		const rest = [...input];
-		const first = rest.splice(i,1)[0]
-		if(perm(first, rest)) {
-			return true
-		}
-	}
-	return false
-}
-const perm = function(prev, input){
-	if(input.length === 1){
-		if(isOffByOne(prev, input[0])) return true
-		else return false
-	}
+// const stringsRearrangement = function(input){
+// 	for( let i=0; i<input.length; i++){
+// 		const rest = [...input];
+// 		const first = rest.splice(i,1)[0]
+// 		if(perm(first, rest)) {
+// 			return true
+// 		}
+// 	}
+// 	return false
+// }
+// const perm = function(prev, input){
+// 	if(input.length === 1){
+// 		if(isOffByOne(prev, input[0])) return true
+// 		else return false
+// 	}
 	
-	for( let i=0; i<input.length; i++){
-		const rest = [...input]
-		const first = rest.splice(i,1)[0]
-		if(isOffByOne(prev, first) && perm(first, rest)) {
-			return true
-		}
-	}
-	return false
-}
+// 	for( let i=0; i<input.length; i++){
+// 		const rest = [...input]
+// 		const first = rest.splice(i,1)[0]
+// 		if(isOffByOne(prev, first) && perm(first, rest)) {
+// 			return true
+// 		}
+// 	}
+// 	return false
+// }
 
-const isOffByOne = (a, b) => {
-	let offBy = 0;
-	for (let i = 0; i < a.length; i++) {
-		if (a[i] !== b[i]) offBy += 1;
-	}
-	return offBy === 1;
-};
+// const isOffByOne = (a, b) => {
+// 	let offBy = 0;
+// 	for (let i = 0; i < a.length; i++) {
+// 		if (a[i] !== b[i]) offBy += 1;
+// 	}
+// 	return offBy === 1;
+// };
 
 
-console.log(stringsRearrangement(
-	[
-		"142", 
-		"112", 
-		"113", 
-		"121"
-	]
-));
+// console.log(stringsRearrangement(
+// 	[
+// 		"142", 
+// 		"112", 
+// 		"113", 
+// 		"121"
+// 	]
+// ));
 
 // algo - 
 // non recursive?
 // sort the array throug all permutations, testing w/ each example
+
+
+// function extractEachKth(inputArray, k) {
+//     console.log(inputArray, k)
+// 	const resultArray = []
+// 	inputArray.forEach((el,i)=>{
+// 		if( (i+1)%k !== 0 )	resultArray.push(inputArray[i])
+// 	})
+// 	return resultArray
+// }
+
+// function extractEachKth(inputArray, k) {
+// 	return inputArray.filter((el,i)=>(i+1)%k !== 0 )
+// }
+
+// console.log(extractEachKth(
+// 	[
+// 		1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20
+// 	],
+// 	3
+// ))
+
+// function firstDigit(inputString) {
+//     const digits = ['0','1','2','3','4','5','6','7','8','9']
+//     for(char of inputString){
+//         if(digits.includes(char)) return char
+//     }
+// }
+
+// console.log(firstDigit('abc3xyz4lmn'))
+
+// function differentSymbolsNaive(s) {
+//     const uniqueArray = []
+// 	for(char of s){
+// 		if(!uniqueArray.includes(char)) uniqueArray.push(char)
+// 	}
+// 	console.log(uniqueArray)
+// 	return uniqueArray.length
+// }
+
+console.log(differentSymbolsNaive('ben is pretty cool'))
+
+function arrayMaxConsecutiveSum(inputArray, k) {
+
+}
