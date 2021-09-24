@@ -1050,14 +1050,27 @@ Use subfunction
 // );
 
 
-function findEmailDomain(address) {
-	while(address.includes("\"")){
-		startQuote = address.indexOf("\"")
-		endQuote = address.substr(startQuote+1).indexOf("\"")
-		address = address.substr(endQuote + 2)
+// function findEmailDomain(address) {
+// 	while(address.includes("\"")){
+// 		startQuote = address.indexOf("\"")
+// 		endQuote = address.substr(startQuote+1).indexOf("\"")
+// 		address = address.substr(endQuote + 2)
+// 	}
+// 	return address.split('@')[1]
+// }
+
+
+// console.log( findEmailDomain( "\"what.theHell@Dude!\"@domain.com"))
+
+function buildPalindrome(st) {
+	console.log('start string', st)
+	let testStr
+	for(let i=0; i<st.length; i++){
+		testStr = st + st.substr(0,i).split('').reverse().join('')
+		if(testStr.split('').reverse().join('') === testStr) return testStr
+		console.log(testStr)
 	}
-	return address.split('@')[1]
 }
 
 
-console.log( findEmailDomain( "\"what.theHell@Dude!\"@domain.com"))
+console.log(buildPalindrome('abcdc'))
