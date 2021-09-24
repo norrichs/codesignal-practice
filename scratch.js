@@ -380,7 +380,6 @@
 // test = "1(((23)45)67)890";
 // ("test", reverseInParentheses(test));
 
-
 // function addBorder(picture) {
 // 	const res = picture.map((line)=>`*${line}*`)
 // 	res.push('*'.repeat(res[0].length))
@@ -395,7 +394,6 @@
 // 	"ijkl"
 // ]))
 
-
 // var twoSum = function(nums, target) {
 //     for(let i=0;i<nums.length;i++){
 // 		(nums.slice(i+1))
@@ -407,14 +405,13 @@
 
 // (twoSum([3,2,4,4,3,5,7,9],6))
 
-
 //* https://app.codesignal.com/arcade/intro/level-4/xYXfzQmnhBvEKJwXP
-//  
+//
 //  INIT - diff = []
 //  FOR all elements
 //      IF a[i] !== b[i]
 //          PUSH i onto diff
-//          IF diff.length > 2 
+//          IF diff.length > 2
 //              RETURN false
 //  IF diff.length = 1
 //      RETURN false
@@ -435,8 +432,6 @@
 // }
 
 // (areSimilar([1,2,3],[1,3,2]))
-
-
 
 // function arrayChange(inputArray) {
 //     let tot = 0;
@@ -496,7 +491,6 @@
 
 // (palindromeRearranging('afabbccd'))
 
-
 // function isIPv4Address(inputString) {
 //     const arr = inputString.split('.')
 //     (arr)
@@ -512,7 +506,7 @@
 // (isIPv4Address('1.1.1.1a'))
 
 ///////////////////////////////////////////////////
-// 
+//
 //
 //
 ///////////////////////////////////////////////////
@@ -533,9 +527,9 @@
 //         }
 //         ('complies', i, complies())
 //         if(complies()) return i
-        
+
 //     }
-     
+
 //     return 'none'
 // }
 
@@ -561,7 +555,7 @@
 //     [2,3]
 // ]
 // tests.forEach(test=>{
-//     ('result',avoidObstacles(test))  
+//     ('result',avoidObstacles(test))
 // })
 
 // function boxBlur(image) {
@@ -582,14 +576,14 @@
 
 // const tests = [
 //     [
-//         [7, 4, 0, 1], 
-//         [5, 6, 2, 2], 
-//         [6, 10, 7, 8], 
+//         [7, 4, 0, 1],
+//         [5, 6, 2, 2],
+//         [6, 10, 7, 8],
 //         [1, 4, 2, 0]
 //     ],
 //     [
-//         [1, 1, 1], 
-//         [1, 7, 1], 
+//         [1, 1, 1],
+//         [1, 7, 1],
 //         [1, 1, 1]
 //     ]
 // ]
@@ -598,13 +592,11 @@
 //     ('test',boxBlur(test))
 // })
 
-
-
-// // boxBlur(image) = [[5, 4], 
+// // boxBlur(image) = [[5, 4],
 // //                   [4, 4]]
 
-// //          image = [[1, 1, 1], 
-// //          [1, 7, 1], 
+// //          image = [[1, 1, 1],
+// //          [1, 7, 1],
 // //          [1, 1, 1]]
 
 // //          boxBlur(image) = [[1]]
@@ -622,7 +614,7 @@
 // 				(matrix[i+1] ? (matrix[i+1][j-1] ? 1 : 0) : 0)+
 // 				(matrix[i+1] ? (matrix[i+1][j  ] ? 1 : 0) : 0)+
 // 				(matrix[i+1] ? (matrix[i+1][j+1] ? 1 : 0) : 0))
-			
+
 // 		}
 // 	}
 // 	return total
@@ -640,7 +632,6 @@
 // //                        [1, 1, 1]]
 
 // console.dir(minesweeper(matrix))
-
 
 // Correct variable names consist only of English letters, digits and underscores and they can't start with a digit.
 // function variableName(name) {
@@ -669,18 +660,13 @@
 // 			parseInt(cell1[1]-1)%2) ===
 // 		((cell2[0].toLowerCase().charCodeAt()-97)%2 ===
 // 			parseInt(cell2[1]-1)%2)
-	
-	
 
 // }
 
 // console.log(chessBoardCellColor('a1', 'f3'))
 
-
-
-
-// Given a sorted array of integers a, your task is to determine 
-// which element of a is closest to all other values of a. In 
+// Given a sorted array of integers a, your task is to determine
+// which element of a is closest to all other values of a. In
 // other words, find the element x in a, which minimizes the following sum:
 
 //   abs(a[0] - x) + abs(a[1] - x) + ... + abs(a[a.length - 1] - x)
@@ -688,16 +674,233 @@
 //  If there are several possible answers, output the smallest one.
 // https://app.codesignal.com/arcade/intro/level-7/ZFnQkq9RmMiyE6qtq
 
+// function absoluteValuesSumMinimization(a) {
 
-function absoluteValuesSumMinimization(a) {
-	
-	let absSums = a.map(x => a.reduce((acc,val)=>{return acc+ Math.abs(val-x)},0))
-	let minAbsSum = [absSums[0],a[0]]
-	for(let i=1;i<a.length;i++){
-		if(absSums[i] < minAbsSum[0]) minAbsSum = [absSums[i], a[i]] 
-		else if(absSums[i] === minAbsSum && a[i] < minAbsSum[1]) minAbsSum[1] = a[i]
+// 	let absSums = a.map(x => a.reduce((acc,val)=>{return acc+ Math.abs(val-x)},0))
+// 	let minAbsSum = [absSums[0],a[0]]
+// 	for(let i=1;i<a.length;i++){
+// 		if(absSums[i] < minAbsSum[0]) minAbsSum = [absSums[i], a[i]]
+// 		else if(absSums[i] === minAbsSum && a[i] < minAbsSum[1]) minAbsSum[1] = a[i]
+// 	}
+// 	return minAbsSum[1]
+// }
+
+// console.log(absoluteValuesSumMinimization([2,4,7]))
+
+// Given an array of equal-length strings, you'd like to know if it's possible to rearrange the order of the elements in such a way that each consecutive pair of strings differ by exactly one character. Return true if it's possible, and false if not.
+
+// Note: You're only rearranging the order of the strings, not the order of the letters within the strings!
+
+// Example
+
+// For inputArray = ["aba", "bbb", "bab"], the output should be
+// stringsRearrangement(inputArray) = false.
+
+// There are 6 possible arrangements for these strings:
+
+// ["aba", "bbb", "bab"]
+// ["aba", "bab", "bbb"]
+// ["bbb", "aba", "bab"]
+// ["bbb", "bab", "aba"]
+// ["bab", "bbb", "aba"]
+// ["bab", "aba", "bbb"]
+// None of these satisfy the condition of consecutive strings differing by 1 character, so the answer is false.
+
+// For inputArray = ["ab", "bb", "aa"], the output should be
+// stringsRearrangement(inputArray) = true.
+
+// It's possible to arrange these strings in a way that each consecutive pair of strings differ by 1 character (eg: "aa", "ab", "bb" or "bb", "ab", "aa"), so return true.
+
+// Algo 1:  2 part -  success test & permute
+// 		1.  Success test (partial)
+//			w/ variable start index, test
+
+// Algo 2: recursive function
+// 		level 0:
+//			loop through values for position 0
+//			test if position 1 is valid
+//			level 1:
+//				loop through values for position 1
+//				test if position 2 is valid
+// etc
+
+/*
+Use subfunction
+	Loop through array, getting "current" string and "remaining" array
+	Pass current and remaining to subfunction
+		Subfunction:
+			If remaining.length === 1 && within 1, return true
+			Loop through remaining array, testing if "newcurrent" and "current" strings are off by 1 character
+				If match, pass newcurrent and newremaining and return result
+			Return false
+
+		
+		Match function (str1, str2)
+			2 nested loop
+			outerloop: 
+				remove letter @ i
+				innerloop: 
+					remove letter @ j
+					if remaining1 === remaining2, return true
+
+			return false
+*/
+
+// function stringsRearrangement(inputArray) {
+// 	// Single loop, looking for matches if a single letter of same position deleted
+// 	function oneOffMatch(str1, str2){
+// 		if(str1 === str2) return false
+// 		console.log('    compare:', str1, str2)
+// 		for (let i = 0; i < str1.length; i++){
+// 			if (str1.substr(0,i).concat(str1.substr(i+1)) === str2.substr(0,i).concat(str2.substr(i+1))){
+// 				console.log('    true - ',str1.substr(0,i).concat(str1.substr(i+1)),str2.substr(0,i).concat(str2.substr(i+1)))
+// 				return true
+// 			}else{
+// 				console.log('    false',str1.substr(0,i).concat(str1.substr(i+1)),str2.substr(0,i).concat(str2.substr(i+1)))
+// 			}
+
+// 		}
+// 		console.log('    return false')
+// 		return false
+// 	}
+// 	function recursiveStringsRearrangement(str, arr){
+// 		console.log('  recursive ', str, arr)
+// 		if(arr.length === 1) return oneOffMatch(str, arr[0])
+// 		for(let i = 0; i < arr.length; i++){
+// 			if (oneOffMatch(str, arr[i])){
+// 				let newArr = [...arr]
+// 				console.log('init new array', newArr)
+// 				newArr.splice(i,1)
+// 				console.log('spliced array', newArr)
+// 				console.log('      newstr:', arr[i],'newarr:', newArr, i)
+// 				return recursiveStringsRearrangement(arr[i], newArr)
+// 			}
+// 		}
+// 	}
+
+// 	for(let i = 0; i < inputArray.length; i++){
+// 		const remainingArray = [...inputArray]
+// 		const currentString  = remainingArray.splice(i,1)[0]
+// 		console.log('current', currentString, ' remaining', remainingArray)
+// 		if(recursiveStringsRearrangement(currentString, remainingArray)) return true
+// 	}
+// 	return false
+// }
+
+// function stringsRearrangement(inputArray) {
+// 	// Single loop, looking for matches if a single letter of same position deleted
+// 	function oneOffMatch(str1, str2){
+// 		if(str1 === str2) return false
+// 		for (let i = 0; i < str1.length; i++){
+// 			if (str1.substr(0,i).concat(str1.substr(i+1)) === str2.substr(0,i).concat(str2.substr(i+1))) return true
+// 		}
+// 		return false
+// 	}
+// 	function recursiveStringsRearrangement(str, arr){
+// 		if(arr.length === 1) return oneOffMatch(str, arr[0])
+// 		for(let i = 0; i < arr.length; i++){
+// 			if (oneOffMatch(str, arr[i])){
+// 				let newArr = [...arr]
+// 				newArr.splice(i,1)
+// 				return recursiveStringsRearrangement(arr[i], newArr)
+// 			}
+// 		}
+// 	}
+
+// 	for(let i = 0; i < inputArray.length; i++){
+// 		const remainingArray = [...inputArray]
+// 		const currentString  = remainingArray.splice(i,1)[0]
+// 		if(recursiveStringsRearrangement(currentString, remainingArray)) return true
+// 	}
+// 	return false
+// }
+
+// Different algo
+// 	use array.sort((a,b)=>oneOff?)
+
+// Recursive algorithm
+
+//	FOR i->arr.length
+//		let arr = [...argArray]
+//		let elem = arr.splice(i,0)
+//		IF recursive algo ( arr ) && offByOne(elem, arr[0])
+//			return true
+//
+//
+
+// const stringsRearrangement = (level, inputArray) => {
+// 	const spaceArray = new Array(level)
+// 	const spaceStr = spaceArray.fill("-").join('')
+
+
+// 	if (inputArray.length === 1) return true;
+// 	for (let i = 0; i < inputArray.length; i++) {
+// 		const arr = [...inputArray];
+// 		const el = arr.splice(i, 1)[0];
+
+// 		console.log(spaceStr, i, el, arr);
+
+// 		if (isOffByOne(el, arr[0])  && stringsRearrangement(level + 1, arr) ) {
+// 			console.log(spaceStr + "valid array", [el, ...arr]);
+// 			return true;
+// 		}else{
+// 			console.log(spaceStr + "invalid array", [el, ...arr])
+// 		}
+// 	}
+// 	return false;
+// };
+
+// recursive permutation
+
+
+//	recursive( input )
+//		FOR first:last
+//			console log( [first, recursive( rest )])
+
+const stringsRearrangement = function(input){
+	for( let i=0; i<input.length; i++){
+		const rest = [...input];
+		const first = rest.splice(i,1)[0]
+		if(perm(first, rest)) {
+			return true
+		}
 	}
-	return minAbsSum[1]
+	return false
+}
+const perm = function(prev, input){
+	if(input.length === 1){
+		if(isOffByOne(prev, input[0])) return true
+		else return false
+	}
+	
+	for( let i=0; i<input.length; i++){
+		const rest = [...input]
+		const first = rest.splice(i,1)[0]
+		if(isOffByOne(prev, first) && perm(first, rest)) {
+			return true
+		}
+	}
+	return false
 }
 
-console.log(absoluteValuesSumMinimization([2,4,7]))
+const isOffByOne = (a, b) => {
+	let offBy = 0;
+	for (let i = 0; i < a.length; i++) {
+		if (a[i] !== b[i]) offBy += 1;
+	}
+	return offBy === 1;
+};
+
+
+console.log(stringsRearrangement(
+	[
+		"142", 
+		"112", 
+		"113", 
+		"121"
+	]
+));
+
+// algo - 
+// non recursive?
+// sort the array throug all permutations, testing w/ each example
