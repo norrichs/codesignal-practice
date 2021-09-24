@@ -959,3 +959,13 @@ Use subfunction
 // }
 
 // console.log( arrayMaxConsecutiveSum( [ 1,2,3,4,5,6,20],3))
+function growingPlant(upSpeed, downSpeed, desiredHeight) {
+	let height = 0;
+	let days = 1
+	while( height < desiredHeight){
+		height += upSpeed
+		if( height >= desiredHeight) return days
+		height -= downSpeed
+		days += 1
+	}
+}
