@@ -973,10 +973,20 @@ Use subfunction
 // }
 
 
-function knapsackLight(value1, weight1, value2, weight2, maxW) {
-	if( weight1 + weight2 <= maxW) return value1 + value2
-	else if( weight1 <= maxW && weight2 <= maxW) return Math.max( value1, value2)
-	else if( weight1 <= maxW) return value1
-	else if( weight2 <= maxW) return value2
-	else return 0
+// function knapsackLight(value1, weight1, value2, weight2, maxW) {
+// 	if( weight1 + weight2 <= maxW) return value1 + value2
+// 	else if( weight1 <= maxW && weight2 <= maxW) return Math.max( value1, value2)
+// 	else if( weight1 <= maxW) return value1
+// 	else if( weight2 <= maxW) return value2
+// 	else return 0
+// }
+
+function longestDigitsPrefix(inputString) {
+	const digits = ['0','1','2','3','4','5','6','7','8','9']
+	let prefix = ''
+	for(char of inputString){
+		if(digits.includes(char)) prefix = prefix + char
+		else return prefix
+	}
+	return prefix
 }
