@@ -1107,16 +1107,30 @@ Use subfunction
 
 // }
 
-function electionsWinners(votes, k){
-	if(k===0 ){
-		if(votes.filter(count=>count === Math.max(...votes)).length === 1) return 1
-		else return 0
+// function electionsWinners(votes, k){
+// 	if(k===0 ){
+// 		if(votes.filter(count=>count === Math.max(...votes)).length === 1) return 1
+// 		else return 0
+// 	}
+// 	const maxVotes = Math.max(...votes)
+// 	return votes.filter(count=>count + k > maxVotes).length
+// }
+
+
+
+
+// console.log(electionsWinners([40, 50, 52, 20], 3));
+
+function isMAC48Address(inputString) {
+	validChar = "0123456789ABCDEF"
+	const arr = inputString.split("-")
+	if(arr.length !== 6) return false
+	for(str of arr){
+		if(str.length !== 2) return false
+		if(!validChar.includes(str[0]) || !validChar.includes(str[1])) return false
 	}
-	const maxVotes = Math.max(...votes)
-	return votes.filter(count=>count + k > maxVotes).length
+	return true
 }
 
-
-
-
-console.log(electionsWinners([40, 50, 52, 20], 3));
+console.log(isMAC48Address("00-1B-63-84-45-E6"))
+console.log(isMAC48Address("Z1-1B-63-84-45-E6"))
