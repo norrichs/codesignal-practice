@@ -1231,40 +1231,83 @@ Use subfunction
 // }
 
 
-function longestWord(text) {
-	const alphabet = 'abcdefghijklmnopqrstuvwxyz'
-	let cleaned = ''
-	for(char of text){
-		if(alphabet.includes(char.toLowerCase())){
-			cleaned = cleaned + char
-		}else{
-			cleaned = cleaned + ' '
-		}
-	}
-	const wordArray = cleaned.split(" ")
+// function longestWord(text) {
+// 	const alphabet = 'abcdefghijklmnopqrstuvwxyz'
+// 	let cleaned = ''
+// 	for(char of text){
+// 		if(alphabet.includes(char.toLowerCase())){
+// 			cleaned = cleaned + char
+// 		}else{
+// 			cleaned = cleaned + ' '
+// 		}
+// 	}
+// 	const wordArray = cleaned.split(" ")
 
-	let maxLength = 0;
-	let longest
-	wordArray.forEach(word => {
-		if(word.length > maxLength) {
-			maxLength = word.length
-			longest = word
-		}
-	})
-	return longest
+// 	let maxLength = 0;
+// 	let longest
+// 	wordArray.forEach(word => {
+// 		if(word.length > maxLength) {
+// 			maxLength = word.length
+// 			longest = word
+// 		}
+// 	})
+// 	return longest
+// }
+// console.log(longestWord('ABCde! fa asdfsdfas asdfa sfasdfklsaf lkjas flskjfdsa lkdfjsalkdfjs;ldfjkas ;ldfjk slkfdj salkjfda'))
+
+
+// function validTime(time) {
+// 	return (parseInt(time.substr(0,2)) < 24 && 
+// 			parseInt(time.substr(0,2)) >= 0 &&
+// 			parseInt(time.substr(3,2)) < 60 &&
+// 			parseInt(time.substr(3,2)) >= 0 )
+// }
+
+
+// console.log(validTime("02:70"))
+// console.log(validTime("12:13"))
+
+// function sumUpNumbers(inputString) {
+// 	const digits = "0123456789"
+// 	const arr = inputString.split(' ')
+// 	let sum = 0
+// 	for(word of arr){
+		
+// 		if(digits.includes(word[0])){
+// 			sum += parseInt(word)
+// 		}
+// 	}
+// 	return sum
+// }
+
+// function sumUpNumbers(inputString){
+// 	const digits = "0123456789"
+// 	let cleaned = ''
+// 	for(char of inputString){
+// 		if(digits.includes(char)) cleaned = cleaned + char
+// 		else cleaned = cleaned + " "
+// 	}
+// 	let arr = cleaned.split(' ')
+// 	console.log(arr)
+// 	let sum = 0
+// 	for(word of arr){
+// 		if(digits.includes(word[0]))
+// 		sum += parseInt(word)
+// 	}	
+// 	return sum
+// }
+
+
+// console.log(sumUpNumbers("2 apples, 3 bananas"))
+// console.log(sumUpNumbers("2apples, 3 bananas"))
+// console.log(sumUpNumbers("2 apples, 003 bananas"))
+
+
+function differentSquares(matrix) {
+    const cols = matrix[0].length
+    const rows = matrix.length
+    for(let i = 0; i< rows)
+    
+    
+    
 }
-console.log(longestWord('ABCde! fa asdfsdfas asdfa sfasdfklsaf lkjas flskjfdsa lkdfjsalkdfjs;ldfjkas ;ldfjk slkfdj salkjfda'))
-
-
-function validTime(time) {
-	return (parseInt(time.substr(0,2)) < 24 && 
-			parseInt(time.substr(0,2)) >= 0 &&
-			parseInt(time.substr(3,2)) < 60 &&
-			parseInt(time.substr(3,2)) >= 0 )
-}
-
-
-console.log(validTime("02:70"))
-console.log(validTime("12:13"))
-
-
