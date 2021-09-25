@@ -1189,18 +1189,82 @@ Use subfunction
 // }
 
 
-function deleteDigit(n) {
-	nArr = n.toString().split("").map(d=>parseInt(d));
+// function deleteDigit(n) {
+// 	nArr = n.toString().split("").map(d=>parseInt(d));
 
-	const subNumbers = nArr.map((d, i, all) => {
-		const sub = [...all]
-		sub.splice(i,1)
-		return parseInt(sub.join(''))
-	});
-	console.log(subNumbers);
-	return Math.max(...subNumbers)
+// 	const subNumbers = nArr.map((d, i, all) => {
+// 		const sub = [...all]
+// 		sub.splice(i,1)
+// 		return parseInt(sub.join(''))
+// 	});
+// 	console.log(subNumbers);
+// 	return Math.max(...subNumbers)
+// }
+
+
+
+// console.log(deleteDigit(212));
+
+
+
+
+// function longestWord(text) {
+// 	const alphabet = 'abcdefghijklmnopqrstuvwxyz'
+// 	const wordArray = text.split(" ")
+// 	const cleaned = wordArray.map(word=>{
+// 		let clean = ''
+// 		for(char of word){
+// 			if(alphabet.includes(char.toLowerCase())) clean = clean + char
+// 		}
+// 		return clean
+// 	})
+// 	console.log(cleaned)
+// 	let maxLength = 0;
+// 	let longest
+// 	cleaned.forEach(word => {
+// 		if(word.length > maxLength) {
+// 			maxLength = word.length
+// 			longest = word
+// 		}
+// 	})
+// 	return longest
+// }
+
+
+function longestWord(text) {
+	const alphabet = 'abcdefghijklmnopqrstuvwxyz'
+	let cleaned = ''
+	for(char of text){
+		if(alphabet.includes(char.toLowerCase())){
+			cleaned = cleaned + char
+		}else{
+			cleaned = cleaned + ' '
+		}
+	}
+	const wordArray = cleaned.split(" ")
+
+	let maxLength = 0;
+	let longest
+	wordArray.forEach(word => {
+		if(word.length > maxLength) {
+			maxLength = word.length
+			longest = word
+		}
+	})
+	return longest
+}
+console.log(longestWord('ABCde! fa asdfsdfas asdfa sfasdfklsaf lkjas flskjfdsa lkdfjsalkdfjs;ldfjkas ;ldfjk slkfdj salkjfda'))
+
+
+function validTime(time) {
+	return (parseInt(time.substr(0,2)) < 24 && 
+			parseInt(time.substr(0,2)) >= 0 &&
+			parseInt(time.substr(3,2)) < 60 &&
+			parseInt(time.substr(3,2)) >= 0 )
 }
 
 
+console.log(validTime("02:70"))
+console.log(validTime("12:13"))
 
-console.log(deleteDigit(212));
+
