@@ -1367,3 +1367,13 @@ Use subfunction
 // console.log(fileNaming(["doc", "doc", "image", "doc(1)", "doc"]))
 
 
+// function messageFromBinaryCode(code) {
+// 	let message = ''
+// 	for(let i=0; i<code.length/8; i++){
+// 		message += String.fromCharCode(parseInt(code.substr(i*8, 8), 2))
+// 	}
+// 	return message
+// }
+
+
+// console.log(messageFromBinaryCode("010010000110010101101100011011000110111100100001"))
