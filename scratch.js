@@ -1292,29 +1292,50 @@ Use subfunction
 // console.log(sumUpNumbers("2apples, 3 bananas"))
 // console.log(sumUpNumbers("2 apples, 003 bananas"))
 
-function differentSquares(matrix) {
-	const squares = [];
-	let thisSquare;
-	for (let i = 0; i < matrix.length - 1; i++) {
-		for (let j = 0; j < matrix[0].length - 1; j++) {
-			thisSquare =
-				matrix[i][j].toString() +
-				matrix[i + 1][j] +
-				matrix[i][j + 1] +
-				matrix[i + 1][j + 1];
-			if (!squares.includes(thisSquare)) squares.push(thisSquare);
-		}
-	}
-	console.log(squares);
-	return squares.length;
-}
+// function differentSquares(matrix) {
+// 	const squares = [];
+// 	let thisSquare;
+// 	for (let i = 0; i < matrix.length - 1; i++) {
+// 		for (let j = 0; j < matrix[0].length - 1; j++) {
+// 			thisSquare =
+// 				matrix[i][j].toString() +
+// 				matrix[i + 1][j] +
+// 				matrix[i][j + 1] +
+// 				matrix[i + 1][j + 1];
+// 			if (!squares.includes(thisSquare)) squares.push(thisSquare);
+// 		}
+// 	}
+// 	console.log(squares);
+// 	return squares.length;
+// }
 
-console.log(
-	differentSquares([
-		[1, 2, 1],
-		[2, 2, 2],
-		[2, 2, 2],
-		[1, 2, 3],
-		[2, 2, 1],
-	])
-);
+// console.log(
+// 	differentSquares([
+// 		[1, 2, 1],
+// 		[2, 2, 2],
+// 		[2, 2, 2],
+// 		[1, 2, 3],
+// 		[2, 2, 1],
+// 	])
+// );
+
+
+// function digitsProduct(product){
+// 	let digitsNum = 1;
+// 	let digits = []
+// 	let thisProduct
+// 	console.time('exec')
+// 	while(digitsNum < 1000000){
+// 		thisProduct = 1
+// 		digits = digitsNum.toString().split('')
+// 		digits.forEach(d=>thisProduct = thisProduct * parseInt(d))
+// 		// console.log('digitsNum', digitsNum, 'thisProduct', thisProduct)
+// 		if(thisProduct === product) return digitsNum
+// 		digitsNum += 1;
+// 	}
+// 	console.timeLog('exec')
+// 	return -1
+// }
+
+// console.log(digitsProduct(0))
+
