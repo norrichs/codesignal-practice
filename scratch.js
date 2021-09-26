@@ -1375,45 +1375,110 @@ Use subfunction
 
 // console.log(messageFromBinaryCode("010010000110010101101100011011000110111100100001"))
 
-function spiralNumbers(n) {
-	let spiral = new Array(n);
-	for (let i = 0; i < n; i++) {
-		spiral[i] = new Array(n);
-		spiral[i].fill(0);
+// function spiralNumbers(n) {
+// 	let spiral = new Array(n);
+// 	for (let i = 0; i < n; i++) {
+// 		spiral[i] = new Array(n);
+// 		spiral[i].fill(0);
+// 	}
+// 	if (n % 2 === 1) spiral[Math.floor(n / 2)][Math.floor(n / 2)] = n * n;
+// 	else {
+// 		spiral[n / 2 - 1][n / 2 - 1] = n * n - 3;
+// 		spiral[n / 2 - 1][n / 2 - 0] = n * n - 2;
+// 		spiral[n / 2 - 0][n / 2 - 0] = n * n - 1;
+// 		spiral[n / 2 - 0][n / 2 - 1] = n * n;
+// 	}
+// 	let layers = (n - 1 - (n % 2)) / 2;
+// 	let x = 1;
+// 	for (let layer = 0; layer < layers; layer++) {
+// 		// fill top
+// 		for (let i = 0; i < n - 2 * layer; i++) {
+// 			spiral[layer][i + layer] = x;
+// 			x += 1;
+// 		}
+// 		// fill right
+// 		for (let i = 0; i < n - 2 - 2 * layer; i++) {
+// 			spiral[layer + 1 + i][n - 1 - layer] = x;
+// 			x += 1;
+// 		}
+// 		// fill bottom
+// 		for (let i = 0; i < n - 2 * layer; i++) {
+// 			spiral[n - 1 - layer][n - i - 1 - layer] = x;
+// 			x += 1;
+// 		}
+// 		// fill left
+// 		for (let i = 0; i < n - 2 - 2 * layer; i++) {
+// 			spiral[n - 2 - layer - i][layer] = x;
+// 			x += 1;
+// 		}
+// 	}
+
+// 	return spiral;
+// }
+
+// console.dir(spiralNumbers(9));
+
+function sudoku(grid) {
+	const column = (colNum) => {
+		return [
+			grid[0][colNum],
+			grid[1][colNum],
+			grid[2][colNum],
+			grid[3][colNum],
+			grid[4][colNum],
+			grid[5][colNum],
+			grid[6][colNum],
+			grid[7][colNum],
+			grid[8][colNum]
+		];
+	};
+	const subGrid = (n) => {
+		const off = n%3*3
+		return [
+			grid[off + 0][off + 0], grid[off + 0][off + 1], grid[off + 0][off + 2], 
+			grid[off + 1][off + 0], grid[off + 1][off + 1], grid[off + 1][off + 2], 
+			grid[off + 2][off + 0], grid[off + 2][off + 1], grid[off + 2][off + 2]
+		]
 	}
-	if (n % 2 === 1) spiral[Math.floor(n / 2)][Math.floor(n / 2)] = n * n;
-	else {
-		spiral[n / 2 - 1][n / 2 - 1] = n * n - 3;
-		spiral[n / 2 - 1][n / 2 - 0] = n * n - 2;
-		spiral[n / 2 - 0][n / 2 - 0] = n * n - 1;
-		spiral[n / 2 - 0][n / 2 - 1] = n * n;
-	}
-	let layers = (n - 1 - (n % 2)) / 2;
-	let x = 1;
-	for (let layer = 0; layer < layers; layer++) {
-		// fill top
-		for (let i = 0; i < n - 2 * layer; i++) {
-			spiral[layer][i + layer] = x;
-			x += 1;
+	const isComplete = (arr) => {
+		for(let i = 1; i<=9; i++){
+			
+			if(!arr.includes(i)) return false
 		}
-		// fill right
-		for (let i = 0; i < n - 2 - 2 * layer; i++) {
-			spiral[layer + 1 + i][n - 1 - layer] = x;
-			x += 1;
-		}
-		// fill bottom
-		for (let i = 0; i < n - 2 * layer; i++) {
-			spiral[n - 1 - layer][n - i - 1 - layer] = x;
-			x += 1;
-		}
-		// fill left
-		for (let i = 0; i < n - 2 - 2 * layer; i++) {
-			spiral[n - 2 - layer - i][layer] = x;
-			x += 1;
-		}
+		return true
 	}
 
-	return spiral;
+	for (let i = 0; i < 9; i++) {
+		if (!isComplete(grid[i])) return false;
+		if (!isComplete(column(i))) return false;
+		if (!isComplete(subGrid(i))) return false;
+	}
+	return true;
 }
 
-console.dir(spiralNumbers(9));
+console.log(
+	sudoku([
+		[1, 3, 2, 5, 4, 6, 9, 2, 7],
+		[4, 6, 5, 8, 7, 9, 3, 8, 1],
+		[7, 9, 8, 2, 1, 3, 6, 5, 4],
+		[9, 2, 1, 4, 3, 5, 8, 7, 6],
+		[3, 5, 4, 7, 6, 8, 2, 1, 9],
+		[6, 8, 7, 1, 9, 2, 5, 4, 3],
+		[5, 7, 6, 9, 8, 1, 4, 3, 2],
+		[2, 4, 3, 6, 5, 7, 1, 9, 8],
+		[8, 1, 9, 3, 2, 4, 7, 6, 5],
+	])
+);
+console.log(
+	sudoku([
+		[1, 3, 2, 5, 4, 6, 9, 8, 7],
+		[4, 6, 5, 8, 7, 9, 3, 2, 1],
+		[7, 9, 8, 2, 1, 3, 6, 5, 4],
+		[9, 2, 1, 4, 3, 5, 8, 7, 6],
+		[3, 5, 4, 7, 6, 8, 2, 1, 9],
+		[6, 8, 7, 1, 9, 2, 5, 4, 3],
+		[5, 7, 6, 9, 8, 1, 4, 3, 2],
+		[2, 4, 3, 6, 5, 7, 1, 9, 8],
+		[8, 1, 9, 3, 2, 4, 7, 6, 5],
+	])
+);
