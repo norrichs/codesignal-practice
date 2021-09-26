@@ -1188,7 +1188,6 @@ Use subfunction
 // 	return Math.max(...sums)
 // }
 
-
 // function deleteDigit(n) {
 // 	nArr = n.toString().split("").map(d=>parseInt(d));
 
@@ -1201,12 +1200,7 @@ Use subfunction
 // 	return Math.max(...subNumbers)
 // }
 
-
-
 // console.log(deleteDigit(212));
-
-
-
 
 // function longestWord(text) {
 // 	const alphabet = 'abcdefghijklmnopqrstuvwxyz'
@@ -1229,7 +1223,6 @@ Use subfunction
 // 	})
 // 	return longest
 // }
-
 
 // function longestWord(text) {
 // 	const alphabet = 'abcdefghijklmnopqrstuvwxyz'
@@ -1255,14 +1248,12 @@ Use subfunction
 // }
 // console.log(longestWord('ABCde! fa asdfsdfas asdfa sfasdfklsaf lkjas flskjfdsa lkdfjsalkdfjs;ldfjkas ;ldfjk slkfdj salkjfda'))
 
-
 // function validTime(time) {
-// 	return (parseInt(time.substr(0,2)) < 24 && 
+// 	return (parseInt(time.substr(0,2)) < 24 &&
 // 			parseInt(time.substr(0,2)) >= 0 &&
 // 			parseInt(time.substr(3,2)) < 60 &&
 // 			parseInt(time.substr(3,2)) >= 0 )
 // }
-
 
 // console.log(validTime("02:70"))
 // console.log(validTime("12:13"))
@@ -1272,7 +1263,7 @@ Use subfunction
 // 	const arr = inputString.split(' ')
 // 	let sum = 0
 // 	for(word of arr){
-		
+
 // 		if(digits.includes(word[0])){
 // 			sum += parseInt(word)
 // 		}
@@ -1293,21 +1284,37 @@ Use subfunction
 // 	for(word of arr){
 // 		if(digits.includes(word[0]))
 // 		sum += parseInt(word)
-// 	}	
+// 	}
 // 	return sum
 // }
-
 
 // console.log(sumUpNumbers("2 apples, 3 bananas"))
 // console.log(sumUpNumbers("2apples, 3 bananas"))
 // console.log(sumUpNumbers("2 apples, 003 bananas"))
 
-
 function differentSquares(matrix) {
-    const cols = matrix[0].length
-    const rows = matrix.length
-    for(let i = 0; i< rows)
-    
-    
-    
+	const squares = [];
+	let thisSquare;
+	for (let i = 0; i < matrix.length - 1; i++) {
+		for (let j = 0; j < matrix[0].length - 1; j++) {
+			thisSquare =
+				matrix[i][j].toString() +
+				matrix[i + 1][j] +
+				matrix[i][j + 1] +
+				matrix[i + 1][j + 1];
+			if (!squares.includes(thisSquare)) squares.push(thisSquare);
+		}
+	}
+	console.log(squares);
+	return squares.length;
 }
+
+console.log(
+	differentSquares([
+		[1, 2, 1],
+		[2, 2, 2],
+		[2, 2, 2],
+		[1, 2, 3],
+		[2, 2, 1],
+	])
+);
