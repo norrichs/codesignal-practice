@@ -1339,3 +1339,31 @@ Use subfunction
 
 // console.log(digitsProduct(0))
 
+// function fileNaming(names) {
+// 	const newNames = []
+// 	names.forEach(name =>{
+// 		// if name in newnames
+// 		//		concatenate '(1)'
+// 		//		while(new name is in newnames)
+// 		//			increment suffix
+// 		if(newNames.includes(name)){
+// 			let number = 1
+// 			let newName = name + "(" + number + ")";
+// 			while(newNames.includes(newName)){
+// 				number +=1
+// 				newName = name + "(" + number + ")" 
+// 			}
+// 			newNames.push(newName)
+// 		}else{
+// 			newNames.push(name)
+// 		}
+// 	})
+// 	return newNames
+// }
+
+// // For names = ["doc", "doc", "image", "doc(1)", "doc"], the output should be
+// // fileNaming(names) = ["doc", "doc(1)", "image", "doc(1)(1)", "doc(2)"].
+
+// console.log(fileNaming(["doc", "doc", "image", "doc(1)", "doc"]))
+
+
