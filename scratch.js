@@ -1418,67 +1418,80 @@ Use subfunction
 
 // console.dir(spiralNumbers(9));
 
-function sudoku(grid) {
-	const column = (colNum) => {
-		return [
-			grid[0][colNum],
-			grid[1][colNum],
-			grid[2][colNum],
-			grid[3][colNum],
-			grid[4][colNum],
-			grid[5][colNum],
-			grid[6][colNum],
-			grid[7][colNum],
-			grid[8][colNum]
-		];
-	};
-	const subGrid = (n) => {
-		const off = n%3*3
-		return [
-			grid[off + 0][off + 0], grid[off + 0][off + 1], grid[off + 0][off + 2], 
-			grid[off + 1][off + 0], grid[off + 1][off + 1], grid[off + 1][off + 2], 
-			grid[off + 2][off + 0], grid[off + 2][off + 1], grid[off + 2][off + 2]
-		]
-	}
-	const isComplete = (arr) => {
-		for(let i = 1; i<=9; i++){
+// function sudoku(grid) {
+// 	const column = (colNum) => {
+// 		return [
+// 			grid[0][colNum],
+// 			grid[1][colNum],
+// 			grid[2][colNum],
+// 			grid[3][colNum],
+// 			grid[4][colNum],
+// 			grid[5][colNum],
+// 			grid[6][colNum],
+// 			grid[7][colNum],
+// 			grid[8][colNum]
+// 		];
+// 	};
+// 	const subGrid = (n) => {
+// 		const off = n%3*3
+// 		return [
+// 			grid[off + 0][off + 0], grid[off + 0][off + 1], grid[off + 0][off + 2], 
+// 			grid[off + 1][off + 0], grid[off + 1][off + 1], grid[off + 1][off + 2], 
+// 			grid[off + 2][off + 0], grid[off + 2][off + 1], grid[off + 2][off + 2]
+// 		]
+// 	}
+// 	const isComplete = (arr) => {
+// 		for(let i = 1; i<=9; i++){
 			
-			if(!arr.includes(i)) return false
-		}
-		return true
-	}
+// 			if(!arr.includes(i)) return false
+// 		}
+// 		return true
+// 	}
 
-	for (let i = 0; i < 9; i++) {
-		if (!isComplete(grid[i])) return false;
-		if (!isComplete(column(i))) return false;
-		if (!isComplete(subGrid(i))) return false;
+// 	for (let i = 0; i < 9; i++) {
+// 		if (!isComplete(grid[i])) return false;
+// 		if (!isComplete(column(i))) return false;
+// 		if (!isComplete(subGrid(i))) return false;
+// 	}
+// 	return true;
+// }
+
+// console.log(
+// 	sudoku([
+// 		[1, 3, 2, 5, 4, 6, 9, 2, 7],
+// 		[4, 6, 5, 8, 7, 9, 3, 8, 1],
+// 		[7, 9, 8, 2, 1, 3, 6, 5, 4],
+// 		[9, 2, 1, 4, 3, 5, 8, 7, 6],
+// 		[3, 5, 4, 7, 6, 8, 2, 1, 9],
+// 		[6, 8, 7, 1, 9, 2, 5, 4, 3],
+// 		[5, 7, 6, 9, 8, 1, 4, 3, 2],
+// 		[2, 4, 3, 6, 5, 7, 1, 9, 8],
+// 		[8, 1, 9, 3, 2, 4, 7, 6, 5],
+// 	])
+// );
+// console.log(
+// 	sudoku([
+// 		[1, 3, 2, 5, 4, 6, 9, 8, 7],
+// 		[4, 6, 5, 8, 7, 9, 3, 2, 1],
+// 		[7, 9, 8, 2, 1, 3, 6, 5, 4],
+// 		[9, 2, 1, 4, 3, 5, 8, 7, 6],
+// 		[3, 5, 4, 7, 6, 8, 2, 1, 9],
+// 		[6, 8, 7, 1, 9, 2, 5, 4, 3],
+// 		[5, 7, 6, 9, 8, 1, 4, 3, 2],
+// 		[2, 4, 3, 6, 5, 7, 1, 9, 8],
+// 		[8, 1, 9, 3, 2, 4, 7, 6, 5],
+// 	])
+// );
+
+
+function lateRide(n) {
+    let timeStr = ((n - n % 60) / 60).toString() + (n % 60).toString();
+	console.log(timeStr)
+	let sum = 0;
+	for(digit of timeStr){
+		sum += parseInt(digit)
 	}
-	return true;
+	return sum
 }
 
-console.log(
-	sudoku([
-		[1, 3, 2, 5, 4, 6, 9, 2, 7],
-		[4, 6, 5, 8, 7, 9, 3, 8, 1],
-		[7, 9, 8, 2, 1, 3, 6, 5, 4],
-		[9, 2, 1, 4, 3, 5, 8, 7, 6],
-		[3, 5, 4, 7, 6, 8, 2, 1, 9],
-		[6, 8, 7, 1, 9, 2, 5, 4, 3],
-		[5, 7, 6, 9, 8, 1, 4, 3, 2],
-		[2, 4, 3, 6, 5, 7, 1, 9, 8],
-		[8, 1, 9, 3, 2, 4, 7, 6, 5],
-	])
-);
-console.log(
-	sudoku([
-		[1, 3, 2, 5, 4, 6, 9, 8, 7],
-		[4, 6, 5, 8, 7, 9, 3, 2, 1],
-		[7, 9, 8, 2, 1, 3, 6, 5, 4],
-		[9, 2, 1, 4, 3, 5, 8, 7, 6],
-		[3, 5, 4, 7, 6, 8, 2, 1, 9],
-		[6, 8, 7, 1, 9, 2, 5, 4, 3],
-		[5, 7, 6, 9, 8, 1, 4, 3, 2],
-		[2, 4, 3, 6, 5, 7, 1, 9, 8],
-		[8, 1, 9, 3, 2, 4, 7, 6, 5],
-	])
-);
+console.log(lateRide(240))
