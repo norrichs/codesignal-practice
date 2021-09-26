@@ -1319,7 +1319,6 @@ Use subfunction
 // 	])
 // );
 
-
 // function digitsProduct(product){
 // 	let digitsNum = 1;
 // 	let digits = []
@@ -1351,7 +1350,7 @@ Use subfunction
 // 			let newName = name + "(" + number + ")";
 // 			while(newNames.includes(newName)){
 // 				number +=1
-// 				newName = name + "(" + number + ")" 
+// 				newName = name + "(" + number + ")"
 // 			}
 // 			newNames.push(newName)
 // 		}else{
@@ -1366,7 +1365,6 @@ Use subfunction
 
 // console.log(fileNaming(["doc", "doc", "image", "doc(1)", "doc"]))
 
-
 // function messageFromBinaryCode(code) {
 // 	let message = ''
 // 	for(let i=0; i<code.length/8; i++){
@@ -1375,5 +1373,47 @@ Use subfunction
 // 	return message
 // }
 
-
 // console.log(messageFromBinaryCode("010010000110010101101100011011000110111100100001"))
+
+function spiralNumbers(n) {
+	let spiral = new Array(n);
+	for (let i = 0; i < n; i++) {
+		spiral[i] = new Array(n);
+		spiral[i].fill(0);
+	}
+	if (n % 2 === 1) spiral[Math.floor(n / 2)][Math.floor(n / 2)] = n * n;
+	else {
+		spiral[n / 2 - 1][n / 2 - 1] = n * n - 3;
+		spiral[n / 2 - 1][n / 2 - 0] = n * n - 2;
+		spiral[n / 2 - 0][n / 2 - 0] = n * n - 1;
+		spiral[n / 2 - 0][n / 2 - 1] = n * n;
+	}
+	let layers = (n - 1 - (n % 2)) / 2;
+	let x = 1;
+	for (let layer = 0; layer < layers; layer++) {
+		// fill top
+		for (let i = 0; i < n - 2 * layer; i++) {
+			spiral[layer][i + layer] = x;
+			x += 1;
+		}
+		// fill right
+		for (let i = 0; i < n - 2 - 2 * layer; i++) {
+			spiral[layer + 1 + i][n - 1 - layer] = x;
+			x += 1;
+		}
+		// fill bottom
+		for (let i = 0; i < n - 2 * layer; i++) {
+			spiral[n - 1 - layer][n - i - 1 - layer] = x;
+			x += 1;
+		}
+		// fill left
+		for (let i = 0; i < n - 2 - 2 * layer; i++) {
+			spiral[n - 2 - layer - i][layer] = x;
+			x += 1;
+		}
+	}
+
+	return spiral;
+}
+
+console.dir(spiralNumbers(9));
