@@ -1650,24 +1650,41 @@ Use subfunction
 // 10111;
 // 00111;
 
+// function equalPairOfBits(n, m) {
+// 	console.log(n.toString(2), m.toString(2));
+// 	return Math.pow(2,Math.max(n, m)
+// 		.toString(2)
+// 		.split("")
+// 		.reverse()
+// 		.map((digit, i, arr) => {
+// 			const smaller = (
+// 				"0".repeat(arr.length - Math.min(n, m).toString(2).length) +
+// 				Math.min(n, m).toString(2)
+// 			)
+// 			.split("")
+// 			.reverse();
+// 			console.log(smaller.join(''), arr.join(''))
+// 			return digit === smaller[i] ? 1 : 0;
+// 		})
+// 		.indexOf(1));
+// }
 
-function equalPairOfBits(n, m) {
-	console.log(n.toString(2), m.toString(2));
-	return Math.pow(2,Math.max(n, m)
-		.toString(2)
-		.split("")
-		.reverse()
-		.map((digit, i, arr) => {
-			const smaller = (
-				"0".repeat(arr.length - Math.min(n, m).toString(2).length) +
-				Math.min(n, m).toString(2)
-			)
-			.split("")
-			.reverse();
-			console.log(smaller.join(''), arr.join(''))
-			return digit === smaller[i] ? 1 : 0;
-		})
-		.indexOf(1));
+//   console.log(equalPairOfBits(10,11))
+
+// function leastFactorial(n) {
+// 	// find k where k is the smallest  k! >= n
+// 	const getFactorial = (x) => (x === 1 ? 1 : x * getFactorial(x - 1));
+// 	let factorial
+// 	let k = 1;
+// 	while ((factorial = getFactorial(k)) < n) {
+// 		k++;
+// 	}
+// 	return factorial
+// }
+
+// console.log(leastFactorial(17)) // 24
+
+
+function countSumOfTwoRepresentations2(n, l, r) {
+
 }
-  
-  console.log(equalPairOfBits(10,11))
