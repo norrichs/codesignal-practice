@@ -1593,9 +1593,20 @@ Use subfunction
 // console.log(rangeBitCount(1,4))	// 1, 10, 11, 100 -> 5
 // console.log(rangeBitCount(5,8))	// 101, 110, 111, 1000 -> 8
 
-function mirrorBits(a) {
-	return parseInt(a.toString(2).split('').reverse().join(''),2)
-}
+// function mirrorBits(a) {
+// 	return parseInt(a.toString(2).split('').reverse().join(''),2)
+// }
 
-console.log(mirrorBits(97))
+// console.log(mirrorBits(97))
 
+
+function secondRightmostZeroBit(n) {
+	return Math.pow(2, n.toString(2)
+		.split('')
+		.reverse()
+		.map((digit, i)=>{return {digit: digit, index: i}})
+		.filter(n=>{return n.digit === '0'})[1].index)
+  }
+
+  
+  console.log(secondRightmostZeroBit(37)) //   100101 -> 101001 8
