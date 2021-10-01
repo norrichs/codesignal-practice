@@ -1600,13 +1600,27 @@ Use subfunction
 // console.log(mirrorBits(97))
 
 
-function secondRightmostZeroBit(n) {
-	return Math.pow(2, n.toString(2)
-		.split('')
-		.reverse()
-		.map((digit, i)=>{return {digit: digit, index: i}})
-		.filter(n=>{return n.digit === '0'})[1].index)
-  }
+// function secondRightmostZeroBit(n) {
+// 	return Math.pow(2, n.toString(2)
+// 		.split('')
+// 		.reverse()
+// 		.map((digit, i)=>{return {digit: digit, index: i}})
+// 		.filter(n=>{return n.digit === '0'})[1].index)
+//   }
 
   
-  console.log(secondRightmostZeroBit(37)) //   100101 -> 101001 8
+//   console.log(secondRightmostZeroBit(37)) //   100101 -> 101001 8
+
+function swapAdjacentBits(n) {
+	return parseInt(('0'.repeat(n.toString(2).length % 2) + n.toString(2))
+		.split('')
+		.map((digit, i, arr)=>{
+			return i % 2 === 0 ? arr[i+1] : arr[i-1]
+		})
+		.join(''), 2);
+  }
+  
+
+  console.log(swapAdjacentBits(13)) // 13 -> 1101 -> 1110 -> 14
+  console.log(swapAdjacentBits(21)) // 19 -> 010101 -> 101010 -> 42
+  
