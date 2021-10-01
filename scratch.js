@@ -1516,3 +1516,10 @@ Use subfunction
 // console.log(phoneCall(3, 1, 2, 20));
 
 
+function extraNumber(a, b, c) {
+	if(a === b) return c
+	if(a === c) return b
+	if(b === c) return a
+}
+
+console.log(extraNumber( 10, 10, 4))
