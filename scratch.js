@@ -1552,13 +1552,27 @@ Use subfunction
 // console.log(tennisSet(7,2)) // false
 
 
-function metroCard(lastNumberOfDays) {
+// function metroCard(lastNumberOfDays) {
 	
-	 return lastNumberOfDays === 31 ? [28, 30, 31] : [31]
-}
+// 	 return lastNumberOfDays === 31 ? [28, 30, 31] : [31]
+// }
 
 
 
-const monthDaysArray = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+// const monthDaysArray = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-monthDaysArray.forEach(m=>{console.log(metroCard(m))})
+// monthDaysArray.forEach(m=>{console.log(metroCard(m))})
+
+// function killKthBit(n, k) {
+// 	const bin = n.toString(2)
+// 	console.log(bin, bin[k], Math.pow(2, k-1), "isAlreadyZero", (n.toString(2)[n.toString(2).length-k] === '0'), "isOutofRange",  (n.toString(2).length < Math.pow(2,k-1)))
+
+// 	return (((n.toString(2)[n.toString(2).length-k] === '0') || (n.toString(2).length < k))
+// 		? n 
+// 		: n - Math.pow(2,k-1));
+//   }
+  
+//   console.log(killKthBit(37,3)) // 33
+//  //k-1 0 1 2 3 4  5  6  7
+//   // k 1 2 3 4 5  6  7  8
+//   //   1 2 4 8 16 32 64 128
