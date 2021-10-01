@@ -1698,12 +1698,27 @@ Use subfunction
 // console.log(countSumOfTwoRepresentations2(20,2,16))
 
 
-function magicalWell(a, b, n) {
-	let total = 0;
-	for(let i=0; i<n; i++){
-		total += (a+i) * (b+i)
+// function magicalWell(a, b, n) {
+// 	let total = 0;
+// 	for(let i=0; i<n; i++){
+// 		total += (a+i) * (b+i)
+// 	}
+// 	return total
+// }
+
+// console.log(magicalWell(1,2,2))
+
+function lineUp(commands) {
+	const correct   = {L: 1, R: -1, A: 2}
+	const incorrect = {L: -1, R: 1, A: 2}
+	const team = [0,0]
+	let alignedCount = 0;
+	for(c of commands){
+		team[0] = (4+ team[0] + correct[c]) % 4
+		team[1] = (4+ team[1] + incorrect[c]) % 4
+		if(team[0] === team[1]) alignedCount++
 	}
-	return total
+	return alignedCount
 }
 
-console.log(magicalWell(1,2,2))
+console.log(lineUp("LLARL"))
