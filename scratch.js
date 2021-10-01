@@ -1685,16 +1685,25 @@ Use subfunction
 // console.log(leastFactorial(17)) // 24
 
 
-function countSumOfTwoRepresentations2(n, l, r) {
-	let count = 0;
-	for(let i=l; i<=Math.floor(n/2); i++){
-		if(n-i <= r) {
-			count++
-		}
+// function countSumOfTwoRepresentations2(n, l, r) {
+// 	let count = 0;
+// 	for(let i=l; i<=Math.floor(n/2); i++){
+// 		if(n-i <= r) {
+// 			count++
+// 		}
+// 	}
+// 	return count
+// }
+
+// console.log(countSumOfTwoRepresentations2(20,2,16))
+
+
+function magicalWell(a, b, n) {
+	let total = 0;
+	for(let i=0; i<n; i++){
+		total += (a+i) * (b+i)
 	}
-	return count
+	return total
 }
 
-console.log(countSumOfTwoRepresentations2(20,2,16))
-
-
+console.log(magicalWell(1,2,2))
