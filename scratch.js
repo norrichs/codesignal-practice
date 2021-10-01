@@ -1599,7 +1599,6 @@ Use subfunction
 
 // console.log(mirrorBits(97))
 
-
 // function secondRightmostZeroBit(n) {
 // 	return Math.pow(2, n.toString(2)
 // 		.split('')
@@ -1608,19 +1607,45 @@ Use subfunction
 // 		.filter(n=>{return n.digit === '0'})[1].index)
 //   }
 
-  
 //   console.log(secondRightmostZeroBit(37)) //   100101 -> 101001 8
 
-function swapAdjacentBits(n) {
-	return parseInt(('0'.repeat(n.toString(2).length % 2) + n.toString(2))
-		.split('')
-		.map((digit, i, arr)=>{
-			return i % 2 === 0 ? arr[i+1] : arr[i-1]
-		})
-		.join(''), 2);
-  }
-  
+// function swapAdjacentBits(n) {
+// 	return parseInt(('0'.repeat(n.toString(2).length % 2) + n.toString(2))
+// 		.split('')
+// 		.map((digit, i, arr)=>{
+// 			return i % 2 === 0 ? arr[i+1] : arr[i-1]
+// 		})
+// 		.join(''), 2);
+//   }
 
-  console.log(swapAdjacentBits(13)) // 13 -> 1101 -> 1110 -> 14
-  console.log(swapAdjacentBits(21)) // 19 -> 010101 -> 101010 -> 42
-  
+//   console.log(swapAdjacentBits(13)) // 13 -> 1101 -> 1110 -> 14
+//   console.log(swapAdjacentBits(21)) // 19 -> 010101 -> 101010 -> 42
+
+// function differentRightmostBit(n, m) {
+// 	console.log(n.toString(2), m.toString(2));
+// 	return Math.pow(2, Math.max(n, m)
+// 		.toString(2)
+// 		.split("")
+// 		.reverse()
+// 		.map((digit, i, arr) => {
+// 			const smaller = (
+// 				"0".repeat(arr.length - Math.min(n, m).toString(2).length) +
+// 				Math.min(n, m).toString(2)
+// 			)
+// 				.split("")
+// 				.reverse();
+// 			return digit === smaller[i] ? 1 : 0;
+// 		})
+// 		.indexOf(0));
+// }
+
+function differentRightmostBit(n,m){
+	console.log('n', n.toString(2), 'm', m.toString(2), (n^m).toString(2), (-(n^m)).toString(2),(n^m), -(n^m), (n^m) & -(n^m))
+}
+
+  console.log(differentRightmostBit(11,13)) // 1011 , 1101 bitwise and   1001 -> 2
+console.log(differentRightmostBit(7, 23)); //  00111, 10111 bitwize and
+
+00111;
+10111;
+00111;
