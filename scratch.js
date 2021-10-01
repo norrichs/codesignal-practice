@@ -1639,13 +1639,35 @@ Use subfunction
 // 		.indexOf(0));
 // }
 
-function differentRightmostBit(n,m){
-	console.log('n', n.toString(2), 'm', m.toString(2), (n^m).toString(2), (-(n^m)).toString(2),(n^m), -(n^m), (n^m) & -(n^m))
+// function differentRightmostBit(n,m){
+// 	console.log('n', n.toString(2), 'm', m.toString(2), (n^m).toString(2), (-(n^m)).toString(2),(n^m), -(n^m), (n^m) & -(n^m))
+// }
+
+//   console.log(differentRightmostBit(11,13)) // 1011 , 1101 bitwise and   1001 -> 2
+// console.log(differentRightmostBit(7, 23)); //  00111, 10111 bitwize and
+
+// 00111;
+// 10111;
+// 00111;
+
+
+function equalPairOfBits(n, m) {
+	console.log(n.toString(2), m.toString(2));
+	return Math.pow(2,Math.max(n, m)
+		.toString(2)
+		.split("")
+		.reverse()
+		.map((digit, i, arr) => {
+			const smaller = (
+				"0".repeat(arr.length - Math.min(n, m).toString(2).length) +
+				Math.min(n, m).toString(2)
+			)
+			.split("")
+			.reverse();
+			console.log(smaller.join(''), arr.join(''))
+			return digit === smaller[i] ? 1 : 0;
+		})
+		.indexOf(1));
 }
-
-  console.log(differentRightmostBit(11,13)) // 1011 , 1101 bitwise and   1001 -> 2
-console.log(differentRightmostBit(7, 23)); //  00111, 10111 bitwize and
-
-00111;
-10111;
-00111;
+  
+  console.log(equalPairOfBits(10,11))
