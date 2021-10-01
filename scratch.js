@@ -1686,5 +1686,15 @@ Use subfunction
 
 
 function countSumOfTwoRepresentations2(n, l, r) {
-
+	let count = 0;
+	for(let i=l; i<=Math.floor(n/2); i++){
+		if(n-i <= r) {
+			count++
+		}
+	}
+	return count
 }
+
+console.log(countSumOfTwoRepresentations2(20,2,16))
+
+
