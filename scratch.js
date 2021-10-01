@@ -1534,3 +1534,7 @@ console.log(isInfiniteProcess(2, 6)) // false
 console.log(isInfiniteProcess(2, 3)) // true
 console.log(isInfiniteProcess(3, 1)) // true
 console.log(isInfiniteProcess(4, 4)) // false
+
+function arithmeticExpression(a, b, c) {
+    return a * b === c || a / b === c || a + b === c || a - b === c;
+}
