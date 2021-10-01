@@ -1516,10 +1516,21 @@ Use subfunction
 // console.log(phoneCall(3, 1, 2, 20));
 
 
-function extraNumber(a, b, c) {
-	if(a === b) return c
-	if(a === c) return b
-	if(b === c) return a
+// function extraNumber(a, b, c) {
+// 	if(a === b) return c
+// 	if(a === c) return b
+// 	if(b === c) return a
+// }
+
+// console.log(extraNumber( 10, 10, 4))
+
+function isInfiniteProcess(a, b) {
+	return (b > a && (a % 2 !== b %2 )) || b < a // crossover or stay diverged -> true
+
 }
 
-console.log(extraNumber( 10, 10, 4))
+
+console.log(isInfiniteProcess(2, 6)) // false
+console.log(isInfiniteProcess(2, 3)) // true
+console.log(isInfiniteProcess(3, 1)) // true
+console.log(isInfiniteProcess(4, 4)) // false
