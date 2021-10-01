@@ -1708,17 +1708,31 @@ Use subfunction
 
 // console.log(magicalWell(1,2,2))
 
-function lineUp(commands) {
-	const correct   = {L: 1, R: -1, A: 2}
-	const incorrect = {L: -1, R: 1, A: 2}
-	const team = [0,0]
-	let alignedCount = 0;
-	for(c of commands){
-		team[0] = (4+ team[0] + correct[c]) % 4
-		team[1] = (4+ team[1] + incorrect[c]) % 4
-		if(team[0] === team[1]) alignedCount++
+// function lineUp(commands) {
+// 	const correct   = {L: 1, R: -1, A: 2}
+// 	const incorrect = {L: -1, R: 1, A: 2}
+// 	const team = [0,0]
+// 	let alignedCount = 0;
+// 	for(c of commands){
+// 		team[0] = (4+ team[0] + correct[c]) % 4
+// 		team[1] = (4+ team[1] + incorrect[c]) % 4
+// 		if(team[0] === team[1]) alignedCount++
+// 	}
+// 	return alignedCount
+// }
+
+// console.log(lineUp("LLARL"))
+
+function additionWithoutCarrying(param1, param2) {
+	let larger = Math.max(param1, param2).toString()
+	let smaller = Math.min(param1, param2).toString()
+	let answer = larger.substr(0,larger.length - smaller.length)
+	for(let i=0; i< smaller.length; i++){
+		let sumStr = (parseInt(larger[larger.length - smaller.length + i]) + parseInt(smaller[i])).toString()
+		answer += sumStr[sumStr.length-1]
 	}
-	return alignedCount
+	return parseInt(answer)
+	
 }
 
-console.log(lineUp("LLARL"))
+console.log(additionWithoutCarrying(456, 1734))
