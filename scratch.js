@@ -1578,17 +1578,24 @@ Use subfunction
 // }
 // console.log(arrayPacking([24, 85, 0]));
 
-function rangeBitCount(a, b) {
-    let ones = 0;
-    for(let i=a; i<=b; i++){
-        ones += i.toString(2)
-            .split('')
-            .reduce((total,digit)=>{
-                    return total + parseInt(digit)
-                },0)
-    }
-	return ones
+// function rangeBitCount(a, b) {
+//     let ones = 0;
+//     for(let i=a; i<=b; i++){
+//         ones += i.toString(2)
+//             .split('')
+//             .reduce((total,digit)=>{
+//                     return total + parseInt(digit)
+//                 },0)
+//     }
+// 	return ones
+// }
+
+// console.log(rangeBitCount(1,4))	// 1, 10, 11, 100 -> 5
+// console.log(rangeBitCount(5,8))	// 101, 110, 111, 1000 -> 8
+
+function mirrorBits(a) {
+	return parseInt(a.toString(2).split('').reverse().join(''),2)
 }
 
-console.log(rangeBitCount(1,4))	// 1, 10, 11, 100 -> 5
-console.log(rangeBitCount(5,8))	// 101, 110, 111, 1000 -> 8
+console.log(mirrorBits(97))
+
