@@ -1435,14 +1435,14 @@ Use subfunction
 // 	const subGrid = (n) => {
 // 		const off = n%3*3
 // 		return [
-// 			grid[off + 0][off + 0], grid[off + 0][off + 1], grid[off + 0][off + 2], 
-// 			grid[off + 1][off + 0], grid[off + 1][off + 1], grid[off + 1][off + 2], 
+// 			grid[off + 0][off + 0], grid[off + 0][off + 1], grid[off + 0][off + 2],
+// 			grid[off + 1][off + 0], grid[off + 1][off + 1], grid[off + 1][off + 2],
 // 			grid[off + 2][off + 0], grid[off + 2][off + 1], grid[off + 2][off + 2]
 // 		]
 // 	}
 // 	const isComplete = (arr) => {
 // 		for(let i = 1; i<=9; i++){
-			
+
 // 			if(!arr.includes(i)) return false
 // 		}
 // 		return true
@@ -1483,15 +1483,36 @@ Use subfunction
 // 	])
 // );
 
+// function lateRide(n) {
+//     let timeStr = ((n - n % 60) / 60).toString() + (n % 60).toString();
+// 	console.log(timeStr)
+// 	let sum = 0;
+// 	for(digit of timeStr){
+// 		sum += parseInt(digit)
+// 	}
+// 	return sum
+// }
 
-function lateRide(n) {
-    let timeStr = ((n - n % 60) / 60).toString() + (n % 60).toString();
-	console.log(timeStr)
-	let sum = 0;
-	for(digit of timeStr){
-		sum += parseInt(digit)
-	}
-	return sum
-}
+// console.log(lateRide(240))
 
-console.log(lateRide(240))
+// function phoneCall(min1, min2_10, min11, s) {
+// 	let remaining = s;
+// 	let callLength = 0;
+// 	if (min1 > s) return 0;
+// 	else {
+// 		callLength = 1;
+// 		remaining -= min1;
+// 	}
+// 	if (min2_10 >= remaining) return callLength;
+// 	else if (remaining <= min2_10 * 9) {
+// 		return callLength + Math.floor(remaining / min2_10);
+// 	} else {
+// 		callLength += 9;
+// 		remaining -= min2_10 * 9;
+// 	}
+// 	return callLength + Math.floor(remaining / min11);
+// }
+
+// console.log(phoneCall(3, 1, 2, 20));
+
+
