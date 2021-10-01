@@ -1723,16 +1723,31 @@ Use subfunction
 
 // console.log(lineUp("LLARL"))
 
-function additionWithoutCarrying(param1, param2) {
-	let larger = Math.max(param1, param2).toString()
-	let smaller = Math.min(param1, param2).toString()
-	let answer = larger.substr(0,larger.length - smaller.length)
-	for(let i=0; i< smaller.length; i++){
-		let sumStr = (parseInt(larger[larger.length - smaller.length + i]) + parseInt(smaller[i])).toString()
-		answer += sumStr[sumStr.length-1]
-	}
-	return parseInt(answer)
+// function additionWithoutCarrying(param1, param2) {
+// 	let larger = Math.max(param1, param2).toString()
+// 	let smaller = Math.min(param1, param2).toString()
+// 	let answer = larger.substr(0,larger.length - smaller.length)
+// 	for(let i=0; i< smaller.length; i++){
+// 		let sumStr = (parseInt(larger[larger.length - smaller.length + i]) + parseInt(smaller[i])).toString()
+// 		answer += sumStr[sumStr.length-1]
+// 	}
+// 	return parseInt(answer)
 	
-}
+// }
 
-console.log(additionWithoutCarrying(456, 1734))
+// console.log(additionWithoutCarrying(456, 1734))
+
+
+function appleBoxes(k) {
+	// smallest box size 1, up to k
+	// odd size contain yellow, even red
+	// apples per box = m * m
+	let red = 0;
+	let yellow = 0;
+	for (let m = 1; m <= k; m++){
+		if(m % 2 === 0) red += m * m;
+		if(m % 2 === 1) yellow += m * m;		
+	}
+	return red - yellow;
+
+}
