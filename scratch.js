@@ -1524,17 +1524,41 @@ Use subfunction
 
 // console.log(extraNumber( 10, 10, 4))
 
-function isInfiniteProcess(a, b) {
-	return (b > a && (a % 2 !== b %2 )) || b < a // crossover or stay diverged -> true
+// function isInfiniteProcess(a, b) {
+// 	return (b > a && (a % 2 !== b %2 )) || b < a // crossover or stay diverged -> true
 
+// }
+
+
+// console.log(isInfiniteProcess(2, 6)) // false
+// console.log(isInfiniteProcess(2, 3)) // true
+// console.log(isInfiniteProcess(3, 1)) // true
+// console.log(isInfiniteProcess(4, 4)) // false
+
+// function arithmeticExpression(a, b, c) {
+//     return a * b === c || a / b === c || a + b === c || a - b === c;
+// }
+
+
+// function tennisSet(score1, score2) {
+// 	return ((score1 > 5 && score2 < 5) || (score2 > 5 && score1 < 5) || 
+// 		(score1 !== score2 && Math.max(score1, score2) === 7)) && !(Math.max(score1, score2) >= 7 && Math.min(score1,score2)<5);
+// }
+
+// console.log(tennisSet(3,6)) // true
+// console.log(tennisSet(8,5)) // false
+// console.log(tennisSet(6,5)) // false
+// console.log(tennisSet(7,7)) // false
+// console.log(tennisSet(7,2)) // false
+
+
+function metroCard(lastNumberOfDays) {
+	
+	 return lastNumberOfDays === 31 ? [28, 30, 31] : [31]
 }
 
 
-console.log(isInfiniteProcess(2, 6)) // false
-console.log(isInfiniteProcess(2, 3)) // true
-console.log(isInfiniteProcess(3, 1)) // true
-console.log(isInfiniteProcess(4, 4)) // false
 
-function arithmeticExpression(a, b, c) {
-    return a * b === c || a / b === c || a + b === c || a - b === c;
-}
+const monthDaysArray = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+monthDaysArray.forEach(m=>{console.log(metroCard(m))})
