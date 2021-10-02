@@ -1752,19 +1752,33 @@ Use subfunction
 
 // }
 
-function increaseNumberRoundness(n) {
-	const nArrRev = n.toString().split('').reverse()
-	console.log(nArrRev)
-	for(let i=0; i<nArrRev.length-2; i++){
-		if(nArrRev[i] !== '0'){
-			const remaining = nArrRev.slice(i)
-			console.log(remaining)
-			if(remaining.includes('0')) return true
-			else return false
-		}
+// function increaseNumberRoundness(n) {
+// 	const nArrRev = n.toString().split('').reverse()
+// 	console.log(nArrRev)
+// 	for(let i=0; i<nArrRev.length-2; i++){
+// 		if(nArrRev[i] !== '0'){
+// 			const remaining = nArrRev.slice(i)
+// 			console.log(remaining)
+// 			if(remaining.includes('0')) return true
+// 			else return false
+// 		}
+// 	}
+// 	return false
+// }
+
+
+// console.log(increaseNumberRoundness(902200100)) // true
+
+function rounders(n) {
+	const arrRev = n.toString().split('').reverse().map(d=>parseInt(d));
+	let rounded = []
+	for(let i=1; i<arrRev.length; i++){
+		if(arrRev[i-1] >= 5 ) arrRev[i] += 1
+		rounded.unshift(0)
 	}
-	return false
+	rounded.unshift(arrRev[arrRev.length-1])
+	return parseInt(rounded.join(''))
 }
 
-
-console.log(increaseNumberRoundness(902200100)) // true
+console.log(rounders(1445)) // 2000
+console.log(rounders(1230)) // 1200
