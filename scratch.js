@@ -1738,16 +1738,33 @@ Use subfunction
 // console.log(additionWithoutCarrying(456, 1734))
 
 
-function appleBoxes(k) {
-	// smallest box size 1, up to k
-	// odd size contain yellow, even red
-	// apples per box = m * m
-	let red = 0;
-	let yellow = 0;
-	for (let m = 1; m <= k; m++){
-		if(m % 2 === 0) red += m * m;
-		if(m % 2 === 1) yellow += m * m;		
-	}
-	return red - yellow;
+// function appleBoxes(k) {
+// 	// smallest box size 1, up to k
+// 	// odd size contain yellow, even red
+// 	// apples per box = m * m
+// 	let red = 0;
+// 	let yellow = 0;
+// 	for (let m = 1; m <= k; m++){
+// 		if(m % 2 === 0) red += m * m;
+// 		if(m % 2 === 1) yellow += m * m;		
+// 	}
+// 	return red - yellow;
 
+// }
+
+function increaseNumberRoundness(n) {
+	const nArrRev = n.toString().split('').reverse()
+	console.log(nArrRev)
+	for(let i=0; i<nArrRev.length-2; i++){
+		if(nArrRev[i] !== '0'){
+			const remaining = nArrRev.slice(i)
+			console.log(remaining)
+			if(remaining.includes('0')) return true
+			else return false
+		}
+	}
+	return false
 }
+
+
+console.log(increaseNumberRoundness(902200100)) // true
