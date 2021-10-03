@@ -1783,24 +1783,69 @@ Use subfunction
 // console.log(rounders(1445)) // 2000
 // console.log(rounders(1230)) // 1200
 
-function candles(candlesNumber, makeNew) {
-	let candlesBurnt = candlesNumber;
-	let candleEnds = candlesBurnt;
-	let newCandles = 0
-	while(candleEnds >= makeNew){
-		// Make new candles out of ends
-		newCandles = Math.floor(candleEnds / makeNew)
-		candleEnds = candleEnds % makeNew
-		// Burn new candles
-		candlesBurnt += newCandles;
-		candleEnds += newCandles;
-		newCandles = 0
-		console.log('endloop  burnt',candlesBurnt,'ends', candleEnds)
-	}
-	return candlesBurnt;
+// function candles(candlesNumber, makeNew) {
+// 	let candlesBurnt = candlesNumber;
+// 	let candleEnds = candlesBurnt;
+// 	let newCandles = 0
+// 	while(candleEnds >= makeNew){
+// 		// Make new candles out of ends
+// 		newCandles = Math.floor(candleEnds / makeNew)
+// 		candleEnds = candleEnds % makeNew
+// 		// Burn new candles
+// 		candlesBurnt += newCandles;
+// 		candleEnds += newCandles;
+// 		newCandles = 0
+// 		console.log('endloop  burnt',candlesBurnt,'ends', candleEnds)
+// 	}
+// 	return candlesBurnt;
 	
-}
+// }
 
-console.log(candles(5, 2)) // 9
+// console.log(candles(5, 2)) // 9
 
 // 5 candles -> 5 leftovers -> Math.floor(5/2) candles, 1 leftover
+
+function countBlackCells(n, m) {
+	if(n===m) return 1 + ( n - 1) * 3
+	else if(n===1 || m===1) return Math.max(n,m)
+	else{
+		let black = 0
+		let rows = Math.min(n,m)
+		let columns = Math.max(n,m)
+		const slope = rows / columns
+		let intersection
+
+		const rowArr = new Array(rows)
+		rowArr.fill(0)
+		const rowLineArr = new Array(rows-1)
+		rowLineArr.fill(0)
+		for(let columnLine = 1; columnLine < columns; columnLine++){
+			intersection = columnLine * slope;
+			if(intersection % 1 === 0) rowLineArr[intersection-1] +=2
+			else rowArr[Math.floor(intersection)] += 1
+		}
+		// reduce rowlines
+		black = rowLineArr.reduce((total,current)=>{return total + current},0)
+		// map rows add 1, then reduce
+		black = rowArr.map(rCount=>rCount+1)
+			.reduce((total,current)=>{ return total + current}, black)
+		return black
+	}
+}
+console.log(countBlackCells(3,3))	//7
+console.log(countBlackCells(3,4))	//6
+console.log(countBlackCells(3,5))	//7
+console.log(countBlackCells(3,6))	//10
+console.log(countBlackCells(4,6))	//10
+console.log(countBlackCells(4,7))	//10
+
+console.log(countBlackCells(10,10))	//28
+
+
+// 1. make array of intersections
+// 2. bin into rows  and rowlines
+// 3. get count for each row and rowline
+// 4. for each row, increment by count + 1
+// 5. for each rowline, increment by 2
+
+
