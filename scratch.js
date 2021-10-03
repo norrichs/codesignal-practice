@@ -1769,16 +1769,38 @@ Use subfunction
 
 // console.log(increaseNumberRoundness(902200100)) // true
 
-function rounders(n) {
-	const arrRev = n.toString().split('').reverse().map(d=>parseInt(d));
-	let rounded = []
-	for(let i=1; i<arrRev.length; i++){
-		if(arrRev[i-1] >= 5 ) arrRev[i] += 1
-		rounded.unshift(0)
+// function rounders(n) {
+// 	const arrRev = n.toString().split('').reverse().map(d=>parseInt(d));
+// 	let rounded = []
+// 	for(let i=1; i<arrRev.length; i++){
+// 		if(arrRev[i-1] >= 5 ) arrRev[i] += 1
+// 		rounded.unshift(0)
+// 	}
+// 	rounded.unshift(arrRev[arrRev.length-1])
+// 	return parseInt(rounded.join(''))
+// }
+
+// console.log(rounders(1445)) // 2000
+// console.log(rounders(1230)) // 1200
+
+function candles(candlesNumber, makeNew) {
+	let candlesBurnt = candlesNumber;
+	let candleEnds = candlesBurnt;
+	let newCandles = 0
+	while(candleEnds >= makeNew){
+		// Make new candles out of ends
+		newCandles = Math.floor(candleEnds / makeNew)
+		candleEnds = candleEnds % makeNew
+		// Burn new candles
+		candlesBurnt += newCandles;
+		candleEnds += newCandles;
+		newCandles = 0
+		console.log('endloop  burnt',candlesBurnt,'ends', candleEnds)
 	}
-	rounded.unshift(arrRev[arrRev.length-1])
-	return parseInt(rounded.join(''))
+	return candlesBurnt;
+	
 }
 
-console.log(rounders(1445)) // 2000
-console.log(rounders(1230)) // 1200
+console.log(candles(5, 2)) // 9
+
+// 5 candles -> 5 leftovers -> Math.floor(5/2) candles, 1 leftover
