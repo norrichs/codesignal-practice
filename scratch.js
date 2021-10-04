@@ -1962,23 +1962,38 @@ Use subfunction
 
 // console.log(isSumOfConsecutive2(999000000)) // 3+4+5+6+7+8 = 33   qty = 6, average=5.5, spread = 30, tryAverage = 6, tryQty = 5
 
-function squareDigitsSequence(a0) {
-	const sumSqDigits = (n) => {
-		const m = n.toString()
-		let total = 0
-		for(let i=0; i<m.length; i++){
-			total += parseInt(m[i] * m[i])
-		}
-		return total
-	}
+// function squareDigitsSequence(a0) {
+// 	const sumSqDigits = (n) => {
+// 		const m = n.toString()
+// 		let total = 0
+// 		for(let i=0; i<m.length; i++){
+// 			total += parseInt(m[i] * m[i])
+// 		}
+// 		return total
+// 	}
 
-	let arr = [a0]
-	while(!arr.includes( sumSqDigits(arr[arr.length-1]) )){
-		arr.push( sumSqDigits(arr[arr.length-1]) )
-	}
-	return arr.length+1
+// 	let arr = [a0]
+// 	while(!arr.includes( sumSqDigits(arr[arr.length-1]) )){
+// 		arr.push( sumSqDigits(arr[arr.length-1]) )
+// 	}
+// 	return arr.length+1
 
+// }
+
+// console.log(squareDigitsSequence(16)) 	//9		16, 1^2 + 6^2 = 37, 3^2 + 7^2 = 58
+// console.log(squareDigitsSequence(103)) 	//4
+
+
+function pagesNumberingWithInk(current, numberOfDigits) {
+	let total = current.toString().length
+	while(total <= numberOfDigits){
+		current += 1
+		total += current.toString().length
+	}
+	return current-1
 }
 
-console.log(squareDigitsSequence(16)) 	//9		16, 1^2 + 6^2 = 37, 3^2 + 7^2 = 58
-console.log(squareDigitsSequence(103)) 	//4
+
+console.log(pagesNumberingWithInk(1,5)) 	// 5
+console.log(pagesNumberingWithInk(21,5)) 	// 22
+console.log(pagesNumberingWithInk(8,4)) 	// 10
