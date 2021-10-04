@@ -1805,41 +1805,41 @@ Use subfunction
 
 // 5 candles -> 5 leftovers -> Math.floor(5/2) candles, 1 leftover
 
-function countBlackCells(n, m) {
-	if(n===m) return 1 + ( n - 1) * 3
-	else if(n===1 || m===1) return Math.max(n,m)
-	else{
-		let black = 0
-		let rows = Math.min(n,m)
-		let columns = Math.max(n,m)
-		const slope = rows / columns
-		let intersection
+// function countBlackCells(n, m) {
+// 	if(n===m) return 1 + ( n - 1) * 3
+// 	else if(n===1 || m===1) return Math.max(n,m)
+// 	else{
+// 		let black = 0
+// 		let rows = Math.min(n,m)
+// 		let columns = Math.max(n,m)
+// 		const slope = rows / columns
+// 		let intersection
 
-		const rowArr = new Array(rows)
-		rowArr.fill(0)
-		const rowLineArr = new Array(rows-1)
-		rowLineArr.fill(0)
-		for(let columnLine = 1; columnLine < columns; columnLine++){
-			intersection = columnLine * slope;
-			if(intersection % 1 === 0) rowLineArr[intersection-1] +=2
-			else rowArr[Math.floor(intersection)] += 1
-		}
-		// reduce rowlines
-		black = rowLineArr.reduce((total,current)=>{return total + current},0)
-		// map rows add 1, then reduce
-		black = rowArr.map(rCount=>rCount+1)
-			.reduce((total,current)=>{ return total + current}, black)
-		return black
-	}
-}
-console.log(countBlackCells(3,3))	//7
-console.log(countBlackCells(3,4))	//6
-console.log(countBlackCells(3,5))	//7
-console.log(countBlackCells(3,6))	//10
-console.log(countBlackCells(4,6))	//10
-console.log(countBlackCells(4,7))	//10
+// 		const rowArr = new Array(rows)
+// 		rowArr.fill(0)
+// 		const rowLineArr = new Array(rows-1)
+// 		rowLineArr.fill(0)
+// 		for(let columnLine = 1; columnLine < columns; columnLine++){
+// 			intersection = columnLine * slope;
+// 			if(intersection % 1 === 0) rowLineArr[intersection-1] +=2
+// 			else rowArr[Math.floor(intersection)] += 1
+// 		}
+// 		// reduce rowlines
+// 		black = rowLineArr.reduce((total,current)=>{return total + current},0)
+// 		// map rows add 1, then reduce
+// 		black = rowArr.map(rCount=>rCount+1)
+// 			.reduce((total,current)=>{ return total + current}, black)
+// 		return black
+// 	}
+// }
+// console.log(countBlackCells(3,3))	//7
+// console.log(countBlackCells(3,4))	//6
+// console.log(countBlackCells(3,5))	//7
+// console.log(countBlackCells(3,6))	//10
+// console.log(countBlackCells(4,6))	//10
+// console.log(countBlackCells(4,7))	//10
 
-console.log(countBlackCells(10,10))	//28
+// console.log(countBlackCells(10,10))	//28
 
 
 // 1. make array of intersections
@@ -1849,3 +1849,41 @@ console.log(countBlackCells(10,10))	//28
 // 5. for each rowline, increment by 2
 
 
+// function concatenateArrays(a, b) {
+// 	return [...a,...b]	
+// }
+
+// console.log(concatenateArrays([1,2,3], [4,5,6]))
+
+
+// function removeArrayPart(inputArray, l, r) {
+//     inputArray.splice(l,r-l+1)
+//     return inputArray
+// }
+// console.log(removeArrayPart([2, 3, 2, 3, 4, 5],2,4)) // [2,3,5]
+
+
+// function isSmooth(arr) {
+// 	let middle
+// 	if(arr.length % 2 === 1){
+// 		middle = arr[Math.floor(arr.length / 2)]
+// 	}else{
+// 		middle = arr[arr.length / 2] + arr[arr.length / 2 -1]
+// 	}
+// 	return arr[0] === arr[arr.length - 1] && arr[0] === middle
+// }
+
+// console.log(isSmooth([7, 2, 2, 5, 10, 7])) // true
+// console.log(isSmooth([-5, -5, 10])) // false
+// console.log(isSmooth([-12, 34, 40, -5, -12, 4, 0, 0, -12])) // true
+// console.log(isSmooth([-6, 6, -6])) // false
+
+// function makeArrayConsecutive2(statues) {
+// 	let count = 0;
+// 	for(let i=Math.min(...statues)+1; i<Math.max(...statues); i++){
+// 		if(!statues.includes(i)) count +=1
+// 	}
+// 	return count
+// }
+
+// console.log(makeArrayConsecutive2([1])) // 3
