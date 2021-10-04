@@ -1890,14 +1890,74 @@ Use subfunction
 
 
 // is givien number a power of some non negative integer?
-function isPower(n) {
-	for(let i=1; i<=20; i++){
-		for(let j=2; j<=9; j++){
-			if(Math.pow(i,j)===n) return true
+// function isPower(n) {
+// 	for(let i=1; i<=20; i++){
+// 		for(let j=2; j<=9; j++){
+// 			if(Math.pow(i,j)===n) return true
+// 		}
+// 	}
+// 	return false
+// }
+
+// console.log(isPower(125)) // true, 125 === 5^3
+// console.log(isPower(72)) // false, 
+
+
+// function isSumOfConsecutive2(n) {
+// 	for(let i = 1; i<n/2; i++){
+// 		console.log('i', i)
+// 		// make loose estimate, 2 iterations
+// 		let spread = n-i
+// 		let tryQty = spread / (i+1)
+// 		let tryAverage;
+// 		console.log('spread', spread, 'tryQty1', tryQty)
+
+// 		let tryMax = i + Math.ceil(tryQty)
+// 		tryAverage = (tryMax - (i+1)) / tryQty
+// 		tryQty = 
+// 		console.log('tryAverage', tryAverage)
+		
+
+
+
+
+
+
+
+
+
+// 		// spread = (i + 1 + tryQty)
+// 		// tryAverage =  spread / tryQty
+// 		// tryQty = spread / tryAverage
+// 		// console.log('tryQty2', tryQty)
+// 		// tryAverage = spread / tryQty
+// 		// tryQty = spread / tryAverage
+// 		// console.log('tryQty3', tryQty)
+
+// 		// test precisely 
+
+		
+// 	}
+// }
+function isSumOfConsecutive2(n) {
+	let count = 0;
+	let total
+	let j
+	for(let i=1; i<n/2; i++){
+		total = i;
+		j = i+1
+		while(total < n){
+			total = total + j;
+			// console.log('count', count,'i',i,'j',j,'total', total)
+			j+=1
+		}
+		if(total === n){
+
+			count +=1
 		}
 	}
-	return false
+	return count
 }
 
-console.log(isPower(125)) // true, 125 === 5^3
-console.log(isPower(72)) // false, 
+
+console.log(isSumOfConsecutive2(999000000)) // 3+4+5+6+7+8 = 33   qty = 6, average=5.5, spread = 30, tryAverage = 6, tryQty = 5
