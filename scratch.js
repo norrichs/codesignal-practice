@@ -1887,3 +1887,17 @@ Use subfunction
 // }
 
 // console.log(makeArrayConsecutive2([1])) // 3
+
+
+// is givien number a power of some non negative integer?
+function isPower(n) {
+	for(let i=1; i<=20; i++){
+		for(let j=2; j<=9; j++){
+			if(Math.pow(i,j)===n) return true
+		}
+	}
+	return false
+}
+
+console.log(isPower(125)) // true, 125 === 5^3
+console.log(isPower(72)) // false, 
