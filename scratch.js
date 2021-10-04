@@ -1984,16 +1984,51 @@ Use subfunction
 // console.log(squareDigitsSequence(103)) 	//4
 
 
-function pagesNumberingWithInk(current, numberOfDigits) {
-	let total = current.toString().length
-	while(total <= numberOfDigits){
-		current += 1
-		total += current.toString().length
-	}
-	return current-1
-}
+// function pagesNumberingWithInk(current, numberOfDigits) {
+// 	let total = current.toString().length
+// 	while(total <= numberOfDigits){
+// 		current += 1
+// 		total += current.toString().length
+// 	}
+// 	return current-1
+// }
 
 
-console.log(pagesNumberingWithInk(1,5)) 	// 5
-console.log(pagesNumberingWithInk(21,5)) 	// 22
-console.log(pagesNumberingWithInk(8,4)) 	// 10
+// console.log(pagesNumberingWithInk(1,5)) 	// 5
+// console.log(pagesNumberingWithInk(21,5)) 	// 22
+// console.log(pagesNumberingWithInk(8,4)) 	// 10
+
+// function comfortableNumbers(l, r) {
+// 	const sumDigits = (n) => {
+// 		return n.toString()
+// 			.split('')
+// 			.map(d=>parseInt(d))
+// 			.reduce((t,d)=>{return t+d},0)
+// 	}
+
+// 	let pairs = []
+// 	for(let i = l; i <= r-1; i++){
+// 		for(let j = i+1; j<=r; j++){
+// 			pairs.push([i,j])
+// 		}
+// 	}
+// 	// console.log(pairs)
+
+// 	const result = pairs.reduce((count, pair)=>{
+// 		const [a,b] = pair
+// 		return ( 
+// 			a - sumDigits(a) <= b &&
+// 			a + sumDigits(a) >= b &&
+// 			b - sumDigits(b) <= a &&
+// 			b + sumDigits(b) >= a
+// 		) ? count + 1 : count
+// 	},0)
+// 	return result
+// }
+
+// console.log(comfortableNumbers(12, 108)) // 707
+// console.log(comfortableNumbers(239, 777)) // 6166
+// console.log(comfortableNumbers(1, 1000)) // 11435
+
+// console.log(comfortableNumbers(1, 20)) // 707
+
