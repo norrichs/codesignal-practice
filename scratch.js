@@ -2032,3 +2032,37 @@ Use subfunction
 
 // console.log(comfortableNumbers(1, 20)) // 707
 
+function weakNumbers(n) {
+	//weakness x is number of positive integers  < x with more divisors than x
+	const weakness = (x) => {
+		const divisorsOfX = divisors(x)
+		let weakness = 0
+		for(let i=1; i<x; i++){
+			if(divisors(i) > divisorsOfX) weakness +=1
+		}
+		return weakness
+	}
+
+	const divisors = (n) => {
+		const limit = Math.sqrt(n)
+		let count = 0
+		for(let i=1; i<=limit; i++){
+			if(n % i === 0) {
+				count += 1
+				if(i!==n/i)	count += 1
+			}
+		}
+		return count
+	}
+
+	let weaknessArray = new Array(n)
+	weaknessArray.fill(0)
+	weaknessArray = weaknessArray.map((x,i)=>i+1)
+	weaknessArray = weaknessArray.map((x)=>{return weakness(x)})
+	const weakest = Math.max(...weaknessArray)
+	return [weakest, weaknessArray.filter(w=>{return w===weakest}).length]
+
+}
+
+console.log(weakNumbers(9)) // [2,2]
+
