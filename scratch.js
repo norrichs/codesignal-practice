@@ -2032,37 +2032,129 @@ Use subfunction
 
 // console.log(comfortableNumbers(1, 20)) // 707
 
-function weakNumbers(n) {
-	//weakness x is number of positive integers  < x with more divisors than x
-	const weakness = (x) => {
-		const divisorsOfX = divisors(x)
-		let weakness = 0
-		for(let i=1; i<x; i++){
-			if(divisors(i) > divisorsOfX) weakness +=1
+// function weakNumbers(n) {
+// 	//weakness x is number of positive integers  < x with more divisors than x
+// 	const weakness = (x) => {
+// 		const divisorsOfX = divisors(x)
+// 		let weakness = 0
+// 		for(let i=1; i<x; i++){
+// 			if(divisors(i) > divisorsOfX) weakness +=1
+// 		}
+// 		return weakness
+// 	}
+
+// 	const divisors = (n) => {
+// 		const limit = Math.sqrt(n)
+// 		let count = 0
+// 		for(let i=1; i<=limit; i++){
+// 			if(n % i === 0) {
+// 				count += 1
+// 				if(i!==n/i)	count += 1
+// 			}
+// 		}
+// 		return count
+// 	}
+
+// 	let weaknessArray = new Array(n)
+// 	weaknessArray.fill(0)
+// 	weaknessArray = weaknessArray.map((x,i)=>i+1)
+// 	weaknessArray = weaknessArray.map((x)=>{return weakness(x)})
+// 	const weakest = Math.max(...weaknessArray)
+// 	return [weakest, weaknessArray.filter(w=>{return w===weakest}).length]
+
+// }
+
+// console.log(weakNumbers(9)) // [2,2]
+
+
+function rectangleRotation(a, b) {
+	const longLeg = Math.sqrt(Math.pow(Math.max(a,b),2) / 2)
+	const shortLeg = Math.sqrt(Math.pow(Math.min(a,b),2) / 2)
+	const h = shortLeg + longLeg
+	console.log('longleg', longLeg,'shortleg', shortLeg,'h/2', h/2)
+	
+	const startX = 0 - h / 2
+	const endX1 = startX + shortLeg
+	const endX3 = h / 2
+	const endX2 = endX3 - shortLeg
+
+	const startY = 0 - h / 2 + shortLeg
+	const startY2low = 0 - h / 2
+	const startY3high = h / 2
+
+	let count = 0
+	let dx1 = 0
+	let dx2 = 0
+	for(let x = Math.ceil(startX); x<endX3; x++){
+		if(x < endX1){
+			dx1 = x - startX
+			dx2 = x - startX
+			count += Math.floor(startY + 1 * dx1) - Math.ceil(startY - 1 * dx2) + 1
+			console.log('x=',x,'count=', count)
+		}else if(x < endX2){
+			dx1 = x - startX
+			dx2 = x - endX1
+			count += Math.floor(startY + 1 * dx1) - Math.ceil(startY2low + 1 * dx2) + 1
+
+			console.log('x=',x,'count=', count,'high')
+		}else{
+			dx1 = x - endX2
+			dx2 = x - endX1
+			count += Math.floor(startY3high - 1 * dx1) - Math.ceil(startY2low + 1 * dx2) + 1
+			console.log('x=',x,'count=', count)
 		}
-		return weakness
 	}
-
-	const divisors = (n) => {
-		const limit = Math.sqrt(n)
-		let count = 0
-		for(let i=1; i<=limit; i++){
-			if(n % i === 0) {
-				count += 1
-				if(i!==n/i)	count += 1
-			}
-		}
-		return count
-	}
-
-	let weaknessArray = new Array(n)
-	weaknessArray.fill(0)
-	weaknessArray = weaknessArray.map((x,i)=>i+1)
-	weaknessArray = weaknessArray.map((x)=>{return weakness(x)})
-	const weakest = Math.max(...weaknessArray)
-	return [weakest, weaknessArray.filter(w=>{return w===weakest}).length]
-
+	return count
 }
 
-console.log(weakNumbers(9)) // [2,2]
+// get top point x
+// get bottom point x
+// make column lines array
+// for each column line
+//	if zone 1
+//		count between topleft and bottom left
+//	else if zone 2
+//		count between topleft and bottomright
+//	else if zone 3
+//		count between tomright and bottomright
+//	return count
+//	
 
+
+//		get top point
+//			if columnline x < top point x
+//				dx = columnline x - left point x
+//				top y = left point y + slope * dx
+//		get bottom point
+//				bottom y = left point y - slope * dx 
+//		count points between
+//			
+// a2+b2=c2
+// 2a2=c2
+// a = sqrt(c2/2)
+
+
+// 	rectangle, sides a and b
+// 	center @ origin
+//	sides are @ 45 degrees to axes
+//	how many points w/ integer coordinates are inside rectangle, inclusive of sides
+
+// 1. find endpoints
+//	a) 2 isoceles triangles, with short and long hypotenuse.
+//	b) height = width = short leg + long leg
+//	c) vertices @ 
+//		top 	(h/2 + longleg, h/2)
+//		right 	(h/2, 0-h/2+longleg)
+//		bottom 	(h/2-longleg, -h/2)
+//		left	(-h/2, h/2-longleg) 
+// points = (Math.floor(top Y bound) - Math.ceil(bottom Y bound)) * 
+//			(Math.floor(top X bound) - Math.ceil(bottom X bound)
+
+
+console.log(rectangleRotation(6,4)) // 23
+
+// university dr
+// pleasant st amherst
+// ludlow
+// easthampton 
+// holyoke
