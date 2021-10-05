@@ -2160,73 +2160,73 @@ Use subfunction
 // holyoke
 
 
-const highlight = (word, l1, l2,orientation) =>{
-	let arr = word.split('')
-	for(let i=0; i<arr.length; i++){
-		if(i===l1 || i===l2) arr[i] = '[' + arr[i] + ']'
-	}
-	if(orientation==='h') return arr.join('')
-	else return arr.join('\n')
-}
+// const highlight = (word, l1, l2,orientation) =>{
+// 	let arr = word.split('')
+// 	for(let i=0; i<arr.length; i++){
+// 		if(i===l1 || i===l2) arr[i] = '[' + arr[i] + ']'
+// 	}
+// 	if(orientation==='h') return arr.join('')
+// 	else return arr.join('\n')
+// }
 
-function crosswordFormation(words) {
-	// algo 2 - 
-	// 24 permutations 
-	//	generate permutations
-	let permutations = []
-	for(let i=0; i<4; i++){
-		let tempWords0 = [...words]
-		let word0 = tempWords0.splice(i,1)
-		for(let j=0; j<3; j++){
-			let tempWords1 = [...tempWords0]
-			let word1 = tempWords1.splice(j,1)
-			for(let k=0; k<2; k++){
-				let tempWords2 = [...tempWords1]
-				let word2 = tempWords2.splice(k,1)
-				permutations.push([word0[0], word1[0], word2[0], tempWords2[0]])
-			}
-		}
-	}
-	// loop permutations
-	let count = 0
-	for(perm of permutations){
-		let [l,t,r,b] = perm
-		const vNegLimit = 3-r.length;
-		const vPosLimit = l.length-3
-		// loop left / right word vertical offset (lrV)
-		for(let lrV = vNegLimit; lrV <= vPosLimit; lrV++){
-			const hPosLimit = Math.min(t.length,b.length) - 1
-			// loop left / right word horizontal offset (lrH)
-			for(let lrH=2; lrH<=hPosLimit; lrH++){
-				// loop top word vertical position (tvp)
-				for(let tvp=0; tvp<lrV+r.length-2; tvp++){
-					// loop top word letters 0->length-1-horiz offset
-					for(let tLetter=0; tLetter<t.length-lrH; tLetter++){
-						// if top[i] === left[tvp] && top[i+horizoffset] === right[tvp-vertoffset]
-						if(t[tLetter]===l[tvp] && t[tLetter + lrH]===r[tvp-lrV]){
-							// loop bottom word vertical position (bvp) [tvp+2 : Math.min(l.length, lr_voff+r.length)]
-							const bvpLimit = Math.min(l.length, lrV+r.length)
-							for(let bvp=tvp+2; bvp<bvpLimit; bvp++){
-								// loop bottom word letters 0->length - 1 - lr_h_offset
-								for(let bLetter=0; bLetter<b.length-lrH; bLetter++){
-									// if bottom[j] === left[bvp] && bottom[j+lr_h_offset] === right[bvp-lr_v_offset]
-									if(b[bLetter]===l[bvp] && b[bLetter + lrH]===r[bvp-lrV]){
-										// console.log(highlight(l, tvp, bvp,'v'))
-										// console.log(highlight(t, tLetter, tLetter+lrH, 'h'))
-										// console.log(highlight(r, tvp-lrV, bvp-lrV, 'v'))
-										// console.log(highlight(b, bLetter, bLetter+lrH, 'h'))
-										count += 1
-									}
-								}
-							}
-						}
-					}
-				} 
-			}
-		}
-	}
-	return count
-}
+// function crosswordFormation(words) {
+// 	// algo 2 - 
+// 	// 24 permutations 
+// 	//	generate permutations
+// 	let permutations = []
+// 	for(let i=0; i<4; i++){
+// 		let tempWords0 = [...words]
+// 		let word0 = tempWords0.splice(i,1)
+// 		for(let j=0; j<3; j++){
+// 			let tempWords1 = [...tempWords0]
+// 			let word1 = tempWords1.splice(j,1)
+// 			for(let k=0; k<2; k++){
+// 				let tempWords2 = [...tempWords1]
+// 				let word2 = tempWords2.splice(k,1)
+// 				permutations.push([word0[0], word1[0], word2[0], tempWords2[0]])
+// 			}
+// 		}
+// 	}
+// 	// loop permutations
+// 	let count = 0
+// 	for(perm of permutations){
+// 		let [l,t,r,b] = perm
+// 		const vNegLimit = 3-r.length;
+// 		const vPosLimit = l.length-3
+// 		// loop left / right word vertical offset (lrV)
+// 		for(let lrV = vNegLimit; lrV <= vPosLimit; lrV++){
+// 			const hPosLimit = Math.min(t.length,b.length) - 1
+// 			// loop left / right word horizontal offset (lrH)
+// 			for(let lrH=2; lrH<=hPosLimit; lrH++){
+// 				// loop top word vertical position (tvp)
+// 				for(let tvp=0; tvp<lrV+r.length-2; tvp++){
+// 					// loop top word letters 0->length-1-horiz offset
+// 					for(let tLetter=0; tLetter<t.length-lrH; tLetter++){
+// 						// if top[i] === left[tvp] && top[i+horizoffset] === right[tvp-vertoffset]
+// 						if(t[tLetter]===l[tvp] && t[tLetter + lrH]===r[tvp-lrV]){
+// 							// loop bottom word vertical position (bvp) [tvp+2 : Math.min(l.length, lr_voff+r.length)]
+// 							const bvpLimit = Math.min(l.length, lrV+r.length)
+// 							for(let bvp=tvp+2; bvp<bvpLimit; bvp++){
+// 								// loop bottom word letters 0->length - 1 - lr_h_offset
+// 								for(let bLetter=0; bLetter<b.length-lrH; bLetter++){
+// 									// if bottom[j] === left[bvp] && bottom[j+lr_h_offset] === right[bvp-lr_v_offset]
+// 									if(b[bLetter]===l[bvp] && b[bLetter + lrH]===r[bvp-lrV]){
+// 										// console.log(highlight(l, tvp, bvp,'v'))
+// 										// console.log(highlight(t, tLetter, tLetter+lrH, 'h'))
+// 										// console.log(highlight(r, tvp-lrV, bvp-lrV, 'v'))
+// 										// console.log(highlight(b, bLetter, bLetter+lrH, 'h'))
+// 										count += 1
+// 									}
+// 								}
+// 							}
+// 						}
+// 					}
+// 				} 
+// 			}
+// 		}
+// 	}
+// 	return count
+// }
 
 
 
@@ -2264,4 +2264,11 @@ function crosswordFormation(words) {
 // find # of ways to form crossword following rules, given 4 words
 
 
-console.log(crosswordFormation(["crossword", "square", "formation", "something"])) // 6
+// console.log(crosswordFormation(["crossword", "square", "formation", "something"])) // 6
+
+
+// function properNounCorrection(noun) {
+//     return noun[0].toUpperCase() + noun.toLowerCase().substr(1)
+// }
+
+// console.log(properNounCorrection('pARiS'))
