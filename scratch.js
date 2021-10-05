@@ -2287,10 +2287,28 @@ Use subfunction
 // console.log(isTandemRepeat('2w2ww')) // false
 // console.log(isTandemRepeat('aa')) // true
 
-function htmlEndTagByStartTag(startTag) {
-	if(startTag.indexOf(' ')===-1) return '</' + startTag.substr(1)
-	return '</' + startTag.substr(1,startTag.indexOf(' ')-1) + ">"
+// function htmlEndTagByStartTag(startTag) {
+// 	if(startTag.indexOf(' ')===-1) return '</' + startTag.substr(1)
+// 	return '</' + startTag.substr(1,startTag.indexOf(' ')-1) + ">"
+// }
+
+// console.log(htmlEndTagByStartTag('<button type="button">')) // </button>
+// console.log(htmlEndTagByStartTag('<i>')) // </i>
+
+function isMAC48Address(inputString) {
+	const hexDigits = "0123456789ABCDEF"
+	const arr = inputString.split("-")
+	if(arr.length !== 6) return false
+	for(str of arr){
+		if(str.length !== 2) return false
+		for(d of str){
+			if(!hexDigits.includes(d)) return false
+		}
+	}
+	return true
 }
 
-console.log(htmlEndTagByStartTag('<button type="button">')) // </button>
-console.log(htmlEndTagByStartTag('<i>')) // </i>
+
+console.log(isMAC48Address("00-1B-63-84-45-E6")) // true
+console.log(isMAC48Address("Z1-1B-63-84-45-E6")) // false
+console.log(isMAC48Address("not a MAC-48 address")) // false
