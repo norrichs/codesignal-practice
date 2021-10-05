@@ -2067,45 +2067,45 @@ Use subfunction
 // console.log(weakNumbers(9)) // [2,2]
 
 
-function rectangleRotation(a, b) {
-	const longLeg = Math.sqrt(Math.pow(Math.max(a,b),2) / 2)
-	const shortLeg = Math.sqrt(Math.pow(Math.min(a,b),2) / 2)
-	const h = shortLeg + longLeg
-	console.log('longleg', longLeg,'shortleg', shortLeg,'h/2', h/2)
+// function rectangleRotation(a, b) {
+// 	const longLeg = Math.sqrt(Math.pow(Math.max(a,b),2) / 2)
+// 	const shortLeg = Math.sqrt(Math.pow(Math.min(a,b),2) / 2)
+// 	const h = shortLeg + longLeg
+// 	console.log('longleg', longLeg,'shortleg', shortLeg,'h/2', h/2)
 	
-	const startX = 0 - h / 2
-	const endX1 = startX + shortLeg
-	const endX3 = h / 2
-	const endX2 = endX3 - shortLeg
+// 	const startX = 0 - h / 2
+// 	const endX1 = startX + shortLeg
+// 	const endX3 = h / 2
+// 	const endX2 = endX3 - shortLeg
 
-	const startY = 0 - h / 2 + shortLeg
-	const startY2low = 0 - h / 2
-	const startY3high = h / 2
+// 	const startY = 0 - h / 2 + shortLeg
+// 	const startY2low = 0 - h / 2
+// 	const startY3high = h / 2
 
-	let count = 0
-	let dx1 = 0
-	let dx2 = 0
-	for(let x = Math.ceil(startX); x<endX3; x++){
-		if(x < endX1){
-			dx1 = x - startX
-			dx2 = x - startX
-			count += Math.floor(startY + 1 * dx1) - Math.ceil(startY - 1 * dx2) + 1
-			console.log('x=',x,'count=', count)
-		}else if(x < endX2){
-			dx1 = x - startX
-			dx2 = x - endX1
-			count += Math.floor(startY + 1 * dx1) - Math.ceil(startY2low + 1 * dx2) + 1
+// 	let count = 0
+// 	let dx1 = 0
+// 	let dx2 = 0
+// 	for(let x = Math.ceil(startX); x<endX3; x++){
+// 		if(x < endX1){
+// 			dx1 = x - startX
+// 			dx2 = x - startX
+// 			count += Math.floor(startY + 1 * dx1) - Math.ceil(startY - 1 * dx2) + 1
+// 			console.log('x=',x,'count=', count)
+// 		}else if(x < endX2){
+// 			dx1 = x - startX
+// 			dx2 = x - endX1
+// 			count += Math.floor(startY + 1 * dx1) - Math.ceil(startY2low + 1 * dx2) + 1
 
-			console.log('x=',x,'count=', count,'high')
-		}else{
-			dx1 = x - endX2
-			dx2 = x - endX1
-			count += Math.floor(startY3high - 1 * dx1) - Math.ceil(startY2low + 1 * dx2) + 1
-			console.log('x=',x,'count=', count)
-		}
-	}
-	return count
-}
+// 			console.log('x=',x,'count=', count,'high')
+// 		}else{
+// 			dx1 = x - endX2
+// 			dx2 = x - endX1
+// 			count += Math.floor(startY3high - 1 * dx1) - Math.ceil(startY2low + 1 * dx2) + 1
+// 			console.log('x=',x,'count=', count)
+// 		}
+// 	}
+// 	return count
+// }
 
 // get top point x
 // get bottom point x
@@ -2151,10 +2151,117 @@ function rectangleRotation(a, b) {
 //			(Math.floor(top X bound) - Math.ceil(bottom X bound)
 
 
-console.log(rectangleRotation(6,4)) // 23
+// console.log(rectangleRotation(6,4)) // 23
 
 // university dr
 // pleasant st amherst
 // ludlow
 // easthampton 
 // holyoke
+
+
+const highlight = (word, l1, l2,orientation) =>{
+	let arr = word.split('')
+	for(let i=0; i<arr.length; i++){
+		if(i===l1 || i===l2) arr[i] = '[' + arr[i] + ']'
+	}
+	if(orientation==='h') return arr.join('')
+	else return arr.join('\n')
+}
+
+function crosswordFormation(words) {
+	// algo 2 - 
+	// 24 permutations 
+	//	generate permutations
+	let permutations = []
+	for(let i=0; i<4; i++){
+		let tempWords0 = [...words]
+		let word0 = tempWords0.splice(i,1)
+		for(let j=0; j<3; j++){
+			let tempWords1 = [...tempWords0]
+			let word1 = tempWords1.splice(j,1)
+			for(let k=0; k<2; k++){
+				let tempWords2 = [...tempWords1]
+				let word2 = tempWords2.splice(k,1)
+				permutations.push([word0[0], word1[0], word2[0], tempWords2[0]])
+			}
+		}
+	}
+	// loop permutations
+	let count = 0
+	for(perm of permutations){
+		let [l,t,r,b] = perm
+		const vNegLimit = 3-r.length;
+		const vPosLimit = l.length-3
+		// loop left / right word vertical offset (lrV)
+		for(let lrV = vNegLimit; lrV <= vPosLimit; lrV++){
+			const hPosLimit = Math.min(t.length,b.length) - 1
+			// loop left / right word horizontal offset (lrH)
+			for(let lrH=2; lrH<=hPosLimit; lrH++){
+				// loop top word vertical position (tvp)
+				for(let tvp=0; tvp<lrV+r.length-2; tvp++){
+					// loop top word letters 0->length-1-horiz offset
+					for(let tLetter=0; tLetter<t.length-lrH; tLetter++){
+						// if top[i] === left[tvp] && top[i+horizoffset] === right[tvp-vertoffset]
+						if(t[tLetter]===l[tvp] && t[tLetter + lrH]===r[tvp-lrV]){
+							// loop bottom word vertical position (bvp) [tvp+2 : Math.min(l.length, lr_voff+r.length)]
+							const bvpLimit = Math.min(l.length, lrV+r.length)
+							for(let bvp=tvp+2; bvp<bvpLimit; bvp++){
+								// loop bottom word letters 0->length - 1 - lr_h_offset
+								for(let bLetter=0; bLetter<b.length-lrH; bLetter++){
+									// if bottom[j] === left[bvp] && bottom[j+lr_h_offset] === right[bvp-lr_v_offset]
+									if(b[bLetter]===l[bvp] && b[bLetter + lrH]===r[bvp-lrV]){
+										// console.log(highlight(l, tvp, bvp,'v'))
+										// console.log(highlight(t, tLetter, tLetter+lrH, 'h'))
+										// console.log(highlight(r, tvp-lrV, bvp-lrV, 'v'))
+										// console.log(highlight(b, bLetter, bLetter+lrH, 'h'))
+										count += 1
+									}
+								}
+							}
+						}
+					}
+				} 
+			}
+		}
+	}
+	return count
+}
+
+
+
+
+
+
+
+
+
+
+// ALgo 1 - massively nexted loops (incompletely pseudocoded)
+//	split this up into a recursive function?
+
+//	loop words 0-3
+//		(first word is left)
+//		loop letters 0-> length-3 = target1
+//			loop words 1-3
+//				loop letters 0->length-1
+//					if letter === target1
+//						loop letters index+2->length-1 = target2
+//							loop words 2-3
+//								loop letters 0->length-1
+//									if letter === target2
+//										loop letters index+2->length
+
+
+
+
+
+// crossword has 4 words
+//	4 words form 4 pairwise intersections
+//	all words either l-r or t-b
+//	area of rectangle formed by empty cells !==0
+
+// find # of ways to form crossword following rules, given 4 words
+
+
+console.log(crosswordFormation(["crossword", "square", "formation", "something"])) // 6
