@@ -2272,3 +2272,17 @@ Use subfunction
 // }
 
 // console.log(properNounCorrection('pARiS'))
+
+function isTandemRepeat(inputString) {
+
+	if(inputString.length % 2 === 1) return false
+	if(inputString.substr(0,inputString.length/2) === inputString.substr(inputString.length/2)) return true
+	return false
+}
+
+console.log(isTandemRepeat('tandemtandem')) // true
+
+console.log(isTandemRepeat('qqq')) // false
+
+console.log(isTandemRepeat('2w2ww')) // false
+console.log(isTandemRepeat('aa')) // true
