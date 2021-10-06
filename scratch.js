@@ -2295,20 +2295,41 @@ Use subfunction
 // console.log(htmlEndTagByStartTag('<button type="button">')) // </button>
 // console.log(htmlEndTagByStartTag('<i>')) // </i>
 
-function isMAC48Address(inputString) {
-	const hexDigits = "0123456789ABCDEF"
-	const arr = inputString.split("-")
-	if(arr.length !== 6) return false
-	for(str of arr){
-		if(str.length !== 2) return false
-		for(d of str){
-			if(!hexDigits.includes(d)) return false
+// function isMAC48Address(inputString) {
+// 	const hexDigits = "0123456789ABCDEF"
+// 	const arr = inputString.split("-")
+// 	if(arr.length !== 6) return false
+// 	for(str of arr){
+// 		if(str.length !== 2) return false
+// 		for(d of str){
+// 			if(!hexDigits.includes(d)) return false
+// 		}
+// 	}
+// 	return true
+// }
+
+
+// console.log(isMAC48Address("00-1B-63-84-45-E6")) // true
+// console.log(isMAC48Address("Z1-1B-63-84-45-E6")) // false
+// console.log(isMAC48Address("not a MAC-48 address")) // false
+
+function isUnstablePair(filename1, filename2) {
+	const sortFunction = (a,b)=>{
+		const short = Math.min(a.length, b.length) === a.length ? a : b
+		for(let i=0; i<short.length; i++){
+			if(a[i]>b[i]) return -1
+			else if(a[i]<b[i]) return 1
 		}
+		if(a.length === b.length) return 0
+		return a === short ? 1 : -1
+		
 	}
-	return true
+	console.log(filename1, filename2, sortFunction(filename1, filename2), filename1.toUpperCase(), filename2.toUpperCase(),sortFunction(filename1.toUpperCase(), filename2.toUpperCase()))
+
+	return sortFunction(filename1, filename2) !== sortFunction(filename1.toUpperCase(), filename2.toUpperCase())
 }
 
+console.log(isUnstablePair('aa', 'AAB'))	// true
+console.log(isUnstablePair('A', 'z'))		// false
+console.log(isUnstablePair('123za', '123Z'))		// false
 
-console.log(isMAC48Address("00-1B-63-84-45-E6")) // true
-console.log(isMAC48Address("Z1-1B-63-84-45-E6")) // false
-console.log(isMAC48Address("not a MAC-48 address")) // false
