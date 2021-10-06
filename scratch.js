@@ -2412,26 +2412,71 @@ Use subfunction
 // console.log(isSubstitutionCipher('ab', 'bc')) // true
 
 
-function createAnagram(s, t){
-	let sArr = s.split('')
-	for(let i=0; i<t.length; i++){
-		if(sArr.includes(t[i]))	{
-			sArr.splice(sArr.indexOf(t[i]),1)
+// function createAnagram(s, t){
+// 	let sArr = s.split('')
+// 	for(let i=0; i<t.length; i++){
+// 		if(sArr.includes(t[i]))	{
+// 			sArr.splice(sArr.indexOf(t[i]),1)
+// 		}
+// 	}
+// 	return sArr.length
+// }
+// // sArr
+// //	loop s letters
+// //		if t.includes(s[i])
+// //			s.spice(i,1)
+// //	return s.length
+// //		
+
+
+
+
+
+// console.log(createAnagram('AABAA', 'BBAAA')) // 1
+// console.log(createAnagram('OVGHK', 'RPGUC')) // 4
+// console.log(createAnagram('AABCDS', 'BASEAE')) // 2
+
+
+function constructSquare(s) {
+	const getSig = (st) => {
+		let arr = st.split('')
+		let unique = ''
+		let sig = []
+		for(char of arr){
+			if(!unique.includes(char)){
+				unique += char
+				sig.push(arr.filter(c=>c===char).length)
+			}
+		}
+		// console.log(sig.sort().join(','))
+		return sig.sort().join(',')
+	}
+
+
+
+	let n = 0
+	let str;
+	let res = -1
+	const sLength = s.toString().length
+	
+	for(let i=1; i<=99999; i++){
+		n = i * i;
+		str = n.toString()
+		// console.log(i, str)
+		if(str.length > s.length){
+			// console.log(str, s)
+			break;
+		}else if(str.length === s.length){
+			if(getSig(str) === getSig(s)) res = n
 		}
 	}
-	return sArr.length
+	return res
 }
-// sArr
-//	loop s letters
-//		if t.includes(s[i])
-//			s.spice(i,1)
-//	return s.length
-//		
+
+console.time('constructSquare')
+console.log(constructSquare('aaaabbcde'))
+console.timeEnd('constructSquare')
 
 
 
-
-
-console.log(createAnagram('AABAA', 'BBAAA')) // 1
-console.log(createAnagram('OVGHK', 'RPGUC')) // 4
-console.log(createAnagram('AABCDS', 'BASEAE')) // 2
+// console.log(getSig('aaaaaaabbb'))
