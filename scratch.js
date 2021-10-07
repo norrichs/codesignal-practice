@@ -2572,21 +2572,44 @@ Use subfunction
 
 // console.log(houseOfCats(20)) // [1,3]
 
-function minimalNumberOfCoins(coins, price) {
-	let count = 0
-	let p = price
-	let qty
-	for(let coin of coins.reverse()){
-		qty = Math.floor(p/coin)
-		if(qty>0) {
-			count += qty
-			p -= coin * qty
+// function minimalNumberOfCoins(coins, price) {
+// 	let count = 0
+// 	let p = price
+// 	let qty
+// 	for(let coin of coins.reverse()){
+// 		qty = Math.floor(p/coin)
+// 		if(qty>0) {
+// 			count += qty
+// 			p -= coin * qty
+// 		}
+// 	}
+// 	return count
+// }
+
+// // for array coins, coins[i] % coins[i-1]===0
+// // what is minimal # of coins summed to price
+
+// console.log(minimalNumberOfCoins([1,2,10], 28)) // 6
+
+// function addBorder(picture) {
+// 	picture.unshift("*".repeat(picture[0].length))
+// 	picture.push("*".repeat(picture[0].length))
+// 	return picture.map(str=>"*"+str+"*")
+// }
+
+
+// console.log(addBorder(["abc","ded"]))
+
+function switchLights(a) {
+	for(let i=0; i<a.length; i++){
+		if(a[i]){
+			for(let j=0; j<=i; j++){
+				a[j] = a[j] ? 0 : 1
+			}
 		}
 	}
-	return count
+	return a
 }
 
-// for array coins, coins[i] % coins[i-1]===0
-// what is minimal # of coins summed to price
-
-console.log(minimalNumberOfCoins([1,2,10], 28)) // 6
+console.log(switchLights([1,1,1,1,1])) // [0,1,0,1,0]
+console.log(switchLights([0,0])) // [0,0]
