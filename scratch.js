@@ -2529,19 +2529,59 @@ Use subfunction
 // console.log(numbersGrouping([10000,1])) // 11
 // console.timeEnd('numbersGrouping')
 
-function differentSquares(matrix) {
-	let unique = new Set()
-	for(let i=0; i<matrix.length-1; i++){
-		for(let j=0; j<matrix[0].length-1; j++){
-			unique.add(matrix[i][j] + "." + matrix[i+1][j] + "." + matrix[i][j+1] + "." + matrix[i+1][j+1])
+// function differentSquares(matrix) {
+// 	let unique = new Set()
+// 	for(let i=0; i<matrix.length-1; i++){
+// 		for(let j=0; j<matrix[0].length-1; j++){
+// 			unique.add(matrix[i][j] + "." + matrix[i+1][j] + "." + matrix[i][j+1] + "." + matrix[i+1][j+1])
+// 		}
+// 	}
+// 	return unique.size
+
+// }
+
+// console.log(differentSquares([[1, 2, 1],
+// 	[2, 2, 2],
+// 	[2, 2, 2],
+// 	[1, 2, 3],
+// 	[2, 2, 1]])) // 6	
+
+function mostFrequentDigitSum(n) {
+	const getSum = (k) => {
+		let sum = 0
+		for(char of k.toString()){
+			sum += parseInt(char)
 		}
+		return sum
 	}
-	return unique.size
 
+
+	let unique = []
+	let array = [n]
+	let x = n
+	while( x > 0 ) {
+		x -= getSum(x)
+		array.push(x)
+	}
+	array = array.map(a=>getSum(a))
+	array.forEach(a=>{if(!unique.includes(a)) unique.push(a)})
+	unique = unique.map(a => {
+		return [a, array.filter(b => b===a).length]
+	})
+	const mostFrequent = Math.max(...unique.map(arr=>arr[1]))
+	return Math.max(...unique.filter(arr => arr[1]===mostFrequent).map(arr=>arr[0]))
 }
+// let unique, array = []
+// x=n
+// while x > 0
+//	x = step(x)
+//	push to array
+// endwhile
+// array = array.map(s(x))
+// array.forEach(if !unique.includes  -> unique.push)
+// unique.map(array.filter().length)
+// if(unique.filter(Math.max(...unique)).length > 1)
 
-console.log(differentSquares([[1, 2, 1],
-	[2, 2, 2],
-	[2, 2, 2],
-	[1, 2, 3],
-	[2, 2, 1]])) // 6	
+console.time('mostFrequentDigitSum')
+console.log(mostFrequentDigitSum(8)) // 8
+console.timeEnd('mostFrequentDigitSum')
