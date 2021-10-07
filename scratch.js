@@ -2437,46 +2437,111 @@ Use subfunction
 // console.log(createAnagram('AABCDS', 'BASEAE')) // 2
 
 
-function constructSquare(s) {
-	const getSig = (st) => {
-		let arr = st.split('')
-		let unique = ''
-		let sig = []
-		for(char of arr){
-			if(!unique.includes(char)){
-				unique += char
-				sig.push(arr.filter(c=>c===char).length)
-			}
-		}
-		// console.log(sig.sort().join(','))
-		return sig.sort().join(',')
-	}
+// function constructSquare(s) {
+// 	const getSig = (st) => {
+// 		let arr = st.split('')
+// 		let unique = ''
+// 		let sig = []
+// 		for(char of arr){
+// 			if(!unique.includes(char)){
+// 				unique += char
+// 				sig.push(arr.filter(c=>c===char).length)
+// 			}
+// 		}
+// 		// console.log(sig.sort().join(','))
+// 		return sig.sort().join(',')
+// 	}
 
 
 
-	let n = 0
-	let str;
-	let res = -1
-	const sLength = s.toString().length
+// 	let n = 0
+// 	let str;
+// 	let res = -1
+// 	const sLength = s.toString().length
 	
-	for(let i=1; i<=99999; i++){
-		n = i * i;
-		str = n.toString()
-		// console.log(i, str)
-		if(str.length > s.length){
-			// console.log(str, s)
-			break;
-		}else if(str.length === s.length){
-			if(getSig(str) === getSig(s)) res = n
+// 	for(let i=1; i<=99999; i++){
+// 		n = i * i;
+// 		str = n.toString()
+// 		// console.log(i, str)
+// 		if(str.length > s.length){
+// 			// console.log(str, s)
+// 			break;
+// 		}else if(str.length === s.length){
+// 			if(getSig(str) === getSig(s)) res = n
+// 		}
+// 	}
+// 	return res
+// }
+
+// console.time('constructSquare')
+// console.log(constructSquare('aaaabbcde'))
+// console.timeEnd('constructSquare')
+
+
+
+// // console.log(getSig('aaaaaaabbb'))
+
+
+// function numbersGrouping(a) {
+// 	let unique = []
+// 	let nBin = 0
+// 	a.forEach(n=>{
+// 		nBin = Math.floor(n/10000)
+// 		if(!unique.includes(nBin)) unique.push(nBin)
+// 	})
+// 	return unique.length + a.length
+
+// }
+
+// function numbersGrouping(a) {
+// 	let unique = new Set()
+// 	a.forEach(n=>{unique.add(Math.floor((n-1)/10000))})
+// 	console.log(unique)
+// 	return unique.size + a.length
+// }
+
+// // function numbersGrouping(a) {
+// // 	let unique = []
+// // 	let nBin = 0
+// // 	a.forEach(n=>{
+// // 		nBin = Math.floor(n/10000)
+// // 		if(!unique.includes(nBin)) unique.push(nBin)
+// // 	})
+// // 	return unique.length + a.length
+
+// // }
+// // split array of numbers in to groups 1-10^4, 10^4+1 - 2*10^4 ... 99*10^4+1 - 10^6
+
+// // All the numbers will then be written down in groups to the text file in such a way that:
+
+// // the groups go one after another;
+// // each non-empty group has a header which occupies one line;
+// // each number in a group occupies one line.
+
+// // Return the number of lines
+
+// // For a = [20000, 239, 10001, 999999, 10000, 20566, 29999], the output should be
+// // numbersGrouping(a) = 11.  (7 numbers, 4 headers)
+// console.time('numbersGrouping')
+// console.log(numbersGrouping([20000, 239, 10001, 999999, 10000, 20566, 29999])) // 11
+// console.timeEnd('numbersGrouping')
+// console.time('numbersGrouping')
+// console.log(numbersGrouping([10000,1])) // 11
+// console.timeEnd('numbersGrouping')
+
+function differentSquares(matrix) {
+	let unique = new Set()
+	for(let i=0; i<matrix.length-1; i++){
+		for(let j=0; j<matrix[0].length-1; j++){
+			unique.add(matrix[i][j] + "." + matrix[i+1][j] + "." + matrix[i][j+1] + "." + matrix[i+1][j+1])
 		}
 	}
-	return res
+	return unique.size
+
 }
 
-console.time('constructSquare')
-console.log(constructSquare('aaaabbcde'))
-console.timeEnd('constructSquare')
-
-
-
-// console.log(getSig('aaaaaaabbb'))
+console.log(differentSquares([[1, 2, 1],
+	[2, 2, 2],
+	[2, 2, 2],
+	[1, 2, 3],
+	[2, 2, 1]])) // 6	
