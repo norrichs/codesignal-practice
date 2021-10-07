@@ -2524,27 +2524,27 @@ Use subfunction
 // console.log(mostFrequentDigitSum(8)) // 8
 // console.timeEnd('mostFrequentDigitSum')
 
-function numberOfClans(divisors, k) {
-	let numArr = new Array(k);
-	let unique = new Set();
-	numArr
-		.fill(1)
-		.map((num, i) => num + i)
-		.map((num) => {
-			return divisors
-				.map((d) => {
-					return num % d === 0 ? 1 : 0;
-				})
-				.join("");
-		})
-		.forEach((sig) => {
-			unique.add(sig);
-		});
+// function numberOfClans(divisors, k) {
+// 	let numArr = new Array(k);
+// 	let unique = new Set();
+// 	numArr
+// 		.fill(1)
+// 		.map((num, i) => num + i)
+// 		.map((num) => {
+// 			return divisors
+// 				.map((d) => {
+// 					return num % d === 0 ? 1 : 0;
+// 				})
+// 				.join("");
+// 		})
+// 		.forEach((sig) => {
+// 			unique.add(sig);
+// 		});
 	
-	return unique.size;
-}
+// 	return unique.size;
+// }
 
-console.log(numberOfClans([6, 2, 2, 8, 9, 2, 2, 2, 2], 10)); // 4
+// console.log(numberOfClans([6, 2, 2, 8, 9, 2, 2, 2, 2], 10)); // 4
 
 // numbers
 /*
@@ -2560,3 +2560,14 @@ console.log(numberOfClans([6, 2, 2, 8, 9, 2, 2, 2, 2], 10)); // 4
 6 2 3
 
 */
+
+function houseOfCats(legs) {
+	let res = []
+	const start = (legs/2)%2===0 ? 0 : 1
+	for(let i=start; i<=legs/2; i+=2){
+		res.push(i)
+	}
+	return res
+}
+
+console.log(houseOfCats(20)) // [1,3]
