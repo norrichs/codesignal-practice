@@ -2561,13 +2561,32 @@ Use subfunction
 
 */
 
-function houseOfCats(legs) {
-	let res = []
-	const start = (legs/2)%2===0 ? 0 : 1
-	for(let i=start; i<=legs/2; i+=2){
-		res.push(i)
+// function houseOfCats(legs) {
+// 	let res = []
+// 	const start = (legs/2)%2===0 ? 0 : 1
+// 	for(let i=start; i<=legs/2; i+=2){
+// 		res.push(i)
+// 	}
+// 	return res
+// }
+
+// console.log(houseOfCats(20)) // [1,3]
+
+function minimalNumberOfCoins(coins, price) {
+	let count = 0
+	let p = price
+	let qty
+	for(let coin of coins.reverse()){
+		qty = Math.floor(p/coin)
+		if(qty>0) {
+			count += qty
+			p -= coin * qty
+		}
 	}
-	return res
+	return count
 }
 
-console.log(houseOfCats(20)) // [1,3]
+// for array coins, coins[i] % coins[i-1]===0
+// what is minimal # of coins summed to price
+
+console.log(minimalNumberOfCoins([1,2,10], 28)) // 6
