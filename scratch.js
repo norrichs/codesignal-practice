@@ -2600,16 +2600,27 @@ Use subfunction
 
 // console.log(addBorder(["abc","ded"]))
 
-function switchLights(a) {
-	for(let i=0; i<a.length; i++){
-		if(a[i]){
-			for(let j=0; j<=i; j++){
-				a[j] = a[j] ? 0 : 1
-			}
-		}
-	}
-	return a
+// function switchLights(a) {
+// 	for(let i=0; i<a.length; i++){
+// 		if(a[i]){
+// 			for(let j=0; j<=i; j++){
+// 				a[j] = a[j] ? 0 : 1
+// 			}
+// 		}
+// 	}
+// 	return a
+// }
+
+// console.log(switchLights([1,1,1,1,1])) // [0,1,0,1,0]
+// console.log(switchLights([0,0])) // [0,0]
+
+function timedReading(maxLength, text) {
+	return text.split(' ')
+		.map(word=> word.replace(/[^a-zA-Z]/g,''))
+		.filter(word=>word.length<=maxLength && word.length > 0)
+		.length
 }
 
-console.log(switchLights([1,1,1,1,1])) // [0,1,0,1,0]
-console.log(switchLights([0,0])) // [0,0]
+
+// console.log(timedReading(4, "The Fox asked the stork, 'How is the soup?'")) // 7
+console.log(timedReading(1, "...")) // 7
