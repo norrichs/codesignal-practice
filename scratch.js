@@ -2614,13 +2614,35 @@ Use subfunction
 // console.log(switchLights([1,1,1,1,1])) // [0,1,0,1,0]
 // console.log(switchLights([0,0])) // [0,0]
 
-function timedReading(maxLength, text) {
-	return text.split(' ')
-		.map(word=> word.replace(/[^a-zA-Z]/g,''))
-		.filter(word=>word.length<=maxLength && word.length > 0)
-		.length
-}
+// function timedReading(maxLength, text) {
+// 	return text.split(' ')
+// 		.map(word=> word.replace(/[^a-zA-Z]/g,''))
+// 		.filter(word=>word.length<=maxLength && word.length > 0)
+// 		.length
+// }
 
 
-// console.log(timedReading(4, "The Fox asked the stork, 'How is the soup?'")) // 7
-console.log(timedReading(1, "...")) // 7
+// // console.log(timedReading(4, "The Fox asked the stork, 'How is the soup?'")) // 7
+// console.log(timedReading(1, "...")) // 7
+
+// function electionsWinners(votes, k){
+// 	if(k===0 ){
+// 		if(votes.filter(count=>count === Math.max(...votes)).length === 1) return 1
+// 		else return 0
+// 	}
+// 	const maxVotes = Math.max(...votes)
+// 	return votes.filter(count=>count + k > maxVotes).length
+// }
+
+// // console.log(electionsWinners([40, 50, 52, 20], 3));
+
+// console.log(electionsWinners([2,3,5,2], 3)) // 2
+
+// function integerToStringOfFixedWidth(number, width) {
+// 	let str = number.toString()
+// 	return str.length < width 
+// 		? '0'.repeat(width - str.length) + str 
+// 		: str.substr(str.length - width)
+// }
+
+// console.log(integerToStringOfFixedWidth(1234,4)) // '234'
