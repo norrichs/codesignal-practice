@@ -2646,3 +2646,25 @@ Use subfunction
 // }
 
 // console.log(integerToStringOfFixedWidth(1234,4)) // '234'
+
+function areSimilar(a, b) {
+	for(let i=0; i< b.length;i++){
+		if(!a.includes(b[i])) return false
+	}
+	const misMatch = b.filter( (el, i) => el !== a[i]).length
+	if(misMatch === 0) return true
+	if(misMatch === 2){
+		const missBSorted = b.filter((el,i) => el !== a[i]).sort()
+		const missASorted = a.filter((el,i) => el !== b[i]).sort()
+		console.log(missASorted, missBSorted)
+		if(missASorted[0] === missBSorted[0] && missASorted[1] === missBSorted[1]) return true
+		return false
+	}
+	return false
+}
+
+
+// need to catch duplicates 
+
+console.log(areSimilar([1, 4, 2, 5, 3, 7, 4, 8, 4, 2, 25], [1, 4, 2, 5, 3, 3, 7, 8, 4, 2, 25]))
+console.log(areSimilar([1,2,3], [2,1,3]))
