@@ -2669,49 +2669,94 @@ Use subfunction
 // console.log(areSimilar([1, 4, 2, 5, 3, 7, 4, 8, 4, 2, 25], [1, 4, 2, 5, 3, 3, 7, 8, 4, 2, 25]))
 // console.log(areSimilar([1,2,3], [2,1,3]))
 
-function adaNumber(line) {
-	let num
-	let base
-	// test if decimal
-	if(!/[^0-9_]/.test(line) && /[0-9]/.test(line)) return true
-	else if(line.includes('#')){
-		base = parseInt(line.substring(0,line.indexOf('#')).replace("_",""))
-		console.log('line', line,'base', base)
-		if(base < 2 || base > 16 || line[line.length-1] !== '#') return false
-		else{
-			let digits = '0123456789abcdef'
-			let pattern1, pattern2
-			if(base < 11) {
-				pattern1 = "[^0-" + digits[base-1] + "_]"
-				pattern2 = "[0-" + digits[base-1] + "]"
+// function adaNumber(line) {
+// 	let num
+// 	let base
+// 	// test if decimal
+// 	if(!/[^0-9_]/.test(line) && /[0-9]/.test(line)) return true
+// 	else if(line.includes('#')){
+// 		base = parseInt(line.substring(0,line.indexOf('#')).replace("_",""))
+// 		console.log('line', line,'base', base)
+// 		if(base < 2 || base > 16 || line[line.length-1] !== '#') return false
+// 		else{
+// 			let digits = '0123456789abcdef'
+// 			let pattern1, pattern2
+// 			if(base < 11) {
+// 				pattern1 = "[^0-" + digits[base-1] + "_]"
+// 				pattern2 = "[0-" + digits[base-1] + "]"
 
-			}else if(base === 11) {
-				pattern1 = "[^0-9a_]"
-				pattern2 = "[0-9a]"
-			}else {
-				pattern1 = "[^0-9a-" + digits[base-1] + "_]"
-				pattern2 = "[0-9a-" + digits[base-1] + "]"
+// 			}else if(base === 11) {
+// 				pattern1 = "[^0-9a_]"
+// 				pattern2 = "[0-9a]"
+// 			}else {
+// 				pattern1 = "[^0-9a-" + digits[base-1] + "_]"
+// 				pattern2 = "[0-9a-" + digits[base-1] + "]"
+// 			}
+// 			let re1 = new RegExp(pattern1, 'i')
+// 			let re2 = new RegExp(pattern2, 'i')
+// 			num = line.substring(line.indexOf('#')+1,line.length - 1)
+// 			console.log('num',num)
+// 			if(re1.test(num) || !re2.test(num) || num.length === 0) return false
+// 			return true
+
+// 			// return [base,num, pattern, re.test(num)]
+// 		}
+// 	}else return false
+// }
+
+
+// // console.log(adaNumber("123_456_789")) // true
+// // console.log(adaNumber("16#123abc#")) // true
+// // console.log(adaNumber("10#123abc#")) // false (digits abc out of range 0-9)
+// // console.log(adaNumber("10#10#123ABC#")) // false (too many #)
+// // console.log(adaNumber("10#0#")) // true
+// // console.log(adaNumber("10##")) // false (no digits between ##)
+// console.log(adaNumber("16#1234567890ABCDEFabcdef#")) // true
+// console.log(adaNumber("9#____#")) // false
+// console.log(adaNumber("1_4#___C63A_4cc6_5B362d__3#")) // true - 
+// console.log(adaNumber("__")) // false
+
+// function threeSplit(a) {
+// 	let count = 0
+// 	let sum
+// 	let total = a.reduce((total, current) => total + current, 0)
+// 	for(let i=1; i<a.length-1; i++){
+// 		sum = a.slice(0,i).reduce((total,current) => total + current,0)
+// 		if(sum === total / 3 ){
+// 			for(let j=i+1; j<a.length; j++){
+// 				if( sum === a.slice(i,j).reduce((total,current) => total + current,0)){
+// 					count += 1
+// 				}
+				
+// 			}
+// 		}
+// 	}
+// 	return count
+// }
+
+
+
+
+function threeSplit(a) {
+	let count = 0
+	let sum1 = 0
+	let sum2 = 0 
+	let total = a.reduce((acc,n)=>acc+n,0)
+	for(let i=0; i<a.length-2; i++){
+		sum1 += a[i]
+		if(sum1 === total / 3 ){
+			sum2 = 0
+			for(let j=i+1; j<a.length-1; j++){
+				sum2 += a[j]
+				if(sum1 === sum2){
+					console.log('i', i,'j', j, 'sum1',sum1, 'sum2', sum2)
+					count += 1
+				}	
 			}
-			let re1 = new RegExp(pattern1, 'i')
-			let re2 = new RegExp(pattern2, 'i')
-			num = line.substring(line.indexOf('#')+1,line.length - 1)
-			console.log('num',num)
-			if(re1.test(num) || !re2.test(num) || num.length === 0) return false
-			return true
-
-			// return [base,num, pattern, re.test(num)]
 		}
-	}else return false
+	}
+	return count
 }
 
-
-// console.log(adaNumber("123_456_789")) // true
-// console.log(adaNumber("16#123abc#")) // true
-// console.log(adaNumber("10#123abc#")) // false (digits abc out of range 0-9)
-// console.log(adaNumber("10#10#123ABC#")) // false (too many #)
-// console.log(adaNumber("10#0#")) // true
-// console.log(adaNumber("10##")) // false (no digits between ##)
-console.log(adaNumber("16#1234567890ABCDEFabcdef#")) // true
-console.log(adaNumber("9#____#")) // false
-console.log(adaNumber("1_4#___C63A_4cc6_5B362d__3#")) // true - 
-console.log(adaNumber("__")) // false
+console.log(threeSplit([0,-1,0,-1,0,-1])) // 4
+console.log(threeSplit([0,0,0,0,0])) // 6 - 0 0 000, 0 00 00, 0 000 0, 00 0 00, 00 00 0, 000 0 0
