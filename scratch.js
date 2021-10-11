@@ -2737,26 +2737,41 @@ Use subfunction
 
 
 
-function threeSplit(a) {
-	let count = 0
-	let sum1 = 0
-	let sum2 = 0 
-	let total = a.reduce((acc,n)=>acc+n,0)
-	for(let i=0; i<a.length-2; i++){
-		sum1 += a[i]
-		if(sum1 === total / 3 ){
-			sum2 = 0
-			for(let j=i+1; j<a.length-1; j++){
-				sum2 += a[j]
-				if(sum1 === sum2){
-					console.log('i', i,'j', j, 'sum1',sum1, 'sum2', sum2)
-					count += 1
-				}	
-			}
-		}
+// function threeSplit(a) {
+// 	let count = 0
+// 	let sum1 = 0
+// 	let sum2 = 0 
+// 	let total = a.reduce((acc,n)=>acc+n,0)
+// 	for(let i=0; i<a.length-2; i++){
+// 		sum1 += a[i]
+// 		if(sum1 === total / 3 ){
+// 			sum2 = 0
+// 			for(let j=i+1; j<a.length-1; j++){
+// 				sum2 += a[j]
+// 				if(sum1 === sum2){
+// 					console.log('i', i,'j', j, 'sum1',sum1, 'sum2', sum2)
+// 					count += 1
+// 				}	
+// 			}
+// 		}
+// 	}
+// 	return count
+// }
+
+// console.log(threeSplit([0,-1,0,-1,0,-1])) // 4
+// console.log(threeSplit([0,0,0,0,0])) // 6 - 0 0 000, 0 00 00, 0 000 0, 00 0 00, 00 00 0, 000 0 0
+
+
+function newNumeralSystem(number) {
+	let alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+	const dec = alphabet.indexOf(number)
+	let res = []
+	for(let i=0; i<=Math.floor(dec / 2); i++){
+		res.push(alphabet[i] + " + " + alphabet[dec - i])
 	}
-	return count
+	return res
+
 }
 
-console.log(threeSplit([0,-1,0,-1,0,-1])) // 4
-console.log(threeSplit([0,0,0,0,0])) // 6 - 0 0 000, 0 00 00, 0 000 0, 00 0 00, 00 00 0, 000 0 0
+
+console.log(newNumeralSystem('G')) // ["A + G", "B + F", "C + E", "D + D"]
