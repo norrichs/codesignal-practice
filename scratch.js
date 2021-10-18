@@ -2540,7 +2540,7 @@ Use subfunction
 // 		.forEach((sig) => {
 // 			unique.add(sig);
 // 		});
-	
+
 // 	return unique.size;
 // }
 
@@ -2597,7 +2597,6 @@ Use subfunction
 // 	return picture.map(str=>"*"+str+"*")
 // }
 
-
 // console.log(addBorder(["abc","ded"]))
 
 // function switchLights(a) {
@@ -2621,7 +2620,6 @@ Use subfunction
 // 		.length
 // }
 
-
 // // console.log(timedReading(4, "The Fox asked the stork, 'How is the soup?'")) // 7
 // console.log(timedReading(1, "...")) // 7
 
@@ -2640,8 +2638,8 @@ Use subfunction
 
 // function integerToStringOfFixedWidth(number, width) {
 // 	let str = number.toString()
-// 	return str.length < width 
-// 		? '0'.repeat(width - str.length) + str 
+// 	return str.length < width
+// 		? '0'.repeat(width - str.length) + str
 // 		: str.substr(str.length - width)
 // }
 
@@ -2663,8 +2661,7 @@ Use subfunction
 // 	return false
 // }
 
-
-// // need to catch duplicates 
+// // need to catch duplicates
 
 // console.log(areSimilar([1, 4, 2, 5, 3, 7, 4, 8, 4, 2, 25], [1, 4, 2, 5, 3, 3, 7, 8, 4, 2, 25]))
 // console.log(areSimilar([1,2,3], [2,1,3]))
@@ -2704,7 +2701,6 @@ Use subfunction
 // 	}else return false
 // }
 
-
 // // console.log(adaNumber("123_456_789")) // true
 // // console.log(adaNumber("16#123abc#")) // true
 // // console.log(adaNumber("10#123abc#")) // false (digits abc out of range 0-9)
@@ -2713,7 +2709,7 @@ Use subfunction
 // // console.log(adaNumber("10##")) // false (no digits between ##)
 // console.log(adaNumber("16#1234567890ABCDEFabcdef#")) // true
 // console.log(adaNumber("9#____#")) // false
-// console.log(adaNumber("1_4#___C63A_4cc6_5B362d__3#")) // true - 
+// console.log(adaNumber("1_4#___C63A_4cc6_5B362d__3#")) // true -
 // console.log(adaNumber("__")) // false
 
 // function threeSplit(a) {
@@ -2727,20 +2723,17 @@ Use subfunction
 // 				if( sum === a.slice(i,j).reduce((total,current) => total + current,0)){
 // 					count += 1
 // 				}
-				
+
 // 			}
 // 		}
 // 	}
 // 	return count
 // }
 
-
-
-
 // function threeSplit(a) {
 // 	let count = 0
 // 	let sum1 = 0
-// 	let sum2 = 0 
+// 	let sum2 = 0
 // 	let total = a.reduce((acc,n)=>acc+n,0)
 // 	for(let i=0; i<a.length-2; i++){
 // 		sum1 += a[i]
@@ -2751,7 +2744,7 @@ Use subfunction
 // 				if(sum1 === sum2){
 // 					console.log('i', i,'j', j, 'sum1',sum1, 'sum2', sum2)
 // 					count += 1
-// 				}	
+// 				}
 // 			}
 // 		}
 // 	}
@@ -2761,17 +2754,74 @@ Use subfunction
 // console.log(threeSplit([0,-1,0,-1,0,-1])) // 4
 // console.log(threeSplit([0,0,0,0,0])) // 6 - 0 0 000, 0 00 00, 0 000 0, 00 0 00, 00 00 0, 000 0 0
 
+// function newNumeralSystem(number) {
+// 	let alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+// 	const dec = alphabet.indexOf(number)
+// 	let res = []
+// 	for(let i=0; i<=Math.floor(dec / 2); i++){
+// 		res.push(alphabet[i] + " + " + alphabet[dec - i])
+// 	}
+// 	return res
 
-function newNumeralSystem(number) {
-	let alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-	const dec = alphabet.indexOf(number)
-	let res = []
-	for(let i=0; i<=Math.floor(dec / 2); i++){
-		res.push(alphabet[i] + " + " + alphabet[dec - i])
-	}
-	return res
+// }
 
+// console.log(newNumeralSystem('G')) // ["A + G", "B + F", "C + E", "D + D"]
+
+// function cipher26(message) {
+// 	const alphabet = "abcdefghijklmnopqrstuvwxyz"
+// 	let res = [alphabet.indexOf(message[0])]
+// 	let encrypted
+// 	let decrypted
+// 	let sum = res[0]
+// 	for(let i=1; i<message.length; i++){
+// 		encrypted = alphabet.indexOf(message[i])
+// 		decrypted = (( encrypted+26 ) - sum%26)
+// 		res.push( decrypted%26 )
+// 		sum = sum + decrypted
+// 	}
+// 	return res.map(i=>alphabet[i]).join('')
+// }
+
+// console.log(cipher26("taiaiaertkixquxjnfxxdh")) // thisisencryptedmessage
+
+// // console.log(cipher26('taia')) //this
+
+// //  	19 	19+7%26=0 26+8%26=8 34+18%26=52%26=0
+// //		19	(19+x)%26=(0+(n*26))%26
+
+// function stolenLunch(note) {
+// 	const cipher = "abcdefghij"
+// 	const numbers = "0123456789"
+// 	let decrypted = ''
+// 	let inMessage = true
+// 	for(char of  note){
+// 		// console.log(parseInt(char))
+// 		if(inMessage){
+// 			if(char === ":") {
+// 				inMessage = false
+// 				decrypted += char
+// 			}else if(numbers.includes(char)) decrypted += cipher[parseInt(char)]
+// 			else decrypted += char
+// 		}else{
+// 			if(cipher.includes(char)) decrypted += cipher.indexOf(char).toString()
+// 			else decrypted += char
+// 		}
+
+// 	}
+// 	return decrypted
+// }
+function stolenLunch(note) {
+	const cipher = "abcdefghij";
+	const numbers = "0123456789";
+	return note
+		.split("")
+		.map(ch => {
+			if(cipher.includes(ch)) return cipher.indexOf(ch).toString()
+			else if(numbers.includes(ch)) return cipher[parseInt(ch)]
+			else return ch
+		})
+		.join("");
 }
 
-
-console.log(newNumeralSystem('G')) // ["A + G", "B + F", "C + E", "D + D"]
+// console.log(stolenLunch( "you'll n4v4r 6u4ss 8t: cdja")) // "you'll never guess it: 2390"
+console.log(stolenLunch("jihgfedcba")); // 9876543210
