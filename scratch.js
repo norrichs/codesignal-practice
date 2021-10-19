@@ -2828,7 +2828,7 @@ Use subfunction
 
 // function higherVersion(ver1, ver2) {
 // 	const serial = (ver) => {
-// 		return ( ver 
+// 		return ( ver
 // 			.split(".")
 // 			.reverse()
 // 			.reduce((acc, x, i) => {
@@ -2903,7 +2903,6 @@ Use subfunction
 // 	}
 // }
 
-
 // // console.log(alphanumericLess('a', 'a1')) 	//true
 // // console.log(alphanumericLess('ab', 'a1')) 	//false
 // // console.log(alphanumericLess('b', 'a1')) 	//false
@@ -2911,7 +2910,6 @@ Use subfunction
 // // console.log(alphanumericLess('ab1c', 'ab1c')) 	//false
 // // console.log(alphanumericLess('ab01c', 'ab1c')) 	//true
 // console.log(alphanumericLess('12345678909876543210', '12345678909876543211')) 	//true
-
 
 // function arrayConversion(inputArray) {
 //     let j=1
@@ -2933,21 +2931,64 @@ Use subfunction
 
 // console.log(arrayConversion( [99])) // 186
 
-function arrayPreviousLess(items){
-	let result = new Array(items.length)
-	result.fill(-1)
-	for(let i=0; i<items.length; i++){
-		console.log(i,items[i])
-		for(let j=i-1; j>=0; j--){
-			console.log('i,j', i, j,'i', items[i], 'j', items[j])
-			if( j < 0) result[i] = -1
-			else if(items[j] < items[i]){
-				console.log('prev less')
-				result[i] = items[j]
-				break;
-			}
-		}
-	}
-	return result
+// function arrayPreviousLess(items){
+// 	let result = new Array(items.length)
+// 	result.fill(-1)
+// 	for(let i=0; i<items.length; i++){
+// 		console.log(i,items[i])
+// 		for(let j=i-1; j>=0; j--){
+// 			console.log('i,j', i, j,'i', items[i], 'j', items[j])
+// 			if( j < 0) result[i] = -1
+// 			else if(items[j] < items[i]){
+// 				console.log('prev less')
+// 				result[i] = items[j]
+// 				break;
+// 			}
+// 		}
+// 	}
+// 	return result
+// }
+// console.log(arrayPreviousLess([3,5,2,4,5])) // [-1,3,-1,2,4]
+
+// function pairOfShoes(shoes) {
+// 	let pairs = []
+// 	shoes.forEach(shoe=>{
+// 		pairs[shoe[1]] === undefined 
+// 			? pairs[shoe[1]] = (shoe[0] * 2 - 1)
+// 			: pairs[shoe[1]] = (shoe[0] * 2 - 1) + pairs[shoe[1]]
+// 	})
+// 	for(let pair of pairs){
+// 		if(pair !== 0 && pair !== undefined) return false
+// 	}
+// 	return true
+// }
+
+// console.log(
+// 	pairOfShoes([
+// 		[0, 21],
+// 		[1, 23],
+// 		[1, 21],
+// 		[0, 23],
+// 	])
+// ); //	true
+// console.log(
+// 	pairOfShoes([
+// 		[0, 21],
+// 		[1, 23],
+// 		[1, 21],
+// 		[1, 23],
+// 	])
+// ); //	false
+
+
+// console.log(pairOfShoes([[1,41], 
+//  [1,40], 
+//  [1,45], 
+//  [0,42], 
+//  [0,42], 
+//  [0,42]])) // false
+
+
+ function combs(comb1, comb2) {
+
 }
-console.log(arrayPreviousLess([3,5,2,4,5])) // [-1,3,-1,2,4]
