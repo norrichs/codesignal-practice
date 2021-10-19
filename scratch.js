@@ -2810,18 +2810,125 @@ Use subfunction
 // 	}
 // 	return decrypted
 // }
-function stolenLunch(note) {
-	const cipher = "abcdefghij";
-	const numbers = "0123456789";
-	return note
-		.split("")
-		.map(ch => {
-			if(cipher.includes(ch)) return cipher.indexOf(ch).toString()
-			else if(numbers.includes(ch)) return cipher[parseInt(ch)]
-			else return ch
-		})
-		.join("");
+// function stolenLunch(note) {
+// 	const cipher = "abcdefghij";
+// 	const numbers = "0123456789";
+// 	return note
+// 		.split("")
+// 		.map(ch => {
+// 			if(cipher.includes(ch)) return cipher.indexOf(ch).toString()
+// 			else if(numbers.includes(ch)) return cipher[parseInt(ch)]
+// 			else return ch
+// 		})
+// 		.join("");
+// }
+
+// // console.log(stolenLunch( "you'll n4v4r 6u4ss 8t: cdja")) // "you'll never guess it: 2390"
+// console.log(stolenLunch("jihgfedcba")); // 9876543210
+
+// function higherVersion(ver1, ver2) {
+// 	const serial = (ver) => {
+// 		return ( ver 
+// 			.split(".")
+// 			.reverse()
+// 			.reduce((acc, x, i) => {
+// 				return acc + parseInt(x) * Math.pow(100, i)
+// 			}, 0))}
+
+// 	return serial(ver1) > serial(ver2)
+// }
+
+// console.log(higherVersion("1.0.5", "1.1.0")); // true
+
+// function decipher(cipher) {
+// 	let res = ''
+// 	let i = 0
+// 	while(i<cipher.length){
+// 		if( parseInt(cipher[i]) === 9 ){
+// 			res += String.fromCharCode(parseInt(cipher[i] + cipher[i+1]))
+// 			i += 2
+// 		}else{
+// 			res += String.fromCharCode(parseInt( cipher[i] + cipher[i+1] + cipher[i+2] ))
+// 			i += 3
+// 		}
+// 	}
+// 	return res
+// }
+
+// console.log(decipher("10197115121")) // 'easy'
+
+// console.log('z'.charCodeAt(0))
+
+// function alphanumericLess(s1, s2){
+// 	// get tokens
+// 	const tokenize = (s) => {
+// 		// console.log(s)
+// 		const numbers = '0123456789'
+// 		let i = 0;
+// 		let tokens = []
+// 		while(i<s.length){
+// 			if( numbers.includes(s[i])){
+// 				tokens.push(['',0])
+// 				while( numbers.includes(s[i])){
+// 					tokens[tokens.length-1][0] += s[i]
+// 					tokens[tokens.length-1][1] += 1
+// 					i++
+// 					// console.log(tokens)
+// 				}
+// 				tokens[tokens.length-1][0] = BigInt(tokens[tokens.length-1][0])
+// 				console.log(tokens)
+// 			}else{
+// 				tokens.push([s[i], 0])
+// 				i++
+// 			}
+// 		}
+// 		return tokens
+// 	}
+// 	const t1 = tokenize(s1)
+// 	const t2 = tokenize(s2)
+// 	const shorterLength = Math.min(t1.length, t2.length)
+// 	for(let i=0; i<shorterLength; i++){
+// 		if( t1[i][0] > t2[i][0] ) return false
+// 		if( t1[i][0] < t2[i][0] ) return true
+// 	}
+// 	if(t1.length !== t2.length) return t1.length < t2.length
+// 	else{
+// 		console.log('equal',t1,t2)
+// 		for(let i=0; i<t1.length; i++){
+// 			if(t1[i][1] > 0) {
+// 				if( t1[i][1] !== t2[i][1] ) return t1[i][1] > t2[i][1]
+// 			}
+// 		}
+// 		return false
+// 	}
+// }
+
+
+// // console.log(alphanumericLess('a', 'a1')) 	//true
+// // console.log(alphanumericLess('ab', 'a1')) 	//false
+// // console.log(alphanumericLess('b', 'a1')) 	//false
+// // console.log(alphanumericLess('ab1c', 'ab001c')) 	//false
+// // console.log(alphanumericLess('ab1c', 'ab1c')) 	//false
+// // console.log(alphanumericLess('ab01c', 'ab1c')) 	//true
+// console.log(alphanumericLess('12345678909876543210', '12345678909876543211')) 	//true
+
+
+function arrayConversion(inputArray) {
+    let j=1
+    let input = [...inputArray]
+    let output = [...input]
+    while(input.length > 1){
+        output = new Array(input.length / 2)
+		output.fill(0)
+        if(j % 2 === 1) {
+            output = output.map((x,i)=>input[i*2]+input[i*2+1])
+        }else{
+            output = output.map((x,i)=>input[i*2]*input[i*2+1])
+        }
+        j++
+        input = [...output]
+    }
+    return output[0]
 }
 
-// console.log(stolenLunch( "you'll n4v4r 6u4ss 8t: cdja")) // "you'll never guess it: 2390"
-console.log(stolenLunch("jihgfedcba")); // 9876543210
+console.log(arrayConversion( [99])) // 186

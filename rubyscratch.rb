@@ -98,6 +98,20 @@
 # p a
 # p b
 
-require 'mathn'
+# require 'mathn'
 
-Prime.each { |x| puts "a prime number #{x}"}
+# Prime.each { |x| puts "a prime number #{x}"}
+
+def higher_version(ver1, ver2)
+	p ver1 > ver2
+
+end
+
+puts higher_version("1.0.5", "1.1.0")
+
+def decipher(cipher)
+
+
+end
+
+puts decipher('10197115121')
