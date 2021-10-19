@@ -2953,7 +2953,7 @@ Use subfunction
 // function pairOfShoes(shoes) {
 // 	let pairs = []
 // 	shoes.forEach(shoe=>{
-// 		pairs[shoe[1]] === undefined 
+// 		pairs[shoe[1]] === undefined
 // 			? pairs[shoe[1]] = (shoe[0] * 2 - 1)
 // 			: pairs[shoe[1]] = (shoe[0] * 2 - 1) + pairs[shoe[1]]
 // 	})
@@ -2980,15 +2980,70 @@ Use subfunction
 // 	])
 // ); //	false
 
-
-// console.log(pairOfShoes([[1,41], 
-//  [1,40], 
-//  [1,45], 
-//  [0,42], 
-//  [0,42], 
+// console.log(pairOfShoes([[1,41],
+//  [1,40],
+//  [1,45],
+//  [0,42],
+//  [0,42],
 //  [0,42]])) // false
 
+// function combs(comb1, comb2) {
 
- function combs(comb1, comb2) {
+// 	let result = comb1.length + comb2.length
 
+// 	let c1 = [...comb1.split('').map(t=>t==="*" ? 1 : 0)]
+// 	let c2 = comb2.split('').map(t=>t==="*" ? 1 : 0)
+// 	let arr = []
+// 	for(let offset=(-c2.length); offset < c1.length; offset++){
+// 		console.log(c1,c2)
+// 		arr[offset + c2.length] = [
+// 			Math.abs(offset) + c1.length,
+// 			true
+// 		]
+// 		const aligned = new Array(arr[arr.length-1])
+// 		for(let i=0; i<aligned.length; i++){
+
+// 			aligned[i] = offset < 0
+// 				? c2[i] +
+// 		}
+
+// 		// aligned = new Array()
+// 	}
+
+// 	return arr
+// }
+
+function combs(comb1, comb2) {
+	const filler = new Array(comb2.length);
+	filler.fill(0);
+
+	const static = [
+		...filler,
+		...comb1.split("").map(t => (t === "*" ? 1 : 0)),
+		...filler,
+	];
+	const moving = comb2.split("").map(t => (t === "*" ? 1 : 0));
+	const mL = moving.length;
+	const sL = static.length;
+	const sL0 = comb1.length;
+
+	let aligned = [];
+	for (let offset = 0; offset <= sL - mL; offset++) {
+		aligned[offset] = static.map((x, i) => {
+			if (i >= offset && i < offset + mL) {
+				return static[i] + moving[i - offset];
+			} else {
+				return static[i];
+			}
+		});
+
+		aligned[offset].splice(Math.max(offset + mL, mL + sL0), mL); //trim right
+		aligned[offset].splice(0, Math.min(offset, mL)); // trim left
+	}
+
+	return Math.min(
+		...aligned.filter(arr => !arr.includes(2)).map(arr => arr.length)
+	);
 }
+
+console.log(combs("*.*.*", "*.*"));
