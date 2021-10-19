@@ -2913,22 +2913,41 @@ Use subfunction
 // console.log(alphanumericLess('12345678909876543210', '12345678909876543211')) 	//true
 
 
-function arrayConversion(inputArray) {
-    let j=1
-    let input = [...inputArray]
-    let output = [...input]
-    while(input.length > 1){
-        output = new Array(input.length / 2)
-		output.fill(0)
-        if(j % 2 === 1) {
-            output = output.map((x,i)=>input[i*2]+input[i*2+1])
-        }else{
-            output = output.map((x,i)=>input[i*2]*input[i*2+1])
-        }
-        j++
-        input = [...output]
-    }
-    return output[0]
-}
+// function arrayConversion(inputArray) {
+//     let j=1
+//     let input = [...inputArray]
+//     let output = [...input]
+//     while(input.length > 1){
+//         output = new Array(input.length / 2)
+// 		output.fill(0)
+//         if(j % 2 === 1) {
+//             output = output.map((x,i)=>input[i*2]+input[i*2+1])
+//         }else{
+//             output = output.map((x,i)=>input[i*2]*input[i*2+1])
+//         }
+//         j++
+//         input = [...output]
+//     }
+//     return output[0]
+// }
 
-console.log(arrayConversion( [99])) // 186
+// console.log(arrayConversion( [99])) // 186
+
+function arrayPreviousLess(items){
+	let result = new Array(items.length)
+	result.fill(-1)
+	for(let i=0; i<items.length; i++){
+		console.log(i,items[i])
+		for(let j=i-1; j>=0; j--){
+			console.log('i,j', i, j,'i', items[i], 'j', items[j])
+			if( j < 0) result[i] = -1
+			else if(items[j] < items[i]){
+				console.log('prev less')
+				result[i] = items[j]
+				break;
+			}
+		}
+	}
+	return result
+}
+console.log(arrayPreviousLess([3,5,2,4,5])) // [-1,3,-1,2,4]
