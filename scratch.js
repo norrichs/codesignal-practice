@@ -3013,37 +3013,60 @@ Use subfunction
 // 	return arr
 // }
 
-function combs(comb1, comb2) {
-	const filler = new Array(comb2.length);
-	filler.fill(0);
+// function combs(comb1, comb2) {
+// 	const filler = new Array(comb2.length);
+// 	filler.fill(0);
 
-	const static = [
-		...filler,
-		...comb1.split("").map(t => (t === "*" ? 1 : 0)),
-		...filler,
-	];
-	const moving = comb2.split("").map(t => (t === "*" ? 1 : 0));
-	const mL = moving.length;
-	const sL = static.length;
-	const sL0 = comb1.length;
+// 	const static = [
+// 		...filler,
+// 		...comb1.split("").map(t => (t === "*" ? 1 : 0)),
+// 		...filler,
+// 	];
+// 	const moving = comb2.split("").map(t => (t === "*" ? 1 : 0));
+// 	const mL = moving.length;
+// 	const sL = static.length;
+// 	const sL0 = comb1.length;
 
-	let aligned = [];
-	for (let offset = 0; offset <= sL - mL; offset++) {
-		aligned[offset] = static.map((x, i) => {
-			if (i >= offset && i < offset + mL) {
-				return static[i] + moving[i - offset];
-			} else {
-				return static[i];
+// 	let aligned = [];
+// 	for (let offset = 0; offset <= sL - mL; offset++) {
+// 		aligned[offset] = static.map((x, i) => {
+// 			if (i >= offset && i < offset + mL) {
+// 				return static[i] + moving[i - offset];
+// 			} else {
+// 				return static[i];
+// 			}
+// 		});
+
+// 		aligned[offset].splice(Math.max(offset + mL, mL + sL0), mL); //trim right
+// 		aligned[offset].splice(0, Math.min(offset, mL)); // trim left
+// 	}
+
+// 	return Math.min(
+// 		...aligned.filter(arr => !arr.includes(2)).map(arr => arr.length)
+// 	);
+// }
+
+// console.log(combs("*.*.*", "*.*"));
+
+function stringsCrossover(inputArray, result) {
+	let count = 0
+	for(let i=0; i<inputArray.length-1; i++){
+		for(let j=i+1; j<inputArray.length; j++){
+			console.log(i,j)
+			let match = 1
+			for(let k=0; k<result.length; k++){
+				if(result[k] !== inputArray[i][k] && result[k] !== inputArray[j][k]) {
+					match = 0
+					break
+				}
 			}
-		});
+			count += match
 
-		aligned[offset].splice(Math.max(offset + mL, mL + sL0), mL); //trim right
-		aligned[offset].splice(0, Math.min(offset, mL)); // trim left
+		}
 	}
-
-	return Math.min(
-		...aligned.filter(arr => !arr.includes(2)).map(arr => arr.length)
-	);
+	return count
 }
+// get permutations
+// test purmutations ( result [i] === perm[j][0][i] || result[i] === perm[j][1][i])
 
-console.log(combs("*.*.*", "*.*"));
+console.log(stringsCrossover(['abc', 'aaa', 'aba', 'bab', 'bba','wwb'], 'bbb'))
