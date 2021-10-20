@@ -3048,25 +3048,71 @@ Use subfunction
 
 // console.log(combs("*.*.*", "*.*"));
 
-function stringsCrossover(inputArray, result) {
-	let count = 0
-	for(let i=0; i<inputArray.length-1; i++){
-		for(let j=i+1; j<inputArray.length; j++){
-			console.log(i,j)
-			let match = 1
-			for(let k=0; k<result.length; k++){
-				if(result[k] !== inputArray[i][k] && result[k] !== inputArray[j][k]) {
-					match = 0
-					break
+// function stringsCrossover(inputArray, result) {
+// 	let count = 0
+// 	for(let i=0; i<inputArray.length-1; i++){
+// 		for(let j=i+1; j<inputArray.length; j++){
+// 			console.log(i,j)
+// 			let match = 1
+// 			for(let k=0; k<result.length; k++){
+// 				if(result[k] !== inputArray[i][k] && result[k] !== inputArray[j][k]) {
+// 					match = 0
+// 					break
+// 				}
+// 			}
+// 			count += match
+
+// 		}
+// 	}
+// 	return count
+// }
+// // get permutations
+// // test purmutations ( result [i] === perm[j][0][i] || result[i] === perm[j][1][i])
+
+// console.log(stringsCrossover(['abc', 'aaa', 'aba', 'bab', 'bba','wwb'], 'bbb'))
+
+function cyclicString(s){
+	let prototypes = []
+	let left = ''
+	let right = ''
+	let rightCheck = ''
+	let rightS = ''
+	let leftCheck = ''
+	let unique = ''
+	
+
+	for(char of s){
+		if(!unique.includes(char)) unique += char
+	}
+
+	for(let i=0; i<s.length; i++){
+		rightS = s.substr(i)
+		left = s.substr(0,i)
+		rightCheck = rightS.substr(rightS.length-i)
+		if(left === rightCheck){
+			for(let j=1; j<rightS.length; j++){
+				middle = rightS.substr(0,rightS.length-j)
+				right = rightS.substr(rightS.length-j)
+				leftCheck = rightS.substr(0,j)
+				rightCheck = middle.substr(middle.length-i)
+				if(right === leftCheck && left === rightCheck){
+					prototypes.push(middle)
 				}
 			}
-			count += match
+
 
 		}
 	}
-	return count
+	const res = Math.min(...prototypes.map(a=>a.length))
+	return prototypes.length===0? s.length : res
 }
-// get permutations
-// test purmutations ( result [i] === perm[j][0][i] || result[i] === perm[j][1][i])
 
-console.log(stringsCrossover(['abc', 'aaa', 'aba', 'bab', 'bba','wwb'], 'bbb'))
+console.log(cyclicString("cabca"), 3) // 3  abc
+console.log(cyclicString("aba"), 2) // 2 ab
+console.log(cyclicString("ccc"), 1) // 1  c
+console.log(cyclicString("zazazaza"), 2) // 2 az
+console.log(cyclicString("abbaab"), 4) // 4 bbaa
+console.log(cyclicString("abaaba"), 3) // 3 aab
+console.log(cyclicString("aab"), 3) // 3 aab
+console.log(cyclicString("abacabaabacab"), 7) // 7 aabacab
+console.log(cyclicString("bcaba"), 5) // 5 bcaba
