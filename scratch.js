@@ -3071,48 +3071,103 @@ Use subfunction
 
 // console.log(stringsCrossover(['abc', 'aaa', 'aba', 'bab', 'bba','wwb'], 'bbb'))
 
-function cyclicString(s){
-	let prototypes = []
-	let left = ''
-	let right = ''
-	let rightCheck = ''
-	let rightS = ''
-	let leftCheck = ''
-	let unique = ''
-	
+function cyclicString(s) {
+	let prototypes = [];
+	let left = "";
+	let right = "";
+	let rightCheck = "";
+	let rightS = "";
+	let leftCheck = "";
+	let unique = "";
 
-	for(char of s){
-		if(!unique.includes(char)) unique += char
+	for (char of s) {
+		if (!unique.includes(char)) unique += char;
 	}
 
-	for(let i=0; i<s.length; i++){
-		rightS = s.substr(i)
-		left = s.substr(0,i)
-		rightCheck = rightS.substr(rightS.length-i)
-		if(left === rightCheck){
-			for(let j=1; j<rightS.length; j++){
-				middle = rightS.substr(0,rightS.length-j)
-				right = rightS.substr(rightS.length-j)
-				leftCheck = rightS.substr(0,j)
-				rightCheck = middle.substr(middle.length-i)
-				if(right === leftCheck && left === rightCheck){
-					prototypes.push(middle)
+	for (let i = 0; i < s.length; i++) {
+		rightS = s.substr(i);
+		left = s.substr(0, i);
+		rightCheck = rightS.substr(rightS.length - i);
+		if (left === rightCheck) {
+			for (let j = 1; j < rightS.length; j++) {
+				middle = rightS.substr(0, rightS.length - j);
+				right = rightS.substr(rightS.length - j);
+				leftCheck = rightS.substr(0, j);
+				rightCheck = middle.substr(middle.length - i);
+				if (right === leftCheck && left === rightCheck) {
+					prototypes.push(middle);
 				}
 			}
-
-
 		}
 	}
-	const res = Math.min(...prototypes.map(a=>a.length))
-	return prototypes.length===0? s.length : res
+	const res = Math.min(...prototypes.map(a => a.length));
+	return prototypes.length === 0 ? s.length : res;
 }
 
-console.log(cyclicString("cabca"), 3) // 3  abc
-console.log(cyclicString("aba"), 2) // 2 ab
-console.log(cyclicString("ccc"), 1) // 1  c
-console.log(cyclicString("zazazaza"), 2) // 2 az
-console.log(cyclicString("abbaab"), 4) // 4 bbaa
-console.log(cyclicString("abaaba"), 3) // 3 aab
-console.log(cyclicString("aab"), 3) // 3 aab
-console.log(cyclicString("abacabaabacab"), 7) // 7 aabacab
-console.log(cyclicString("bcaba"), 5) // 5 bcaba
+// module.exports = cyclicString
+
+// console.log(cyclicString("cabca"), 3) // 3  abc
+// console.log(cyclicString("aba"), 2) // 2 ab
+// console.log(cyclicString("ccc"), 1) // 1  c
+// console.log(cyclicString("zazazaza"), 2) // 2 az
+// console.log(cyclicString("abbaab"), 4) // 4 bbaa
+// console.log(cyclicString("abaaba"), 3) // 3 aab
+// console.log(cyclicString("aab"), 3) // 3 aab
+// console.log(cyclicString("abacabaabacab"), 7) // 7 aabacab
+// console.log(cyclicString("bcaba"), 5) // 5 bcaba
+
+function fizz_buzz(numbers) {
+	let result = [];
+
+	for (number of numbers) {
+		if (number % 15 === 0) {
+			result.push("fizzbuzz");
+		} else if (number % 3 === 0) {
+			result.push("fizz");
+		} else if (number % 5 === 0) {
+			result.push("buzz");
+		} else {
+			result.push(number);
+		}
+	}
+
+	return result.join(", ");
+}
+
+function beautifulText(inputString, l, r) {
+	// Loop through segment lengths
+	let res = false
+	for (let width = l; width <= r; width++) {
+		let sentence = inputString
+		console.log("width=", width)
+		// check each segment end for validity
+		let thisRes = true;
+		let index = width
+		while (index < sentence.length) {
+
+			if(inputString[index] !== " ") {
+				console.log('break @ index=',index)
+				thisRes = false
+				break
+			}
+			sentence = sentence.substr(0,index) + "*" + sentence.substr(index+1)
+			console.log('width',width,'index',index, sentence)
+			index += width + 1
+		}
+		console.log('index', index, 'length', inputString.length)
+		if(thisRes && inputString.length === index){
+			res = thisRes
+			break
+		}
+		// console.log(i, thisRes);
+	}
+	return res;
+}
+
+console.log(beautifulText("Look at this example of a correct text", 5, 15)); // true
+
+module.exports = {
+	fizz_buzz,
+	cyclicString,
+	beautifulText,
+};

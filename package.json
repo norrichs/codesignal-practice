@@ -1,6 +1,25 @@
 {
   "devDependencies": {
     "@prettier/plugin-ruby": "*",
+    "jest": "^27.3.1",
     "prettier": "^2.4.1"
-  }
+  },
+  "name": "codesignal",
+  "version": "1.0.0",
+  "main": "scratch.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/norrichs/codesignal-practice.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/norrichs/codesignal-practice/issues"
+  },
+  "homepage": "https://github.com/norrichs/codesignal-practice#readme",
+  "description": ""
 }
