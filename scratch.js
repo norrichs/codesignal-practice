@@ -1338,27 +1338,27 @@ Use subfunction
 
 // console.log(digitsProduct(0))
 
-// function fileNaming(names) {
-// 	const newNames = []
-// 	names.forEach(name =>{
-// 		// if name in newnames
-// 		//		concatenate '(1)'
-// 		//		while(new name is in newnames)
-// 		//			increment suffix
-// 		if(newNames.includes(name)){
-// 			let number = 1
-// 			let newName = name + "(" + number + ")";
-// 			while(newNames.includes(newName)){
-// 				number +=1
-// 				newName = name + "(" + number + ")"
-// 			}
-// 			newNames.push(newName)
-// 		}else{
-// 			newNames.push(name)
-// 		}
-// 	})
-// 	return newNames
-// }
+function fileNaming(names) {
+	const newNames = [];
+	names.forEach((name) => {
+		// if name in newnames
+		//		concatenate '(1)'
+		//		while(new name is in newnames)
+		//			increment suffix
+		if (newNames.includes(name)) {
+			let number = 1;
+			let newName = name + "(" + number + ")";
+			while (newNames.includes(newName)) {
+				number += 1;
+				newName = name + "(" + number + ")";
+			}
+			newNames.push(newName);
+		} else {
+			newNames.push(name);
+		}
+	});
+	return newNames;
+}
 
 // // For names = ["doc", "doc", "image", "doc(1)", "doc"], the output should be
 // // fileNaming(names) = ["doc", "doc(1)", "image", "doc(1)(1)", "doc(2)"].
@@ -3100,7 +3100,7 @@ function cyclicString(s) {
 			}
 		}
 	}
-	const res = Math.min(...prototypes.map(a => a.length));
+	const res = Math.min(...prototypes.map((a) => a.length));
 	return prototypes.length === 0 ? s.length : res;
 }
 
@@ -3136,38 +3136,298 @@ function fizz_buzz(numbers) {
 
 function beautifulText(inputString, l, r) {
 	// Loop through segment lengths
-	let res = false
+	let res = false;
 	for (let width = l; width <= r; width++) {
-		let sentence = inputString
-		console.log("width=", width)
+		let sentence = inputString;
+		console.log("width=", width);
 		// check each segment end for validity
 		let thisRes = true;
-		let index = width
+		let index = width;
 		while (index < sentence.length) {
-
-			if(inputString[index] !== " ") {
-				console.log('break @ index=',index)
-				thisRes = false
-				break
+			if (inputString[index] !== " ") {
+				console.log("break @ index=", index);
+				thisRes = false;
+				break;
 			}
-			sentence = sentence.substr(0,index) + "*" + sentence.substr(index+1)
-			console.log('width',width,'index',index, sentence)
-			index += width + 1
+			sentence =
+				sentence.substr(0, index) + "*" + sentence.substr(index + 1);
+			console.log("width", width, "index", index, sentence);
+			index += width + 1;
 		}
-		console.log('index', index, 'length', inputString.length)
-		if(thisRes && inputString.length === index){
-			res = thisRes
-			break
+		console.log("index", index, "length", inputString.length);
+		if (thisRes && inputString.length === index) {
+			res = thisRes;
+			break;
 		}
 		// console.log(i, thisRes);
 	}
 	return res;
 }
 
-console.log(beautifulText("Look at this example of a correct text", 5, 15)); // true
+// console.log(beautifulText("Look at this example of a correct text", 5, 15)); // true
 
-module.exports = {
-	fizz_buzz,
-	cyclicString,
-	beautifulText,
-};
+function runnersMeetings(startPosition, speed) {
+	let runners = startPosition.length;
+	let count;
+	let maxCount = -1;
+	// loop through runners
+	for (let i = 0; i < runners - 1; i++) {
+		// loop through second runners
+		console.log("  ", i);
+		for (let j = i + 1; j < runners; j++) {
+			console.log("    ", j);
+			const starts = [...startPosition];
+			const speeds = [...speed];
+			const start1 = starts.splice(j, 1)[0];
+			const start0 = starts.splice(i, 1)[0];
+			const speed1 = speeds.splice(j, 1)[0];
+			const speed0 = speeds.splice(i, 1)[0];
+
+			// default, single intersection
+			count = 2;
+			// edge case, same speed, no intersection  (remove start equality.  That's still an intersection)
+			if (start1 === start0 || speed1 === speed0) {
+				console.log("starting at same place or parallel");
+				count = -1;
+				break;
+			}
+			// find 'time of intersection'
+			let t0 = (start1 - start0) / (speed0 - speed1);
+			// find 'position of intersection'
+			let p0 = speed0 * t0 + start0;
+			// loop rest, finding any additional runners w/ same time and position
+			for (let k = 0; k < starts.length; k++) {
+				// count intersections of rest with p0 at t0
+				if (speeds[k] * t0 + starts[k] === p0) {
+					count++;
+					console.log("another runner", count);
+				}
+			}
+			maxCount = Math.max(count, maxCount);
+		}
+	}
+	return maxCount;
+}
+
+// console.log(runnersMeetings([1, 4, 2], [27, 18, 24]), 'assert', 3) // 3
+// console.log(runnersMeetings([-2,0,2,4], [6,5,4,2]), 'assert', 3) // 3
+// console.log(runnersMeetings([1,4,2], [5,6,2]), 'assert', 2) // 2
+// console.log(runnersMeetings([1,1000], [23,22]), 'assert', 2) // 2
+
+function christmasTree(levelNum, levelHeight) {
+	const max = 5 + (levelNum + levelHeight - 2) * 2;
+	const crown = ["*", "*", "***"];
+
+	const foot = new Array(levelNum);
+	foot.fill(
+		"*".repeat(levelHeight % 2 === 0 ? levelHeight + 1 : levelHeight)
+	);
+
+	const levels = [];
+
+	for (let i = 0; i < levelNum; i++) {
+		for (let j = 0; j < levelHeight; j++) {
+			levels.push("*".repeat(5 + (i + j) * 2));
+		}
+	}
+
+	let tree = [...crown, ...levels, ...foot];
+	tree = tree.map(
+		(line) => " ".repeat(Math.floor(max / 2 - line.length / 2)) + line
+	);
+
+	return tree;
+}
+
+// console.log(christmasTree(3,5),'assert',
+//    ["    *",
+// 	"    *",
+// 	"   ***",
+// 	"  *****",
+// 	" *******",
+// 	"*********",
+// 	"   ***"])
+
+// const tree = christmasTree(3,5)
+// tree.forEach(line=>console.log(line))
+
+function reverseOnDiagonals(matrix) {
+	let l = matrix.length - 1;
+	let result = matrix.map((line) => [...line]);
+	for (let i = 0; i <= l; i++) {
+		result[i][i] = matrix[l - i][l - i];
+		result[i][l - i] = matrix[l - i][i];
+	}
+	return result;
+}
+
+// console.log(
+// 	reverseOnDiagonals([
+// 		[1, 2, 3],
+// 		[4, 5, 6],
+// 		[7, 8, 9],
+// 	]),
+// 	"assert",
+// 	[
+// 		[9, 2, 7],
+// 		[4, 5, 6],
+// 		[3, 8, 1],
+// 	]
+// );
+
+function swapDiagonals(matrix) {
+	let l = matrix.length - 1;
+	let result = matrix.map((line) => [...line]);
+	for (let i = 0; i <= l; i++) {
+		result[i][i] = matrix[i][l - i];
+		result[i][l-i] = matrix[i][i]
+	}
+	return result;
+}
+
+// console.log(
+// 	swapDiagonals([
+// 		[1, 2, 3],
+// 		[4, 5, 6],
+// 		[7, 8, 9],
+// 	]),
+// 	"assert",
+// 	[
+// 		[3, 2, 1],
+// 		[4, 5, 6],
+// 		[9, 8, 7],
+// 	]
+// );
+
+function drawRectangle(canvas, rectangle) {
+    const [x1, y1, x2, y2] = rectangle
+    
+    // paint corners
+    // paint horizontal lines
+    // paint vertical lines
+    canvas[y1][x1] = "*"
+    canvas[y1][x2] = "*"
+    canvas[y2][x1] = "*"
+    canvas[y2][x2] = "*"
+	// horizontal
+    for(let i=x1+1; i<x2; i++){
+        canvas[y1][i] = "-"
+		canvas[y2][i] = "-"
+    }
+	for(let i=y1+1; i<y2; i++){
+		canvas[i][x1] = "|"
+		canvas[i][x2] = "|"
+	}
+    return canvas
+}
+
+// console.log(drawRectangle([['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
+// ['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
+// ['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
+// ['b', 'b', 'b', 'b', 'b', 'b', 'b', 'b'],
+// ['b', 'b', 'b', 'b', 'b', 'b', 'b', 'b']], [1,1,4,3]))
+
+
+function volleyballPositions(formation, k) {
+	k=k%6
+	while(k>0){
+		formation = [
+			["empty",   formation[1][2], "empty"],
+			[formation[0][1], "empty",   formation[3][2]],
+			["empty",   formation[3][0], "empty"],
+			[formation[1][0], "empty",   formation[2][1]]]
+			k--
+	}
+	return formation
+}
+
+
+// console.log(volleyballPositions([
+// 	["empty",   "Player5", "empty"],
+// 	["Player4", "empty",   "Player2"],
+// 	["empty",   "Player3", "empty"],
+// 	["Player6", "empty",   "Player1"]], 2), 
+// 	'assert', [
+//     ["empty",   "Player1", "empty"],
+//     ["Player2", "empty",   "Player3"],
+//     ["empty",   "Player4", "empty"],
+//     ["Player5", "empty",   "Player6"]
+// ])
+
+
+function starRotation(matrix, width, center, t) {
+	t = t % 8;
+	let m = matrix.map(row => row.map(elem => elem))
+	let [x,y] = center
+	// read out star into array of arrays representing arms of star
+	// star arms - clockwise starting from north
+	const armLength = Math.floor(width/2)
+	let arms = new Array(8)
+	arms.fill(true)
+	arms = arms.map(x => [])
+	for(let i=1; i<=armLength; i++){
+		arms[0][i-1] = m[x-i][y  ] 
+		arms[1][i-1] = m[x-i][y+i] 
+		arms[2][i-1] = m[x  ][y+i]
+		arms[3][i-1] = m[x+i][y+i]
+		arms[4][i-1] = m[x+i][y  ]
+		arms[5][i-1] = m[x+i][y-i]
+		arms[6][i-1] = m[x  ][y-i]
+		arms[7][i-1] = m[x-i][y-i] 
+	}
+	console.log('armlength', armLength,'arms', arms)
+
+    // splice + push to rotate
+	arms.unshift( ...arms.splice(8-t, t) )
+	console.log('rotated arms', arms)
+
+	// read back into position
+	for(let i=1; i<=armLength; i++){
+		m[x-i][y  ] = arms[0][i-1]
+		m[x-i][y+i] = arms[1][i-1]
+		m[x  ][y+i] = arms[2][i-1]
+		m[x+i][y+i] = arms[3][i-1]
+		m[x+i][y  ] = arms[4][i-1]
+		m[x+i][y-i] = arms[5][i-1]
+		m[x  ][y-i] = arms[6][i-1]
+		m[x-i][y-i] = arms[7][i-1]
+	}
+	return m
+}
+
+
+// console.log(starRotation([
+// 	[1, 0, 0, 2, 0, 0, 3],
+// 	[0, 1, 0, 2, 0, 3, 0],
+// 	[0, 0, 1, 2, 3, 0, 0],
+// 	[8, 8, 8, 9, 4, 4, 4],
+// 	[0, 0, 7, 6, 5, 0, 0],
+// 	[0, 7, 0, 6, 0, 5, 0],
+// 	[7, 0, 0, 6, 0, 0, 5]
+// ],
+// 7,[3,3],1)
+// ,
+// 'assert',[
+// 	[8, 0, 0, 1, 0, 0, 2],
+// 	[0, 8, 0, 1, 0, 2, 0],
+// 	[0, 0, 8, 1, 2, 0, 0],
+// 	[7, 7, 7, 9, 3, 3, 3],
+// 	[0, 0, 6, 5, 4, 0, 0],
+// 	[0, 6, 0, 5, 0, 4, 0],
+// 	[6, 0, 0, 5, 0, 0, 4]
+// ])
+// console.log(starRotation([
+// 		[1, 0, 0, 2, 0, 0, 3],
+// 		[0, 1, 0, 2, 0, 3, 0],
+// 		[0, 0, 1, 2, 3, 0, 0],
+// 		[8, 8, 8, 9, 4, 4, 4],
+// 		[0, 0, 7, 6, 5, 0, 0]
+// 	],
+// 	3,[1,5],81),
+// 	'assert',[
+// 		[1, 0, 0, 2, 0, 0, 0],
+// 		[0, 1, 0, 2, 3, 3, 3],
+// 		[0, 0, 1, 2, 0, 0, 0],
+// 		[8, 8, 8, 9, 4, 4, 4],
+// 		[0, 0, 7, 6, 5, 0, 0]
+// 	])

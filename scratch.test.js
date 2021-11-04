@@ -1,8 +1,4 @@
-const {
-	fizz_buzz,
-	cyclicString, 
-	beautifulText
-} = require('./scratch.js')
+const exp = require('./scratch.js')
  
 // describe("FizzBuzz", () => {
 //     test('[3] should result in "fizz"', () => {
@@ -30,8 +26,14 @@ const {
 // 	})
 // })
 
-describe("beautifulText", ()=>{
-	test("Look at this example of a correct text should result in true", ()=>{
-		expect(beautifulText("Look at this example of a correct text",5,15)).toBe(true)
+// describe("beautifulText", ()=>{
+// 	test("Look at this example of a correct text should result in true", ()=>{
+// 		expect(beautifulText("Look at this example of a correct text",5,15)).toBe(true)
+// 	})
+// })
+
+describe("runnersMeetings", () => {
+	test(" results in 3 ",  () => {
+		expect( exp.runnersMeetings([1, 4, 2], [27, 18, 24]) ).toBe(3)
 	})
 })
