@@ -3688,9 +3688,70 @@ function isInformationConsistent(evidences) {
     return true
 }
 
-console.log(isInformationConsistent([
-	[0,0,-1], 
-	[-1,1,-1], 
-	[-1,1,0], 
-	[0,1,0], 
-	[0,1,1]]), 'assert', false)
+// console.log(isInformationConsistent([
+// 	[0,0,-1], 
+// 	[-1,1,-1], 
+// 	[-1,1,0], 
+// 	[0,1,0], 
+// 	[0,1,1]]), 'assert', false)
+
+
+
+function correctNonogram(size, nonogramField) {
+	let spec = []
+	let stripe = []
+	const specSize = nonogramField.length - size
+	for(let i=0; i<size; i++){
+		spec = nonogramField[ specSize + i].slice(0,specSize)
+		stripe = nonogramField[ specSize + i].slice(specSize)
+		console.log('row '+i,spec, stripe)
+
+		specNum = spec.map(s => {return s!=="-"?parseInt(s):false}).filter(s=>s)
+		stripeNum = stripe.join('').split('.').map(run => run.length).filter(r=>r>0)
+		console.log('row '+i,specNum, stripeNum)
+
+		if(specNum.length === stripeNum.length){
+			for(let k=0; k<specNum.length; k++){
+				if(specNum[k] !== stripeNum[k]) return false
+			}
+		}else return false
+		
+		spec = spec.map((el, j) => nonogramField[j][specSize + i])
+		stripe = stripe.map((el, j) => nonogramField[specSize + j][specSize + i])
+		console.log('col '+i, spec, stripe)
+		
+		specNum = spec.map(s => {return s!=="-"?parseInt(s):false}).filter(s=>s)
+		stripeNum = stripe.join('').split('.').map(run => run.length).filter(r=>r>0)
+		console.log('col '+i,specNum, stripeNum)
+		if(specNum.length === stripeNum.length){
+			for(let k=0; k<specNum.length; k++){
+				if(specNum[k] !== stripeNum[k]) return false
+			}
+		}else return false
+		
+	}
+
+	return true
+
+}
+
+
+// console.log(correctNonogram(5,[
+// 	["-", "-", "-", "-", "-", "-", "-", "-"],
+// 	["-", "-", "-", "2", "2", "1", "-", "1"],
+// 	["-", "-", "-", "2", "1", "1", "3", "3"],
+// 	["-", "3", "1", "#", "#", "#", ".", "#"],
+// 	["-", "-", "2", "#", "#", ".", ".", "."],
+// 	["-", "-", "2", ".", ".", ".", "#", "#"],
+// 	["-", "1", "2", "#", ".", ".", "#", "#"],
+// 	["-", "-", "5", "#", "#", "#", "#", "#"]]), 'assert', true)
+
+console.log(correctNonogram(5,[
+	["-", "-", "-", "-", "-", "-", "-", "-"],
+	["-", "-", "-", "-", "-", "1", "-", "-"],
+	["-", "-", "-", "3", "3", "2", "5", "5"],
+	["-", "-", "3", ".", ".", ".", "#", "#"],
+	["-", "2", "2", "#", "#", "#", "#", "#"],
+	["-", "-", "5", "#", "#", "#", "#", "#"],
+	["-", "-", "5", "#", "#", "#", "#", "#"],
+	["-", "-", "2", ".", ".", ".", "#", "#"]]), 'assert', false)
