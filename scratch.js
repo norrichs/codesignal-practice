@@ -1,3 +1,22 @@
+const isEqualRecursive = (arr1, arr2) => {
+	if (arr1.length === arr2.length) {
+		for (let i = 0; i < arr1.length; i++) {
+			if (arr1[i] !== arr2[i]) {
+				if (Array.isArray(arr1[i]) && Array.isArray(arr2[i])) {
+					if (!isEqualRecursive(arr1[i], arr2[i])) return false;
+				} else {
+					return false;
+				}
+			}
+		}
+	} else {
+		return false;
+	}
+	return true;
+};
+
+// console.log(isEqualRecursive([[[1],[2],[3]],[[1],2,[3]]], [[[1],[2],[3]],[[1],[2],[3]]]))
+
 // function adjacentElementsProduct(inputArray) {
 //     let max = 0;
 //     for(let i=0; i<inputArray.length-1; i++){
@@ -558,21 +577,31 @@
 //     ('result',avoidObstacles(test))
 // })
 
-// function boxBlur(image) {
-//     const w = image[0].length
-//     const h = image.length
-//     let res = []
-//     for(let i=1;i<h-1;i++){
-//         res.push([])
-//         for(let j=1; j<w-1;j++){
-//             res[i-1].push( Math.floor((image[i-1][j-1] + image[i-1][j] + image[i-1][j+1] +
-//                          image[i][j-1]   + image[i][j]   + image[i][j+1]   +
-//                          image[i+1][j-1] + image[i+1][j] + image[i+1][j+1]) / 9 ))
-
-//         }
-//     }
-//     return res
-// }
+function boxBlur(image) {
+	const w = image[0].length;
+	const h = image.length;
+	let res = [];
+	for (let i = 1; i < h - 1; i++) {
+		res.push([]);
+		for (let j = 1; j < w - 1; j++) {
+			res[i - 1].push(
+				Math.floor(
+					(image[i - 1][j - 1] +
+						image[i - 1][j] +
+						image[i - 1][j + 1] +
+						image[i][j - 1] +
+						image[i][j] +
+						image[i][j + 1] +
+						image[i + 1][j - 1] +
+						image[i + 1][j] +
+						image[i + 1][j + 1]) /
+						9
+				)
+			);
+		}
+	}
+	return res;
+}
 
 // const tests = [
 //     [
@@ -601,24 +630,25 @@
 
 // //          boxBlur(image) = [[1]]
 
-// function minesweeper(matrix) {
-// 	let total = []
-// 	for(let i = 0; i < matrix.length; i++){
-// 		total.push([])
-// 		for(let j = 0; j< matrix[0].length; j++){
-// 			total[i].push((matrix[i-1] ? (matrix[i-1][j-1] ? 1 : 0) : 0)+
-// 				(matrix[i-1] ? (matrix[i-1][j  ] ? 1 : 0) : 0)+
-// 				(matrix[i-1] ? (matrix[i-1][j+1] ? 1 : 0) : 0)+
-// 				(matrix[i  ] ? (matrix[i  ][j-1] ? 1 : 0) : 0)+
-// 				(matrix[i  ] ? (matrix[i  ][j+1] ? 1 : 0) : 0)+
-// 				(matrix[i+1] ? (matrix[i+1][j-1] ? 1 : 0) : 0)+
-// 				(matrix[i+1] ? (matrix[i+1][j  ] ? 1 : 0) : 0)+
-// 				(matrix[i+1] ? (matrix[i+1][j+1] ? 1 : 0) : 0))
-
-// 		}
-// 	}
-// 	return total
-// }
+function minesweeper(matrix) {
+	let total = [];
+	for (let i = 0; i < matrix.length; i++) {
+		total.push([]);
+		for (let j = 0; j < matrix[0].length; j++) {
+			total[i].push(
+				(matrix[i - 1] ? (matrix[i - 1][j - 1] ? 1 : 0) : 0) +
+					(matrix[i - 1] ? (matrix[i - 1][j] ? 1 : 0) : 0) +
+					(matrix[i - 1] ? (matrix[i - 1][j + 1] ? 1 : 0) : 0) +
+					(matrix[i] ? (matrix[i][j - 1] ? 1 : 0) : 0) +
+					(matrix[i] ? (matrix[i][j + 1] ? 1 : 0) : 0) +
+					(matrix[i + 1] ? (matrix[i + 1][j - 1] ? 1 : 0) : 0) +
+					(matrix[i + 1] ? (matrix[i + 1][j] ? 1 : 0) : 0) +
+					(matrix[i + 1] ? (matrix[i + 1][j + 1] ? 1 : 0) : 0)
+			);
+		}
+	}
+	return total;
+}
 
 // // For
 
@@ -1418,43 +1448,48 @@ function fileNaming(names) {
 
 // console.dir(spiralNumbers(9));
 
-// function sudoku(grid) {
-// 	const column = (colNum) => {
-// 		return [
-// 			grid[0][colNum],
-// 			grid[1][colNum],
-// 			grid[2][colNum],
-// 			grid[3][colNum],
-// 			grid[4][colNum],
-// 			grid[5][colNum],
-// 			grid[6][colNum],
-// 			grid[7][colNum],
-// 			grid[8][colNum]
-// 		];
-// 	};
-// 	const subGrid = (n) => {
-// 		const off = n%3*3
-// 		return [
-// 			grid[off + 0][off + 0], grid[off + 0][off + 1], grid[off + 0][off + 2],
-// 			grid[off + 1][off + 0], grid[off + 1][off + 1], grid[off + 1][off + 2],
-// 			grid[off + 2][off + 0], grid[off + 2][off + 1], grid[off + 2][off + 2]
-// 		]
-// 	}
-// 	const isComplete = (arr) => {
-// 		for(let i = 1; i<=9; i++){
+function sudoku(grid) {
+	const column = (colNum) => {
+		return [
+			grid[0][colNum],
+			grid[1][colNum],
+			grid[2][colNum],
+			grid[3][colNum],
+			grid[4][colNum],
+			grid[5][colNum],
+			grid[6][colNum],
+			grid[7][colNum],
+			grid[8][colNum],
+		];
+	};
+	const subGrid = (n) => {
+		const off = (n % 3) * 3;
+		return [
+			grid[off + 0][off + 0],
+			grid[off + 0][off + 1],
+			grid[off + 0][off + 2],
+			grid[off + 1][off + 0],
+			grid[off + 1][off + 1],
+			grid[off + 1][off + 2],
+			grid[off + 2][off + 0],
+			grid[off + 2][off + 1],
+			grid[off + 2][off + 2],
+		];
+	};
+	const isComplete = (arr) => {
+		for (let i = 1; i <= 9; i++) {
+			if (!arr.includes(i)) return false;
+		}
+		return true;
+	};
 
-// 			if(!arr.includes(i)) return false
-// 		}
-// 		return true
-// 	}
-
-// 	for (let i = 0; i < 9; i++) {
-// 		if (!isComplete(grid[i])) return false;
-// 		if (!isComplete(column(i))) return false;
-// 		if (!isComplete(subGrid(i))) return false;
-// 	}
-// 	return true;
-// }
+	for (let i = 0; i < 9; i++) {
+		if (!isComplete(grid[i])) return false;
+		if (!isComplete(column(i))) return false;
+		if (!isComplete(subGrid(i))) return false;
+	}
+	return true;
+}
 
 // console.log(
 // 	sudoku([
@@ -3280,7 +3315,7 @@ function swapDiagonals(matrix) {
 	let result = matrix.map((line) => [...line]);
 	for (let i = 0; i <= l; i++) {
 		result[i][i] = matrix[i][l - i];
-		result[i][l-i] = matrix[i][i]
+		result[i][l - i] = matrix[i][i];
 	}
 	return result;
 }
@@ -3300,25 +3335,25 @@ function swapDiagonals(matrix) {
 // );
 
 function drawRectangle(canvas, rectangle) {
-    const [x1, y1, x2, y2] = rectangle
-    
-    // paint corners
-    // paint horizontal lines
-    // paint vertical lines
-    canvas[y1][x1] = "*"
-    canvas[y1][x2] = "*"
-    canvas[y2][x1] = "*"
-    canvas[y2][x2] = "*"
+	const [x1, y1, x2, y2] = rectangle;
+
+	// paint corners
+	// paint horizontal lines
+	// paint vertical lines
+	canvas[y1][x1] = "*";
+	canvas[y1][x2] = "*";
+	canvas[y2][x1] = "*";
+	canvas[y2][x2] = "*";
 	// horizontal
-    for(let i=x1+1; i<x2; i++){
-        canvas[y1][i] = "-"
-		canvas[y2][i] = "-"
-    }
-	for(let i=y1+1; i<y2; i++){
-		canvas[i][x1] = "|"
-		canvas[i][x2] = "|"
+	for (let i = x1 + 1; i < x2; i++) {
+		canvas[y1][i] = "-";
+		canvas[y2][i] = "-";
 	}
-    return canvas
+	for (let i = y1 + 1; i < y2; i++) {
+		canvas[i][x1] = "|";
+		canvas[i][x2] = "|";
+	}
+	return canvas;
 }
 
 // console.log(drawRectangle([['a', 'a', 'a', 'a', 'a', 'a', 'a', 'a'],
@@ -3327,26 +3362,25 @@ function drawRectangle(canvas, rectangle) {
 // ['b', 'b', 'b', 'b', 'b', 'b', 'b', 'b'],
 // ['b', 'b', 'b', 'b', 'b', 'b', 'b', 'b']], [1,1,4,3]))
 
-
 function volleyballPositions(formation, k) {
-	k=k%6
-	while(k>0){
+	k = k % 6;
+	while (k > 0) {
 		formation = [
-			["empty",   formation[1][2], "empty"],
-			[formation[0][1], "empty",   formation[3][2]],
-			["empty",   formation[3][0], "empty"],
-			[formation[1][0], "empty",   formation[2][1]]]
-			k--
+			["empty", formation[1][2], "empty"],
+			[formation[0][1], "empty", formation[3][2]],
+			["empty", formation[3][0], "empty"],
+			[formation[1][0], "empty", formation[2][1]],
+		];
+		k--;
 	}
-	return formation
+	return formation;
 }
-
 
 // console.log(volleyballPositions([
 // 	["empty",   "Player5", "empty"],
 // 	["Player4", "empty",   "Player2"],
 // 	["empty",   "Player3", "empty"],
-// 	["Player6", "empty",   "Player1"]], 2), 
+// 	["Player6", "empty",   "Player1"]], 2),
 // 	'assert', [
 //     ["empty",   "Player1", "empty"],
 //     ["Player2", "empty",   "Player3"],
@@ -3354,47 +3388,45 @@ function volleyballPositions(formation, k) {
 //     ["Player5", "empty",   "Player6"]
 // ])
 
-
 function starRotation(matrix, width, center, t) {
 	t = t % 8;
-	let m = matrix.map(row => row.map(elem => elem))
-	let [x,y] = center
+	let m = matrix.map((row) => row.map((elem) => elem));
+	let [x, y] = center;
 	// read out star into array of arrays representing arms of star
 	// star arms - clockwise starting from north
-	const armLength = Math.floor(width/2)
-	let arms = new Array(8)
-	arms.fill(true)
-	arms = arms.map(x => [])
-	for(let i=1; i<=armLength; i++){
-		arms[0][i-1] = m[x-i][y  ] 
-		arms[1][i-1] = m[x-i][y+i] 
-		arms[2][i-1] = m[x  ][y+i]
-		arms[3][i-1] = m[x+i][y+i]
-		arms[4][i-1] = m[x+i][y  ]
-		arms[5][i-1] = m[x+i][y-i]
-		arms[6][i-1] = m[x  ][y-i]
-		arms[7][i-1] = m[x-i][y-i] 
+	const armLength = Math.floor(width / 2);
+	let arms = new Array(8);
+	arms.fill(true);
+	arms = arms.map((x) => []);
+	for (let i = 1; i <= armLength; i++) {
+		arms[0][i - 1] = m[x - i][y];
+		arms[1][i - 1] = m[x - i][y + i];
+		arms[2][i - 1] = m[x][y + i];
+		arms[3][i - 1] = m[x + i][y + i];
+		arms[4][i - 1] = m[x + i][y];
+		arms[5][i - 1] = m[x + i][y - i];
+		arms[6][i - 1] = m[x][y - i];
+		arms[7][i - 1] = m[x - i][y - i];
 	}
-	console.log('armlength', armLength,'arms', arms)
+	console.log("armlength", armLength, "arms", arms);
 
-    // splice + push to rotate
-	arms.unshift( ...arms.splice(8-t, t) )
-	console.log('rotated arms', arms)
+	// splice + push to rotate
+	arms.unshift(...arms.splice(8 - t, t));
+	console.log("rotated arms", arms);
 
 	// read back into position
-	for(let i=1; i<=armLength; i++){
-		m[x-i][y  ] = arms[0][i-1]
-		m[x-i][y+i] = arms[1][i-1]
-		m[x  ][y+i] = arms[2][i-1]
-		m[x+i][y+i] = arms[3][i-1]
-		m[x+i][y  ] = arms[4][i-1]
-		m[x+i][y-i] = arms[5][i-1]
-		m[x  ][y-i] = arms[6][i-1]
-		m[x-i][y-i] = arms[7][i-1]
+	for (let i = 1; i <= armLength; i++) {
+		m[x - i][y] = arms[0][i - 1];
+		m[x - i][y + i] = arms[1][i - 1];
+		m[x][y + i] = arms[2][i - 1];
+		m[x + i][y + i] = arms[3][i - 1];
+		m[x + i][y] = arms[4][i - 1];
+		m[x + i][y - i] = arms[5][i - 1];
+		m[x][y - i] = arms[6][i - 1];
+		m[x - i][y - i] = arms[7][i - 1];
 	}
-	return m
+	return m;
 }
-
 
 // console.log(starRotation([
 // 	[1, 0, 0, 2, 0, 0, 3],
@@ -3431,3 +3463,169 @@ function starRotation(matrix, width, center, t) {
 // 		[8, 8, 8, 9, 4, 4, 4],
 // 		[0, 0, 7, 6, 5, 0, 0]
 // 	])
+
+// countours are the outer shell of digits in a 2d matrix, outermost is the ith shell
+// if 0 contour is removed, the outer is i===1, etc
+// shift contours clockwise if i is even, counterclockwise if odd
+function contoursShifting(matrix) {
+	console.log('matrix', matrix)
+	// read contours into array of arrays
+	let width0 = matrix[0].length;
+	let height0 = matrix.length;
+	if( height0 === 1 && width0 === 1) return matrix
+	if (height0 === 1) {
+		matrix[0].unshift(matrix[0].pop());
+		return matrix;
+	}
+	if (width0 === 1) {
+		matrix.unshift(matrix.pop());
+		return matrix;
+	}
+
+	let w;
+	let h;
+	let left, right, top, bottom;
+	let contourLength;
+	const cNum = Math.min(width0 / 2, height0 / 2);
+	let cArray = [];
+	for (let c = 0; c < cNum; c++) {
+		w = width0 - 2*c
+		h = height0 - 2*c
+		console.log('reading in', w, h)
+		if (h === 1) {
+			cArray[c] = matrix[c].slice(c, w + c)
+		}else if (w === 1) {
+			cArray[c] = new Array(h)
+			for( let i = 0; i < h; i++){
+				cArray[c][i] = matrix[c + i][c]
+			}
+			
+		}else{
+			top = matrix[c].slice(c, w + c);
+			bottom = matrix[height0 - 1 - c].slice(c, w + c).reverse();
+			left = [];
+			right = [];
+			for (let i = c + 1; i < height0 - c - 1; i++) {
+				right.push(matrix[i][width0 - 1 - c]);
+				left.push(matrix[height0 - 1 - i][c]);
+			}
+			console.log('sides', top, right, bottom, left)
+			cArray[c] = [...top, ...right, ...bottom, ...left];
+		}
+		console.log('contour' + c, cArray[c])
+	}
+
+	// unshift / splice or push / splice to
+	const shiftedCArray = cArray.map((contour, i) => {
+		if(contour.length === Math.min(width0, height0)){
+			console.log('simple contour', contour)
+			contour.push(contour.shift())
+			console.log('shifted simple contour', contour)
+		}else if (i % 2 === 0) contour.unshift(contour.pop());
+		else contour.push(contour.shift());
+		return contour;
+	});
+	// reconstruct shifted array
+
+	let r = new Array(height0);
+	r.fill(null);
+	r = r.map((elem) => {
+		elem = new Array(width0);
+		return elem.fill(null);
+	});
+	for (let c = 0; c < cNum; c++) {
+		w = width0 - 2 * c;
+		h = height0 - 2 * c - 2;
+		if(height0 - 2*c ===1){
+			cArray[c].forEach((el, i) => { r[c][c + i] = el}) 
+		}else if(width0 - 2*c ===1){
+			cArray[c].forEach((el, i) => { r[c + i][c] = el})
+		}else{
+			top = shiftedCArray[c].slice(0, w);
+			right = shiftedCArray[c].slice(w, w + h);
+			bottom = shiftedCArray[c].slice(w + h, w * 2 + h);
+			left = shiftedCArray[c].slice(w * 2 + h);
+			top.forEach((el, i) => {
+				r[c][c + i] = el;
+			});
+			right.forEach((el, i) => {
+				r[c + 1 + i][width0 - 1 - c] = el;
+			});
+			bottom.reverse().forEach((el, i) => {
+				r[height0 - 1 - c][c + i] = el;
+			});
+			left.reverse().forEach((el, i) => {
+				r[c + 1 + i][c] = el;
+			});
+		}
+	}
+	return r;
+}
+
+// console.log(
+// 	contoursShifting([
+// 		[1, 2, 3, 4],
+// 		[5, 6, 7, 8],
+// 		[9, 10, 11, 12],
+// 		[13, 14, 15, 16],
+// 		[17, 18, 19, 20],
+// 	]), 'assert',
+// 	[[5,1,2,3],
+//  [9,7,11,4],
+//  [13,6,15,8],
+//  [17,10,14,12],
+//  [18,19,20,16]]
+// );
+
+// console.log(contoursShifting([[238,239,240,241,242,243,244,245]]), 'assert', [[245,238,239,240,241,242,243,244]])
+// console.log(contoursShifting([
+// 	[238],
+// 	[239],
+// 	[240],
+// 	[241],
+// 	[242],
+// 	[243],
+// 	[244],
+// 	[245]]), 'assert', [[245],
+// 	[238],
+// 	[239],
+// 	[240],
+// 	[241],
+// 	[242],
+// 	[243],
+// 	[244]])
+// console.log(
+// 	contoursShifting([
+// 		[1, 2, 3, 4, 5],
+// 		[6, 7, 8, 9, 10],
+// 		[11, 12, 13, 14, 15],
+// 	]),
+// 	"assert",
+// 	[
+// 		[6, 1, 2, 3, 4],
+// 		[11, 8, 9, 7, 5],
+// 		[12, 13, 14, 15, 10],
+// 	]
+// );
+// console.log(isEqualRecursive(
+// 	contoursShifting([
+// 		[1, 2, 3, 4, 5],
+// 		[6, 7, 8, 9, 10],
+// 		[11, 12, 13, 14, 15],
+// 	]),
+// 	[
+// 		[6, 1, 2, 3, 4],
+// 		[11, 8, 9, 7, 5],
+// 		[12, 13, 14, 15, 10],
+// 	]
+// ));
+// console.log(contoursShifting([[1,2,3], 
+// 	[4,5,6], 
+// 	[7,8,9], 
+// 	[10,11,12]]), 'assert', [[4,1,2], 
+// 	[7,8,3], 
+// 	[10,5,6], 
+// 	[11,12,9]])
+
+
+
