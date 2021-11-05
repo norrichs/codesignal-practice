@@ -1,4 +1,5 @@
 const isEqualRecursive = (arr1, arr2) => {
+	if (arr1 === undefined || arr2 === undefined) return false
 	if (arr1.length === arr2.length) {
 		for (let i = 0; i < arr1.length; i++) {
 			if (arr1[i] !== arr2[i]) {
@@ -3629,3 +3630,67 @@ function contoursShifting(matrix) {
 
 
 
+function gravitation(rows){
+	// 	convert to column arrays
+	let columns = new Array(rows[0].length)
+	columns = columns.fill(null).map((col, i)=>{
+		col = new Array(rows.length)
+		col.fill(null)
+		return col.map((el, j) => {
+			return rows[j][i]
+		})
+	})
+
+	
+	console.log('columns', columns)
+	//	trim top spaces
+	columns = columns.map(col=>{
+		for(let i=0; i<col.length; i++){
+			if(col[i] !== ".") return col.slice(i)
+		}
+		return []
+	})
+	console.log('trimmed columns', columns)
+	//	splice indexof '.', 
+	//	at end of each round, filter for no spaces, return indices
+	let counts = columns.map(col => col.reduce((sum, el) => {
+		return  el === "." ? sum + 1 : sum 
+	},0))
+	console.log('counts', counts)
+
+	let min = Math.min(...counts)
+	let res = []
+	counts.forEach((count, i) => {
+		if(count === min) res.push(i)
+	})
+	return res
+}
+
+
+// let test = gravitation(["#..#.", 
+// ".##..", 
+// ".#...", 
+// ".#..."])
+// console.log(test, 'assert', [1,4], isEqualRecursive(test,[1,4]))
+
+
+function isInformationConsistent(evidences) {
+    let testimony = 0
+    for(let j=0; j<evidences[0].length; j++){
+        testimony = 0
+        for(let i=0; i<evidences.length; i++){
+			console.log(i,j)
+            if( evidences[i][j] !== 0 && testimony !== 0){
+                if( evidences[i][j] !== testimony) return false
+            }else testimony = testimony === 0 ? evidences[i][j] : testimony
+        }
+    }
+    return true
+}
+
+console.log(isInformationConsistent([
+	[0,0,-1], 
+	[-1,1,-1], 
+	[-1,1,0], 
+	[0,1,0], 
+	[0,1,1]]), 'assert', false)
