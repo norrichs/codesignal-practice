@@ -3746,12 +3746,49 @@ function correctNonogram(size, nonogramField) {
 // 	["-", "1", "2", "#", ".", ".", "#", "#"],
 // 	["-", "-", "5", "#", "#", "#", "#", "#"]]), 'assert', true)
 
-console.log(correctNonogram(5,[
-	["-", "-", "-", "-", "-", "-", "-", "-"],
-	["-", "-", "-", "-", "-", "1", "-", "-"],
-	["-", "-", "-", "3", "3", "2", "5", "5"],
-	["-", "-", "3", ".", ".", ".", "#", "#"],
-	["-", "2", "2", "#", "#", "#", "#", "#"],
-	["-", "-", "5", "#", "#", "#", "#", "#"],
-	["-", "-", "5", "#", "#", "#", "#", "#"],
-	["-", "-", "2", ".", ".", ".", "#", "#"]]), 'assert', false)
+// console.log(correctNonogram(5,[
+// 	["-", "-", "-", "-", "-", "-", "-", "-"],
+// 	["-", "-", "-", "-", "-", "1", "-", "-"],
+// 	["-", "-", "-", "3", "3", "2", "5", "5"],
+// 	["-", "-", "3", ".", ".", ".", "#", "#"],
+// 	["-", "2", "2", "#", "#", "#", "#", "#"],
+// 	["-", "-", "5", "#", "#", "#", "#", "#"],
+// 	["-", "-", "5", "#", "#", "#", "#", "#"],
+// 	["-", "-", "2", ".", ".", ".", "#", "#"]]), 'assert', false)
+
+function shuffledArray(shuffled) {
+	const total = shuffled.reduce((total,n) => {return n + total}, 0)
+	for(let i=0; i<shuffled.length; i++){
+		if(2 * shuffled[i] === total){
+			shuffled.splice(i,1)
+			return shuffled.sort((a,b) => {
+				if(a<b) return -1
+				else if(a>b) return 1
+				else return 0
+			})
+		}
+	}
+	return 'no result'
+}
+
+// algos
+// 1
+//	forEach element, sum remaining
+//	if equal to element, return remaining, sorted
+
+// 2
+//	sum all
+//	loop through, testing for  total - elem === elem, 2*elem === total
+
+// console.log(shuffledArray([1,-3,4,9,5,-2,3,1]))
+
+function sortByHeight(a) {
+	let people = a.filter(n => n!==-1).sort((a,b) => {
+		if(a<b) return -1
+		else if(a>b) return 1
+		else return 0
+	})
+	return a.map(n => n===-1 ? n : people.shift())
+}
+
+console.log( sortByHeight([-1, 150, 190, 170, -1, -1, 160, 180]))
