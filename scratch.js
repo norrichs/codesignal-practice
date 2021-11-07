@@ -3791,4 +3791,111 @@ function sortByHeight(a) {
 	return a.map(n => n===-1 ? n : people.shift())
 }
 
-console.log( sortByHeight([-1, 150, 190, 170, -1, -1, 160, 180]))
+// console.log( sortByHeight([-1, 150, 190, 170, -1, -1, 160, 180]))
+
+function boxesPacking(length, width, height) {
+	// convert to [l,w,h]_0, [l,w,h]_1,...,[l,w,h]_n, each sorted internally by size
+	// sort by largest dimension
+	// 3 loops, checking for d_i > d_i+1
+
+	let boxes = []
+	length.forEach((l,i) => {
+		boxes.push([length[i], width[i], height[i]].sort((a,b) => {
+			if(a<b) return 1
+			if(a>b) return -1
+			else return 0
+		}))
+	})
+
+	boxes.sort((a,b) => {
+		if(a[0] < b[0]) return 1
+		if(a[0] > b[0]) return -1
+		else return 0
+	})
+
+	for(let i=0; i<boxes.length-1; i++){
+		if(boxes[i][0] <= boxes[i+1][0]) return false
+		if(boxes[i][1] <= boxes[i+1][1]) return false
+		if(boxes[i][2] <= boxes[i+1][2]) return false
+	}
+	return true
+}
+
+// console.log(boxesPacking([1,3,2], [1,3,2], [1,3,2]), 'assert', true)
+// console.log(boxesPacking([1,1],[1,1],[1,1]), 'assert', false)
+// console.log(boxesPacking([3,1,2], [3,1,2], [3,2,1]), 'assert', false)
+
+function maximumSum(a, q) {
+    // algo
+    //  initialize array s of size a.length, filled w/ arrays of [0,i]
+    //  q.forEach add 1 to each array element in indicated range
+    //  sort array by first elements
+	//	sort a by largest
+	//  a.reduce()
+    //  result is sum( a[ s[1] ] * s[0]) 
+
+	let scores = new Array(a.length)
+	for(let i = 0; i<scores.length; i++){
+		scores[i] = [0, i]
+	}
+	q.forEach(range => {
+		for(let i = range[0]; i <= range[1]; i++){
+			scores[i][0] += 1
+		}
+	})
+	scores.sort((a,b) => {
+		if(a[0] > b[0]) return -1
+		if(a[0] < b[0]) return 1
+		return 0 
+	})
+	let aSorted = [...a]
+	aSorted.sort((a,b) => {
+		if(a>b) return -1
+		if(a<b) return 1
+		return 0
+	})
+	
+	console.log('a', a,'aSorted', aSorted, 'scores', scores)
+
+	return aSorted.reduce((sum, x, i) => {return sum + x * scores[i][0]},0)
+}
+
+
+// console.log(maximumSum( [9, 7, 2, 4, 4], [[1, 3], [1, 4], [0, 2]]), 'assert', 62) // 20 +  24 + 18 = 62
+
+function rowsRearranging(matrix) {
+	const recursiveCompare = (a,b) => {
+		if(a[0] > b[0]) return 1
+		else if(b[0] > a[0]) return -1
+		else{
+			if(a.length === 1) return 0
+			else return recursiveCompare(a.slice(1), b.slice(1))
+		}
+	}
+
+	matrix.sort(recursiveCompare)
+
+	for(let i = 0; i < matrix[0].length; i++){
+		for(let j=0; j<matrix.length-1; j++){
+			if(matrix[j][i] >= matrix[j+1][i] ) return false
+		}
+	}
+	return true
+}
+
+
+// console.log(rowsRearranging([
+// 	[3, 0, 1], 
+// 	[3, 1, 3], 
+// 	[3, 1, 1]]),
+// 	'assert', false)
+// console.log(rowsRearranging([
+// 	[2, 7, 1], 
+// 	[0, 2, 0], 
+// 	[1, 3, 1]]),
+// 	'assert', false)
+// 	console.log(rowsRearranging([
+// 		[6, 4], 
+// 		[2, 2], 
+// 		[4, 3]]),
+// 		'assert', true)
