@@ -3899,3 +3899,27 @@ function rowsRearranging(matrix) {
 // 		[2, 2], 
 // 		[4, 3]]),
 // 		'assert', true)
+
+function digitDifferenceSort(a) {
+    // sort by difference of largest and smallest digits
+    // if tie, larger index in array comes first
+	a = a.map((el,i) => [el,i])
+	a.sort((a,b) => {
+		let arr = a[0].toString().split('').map(n => parseInt(n))
+		const aDiff = Math.max(...arr) - Math.min(...arr)
+		arr = b[0].toString().split('').map(n => parseInt(n))
+		const bDiff = Math.max(...arr) - Math.min(...arr)
+
+		if(aDiff > bDiff) return 1
+		if(aDiff < bDiff) return -1
+		else{
+			if(a[1] > b[1]) return -1
+			if(a[1] < b[1]) return 1
+			else return 0
+		}
+	})
+	a = a.map(arr => arr[0])
+	return a
+}
+
+console.log(digitDifferenceSort( [152, 23, 7, 887, 243] ),'assert',  [7, 887, 23, 243, 152]) // [ [152,3], [23,1], [7,0], [887, 1], [243,2]] -> [7, 887, 23, 243, 152]
