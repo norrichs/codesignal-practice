@@ -3981,9 +3981,37 @@ function bishopDiagonal(bishop1, bishop2) {
 
 
 
-console.log(bishopDiagonal( 'd8', 'b5'), 'assert', ['b5', 'd8'])
-console.log(bishopDiagonal( 'd8', 'd7'), 'assert', ['d7', 'd8'])
-console.log(bishopDiagonal( 'd7', 'f5'), 'assert', ['c8', 'h3'])
-console.log(bishopDiagonal( 'a1', 'h8'), 'assert', ['a1', 'h8'])
-console.log(bishopDiagonal( 'g3', 'e1'), 'assert', ['e1', 'h4'])
-console.log(bishopDiagonal( 'b4', 'e7'), 'assert', ['a3', 'f8'])
+// console.log(bishopDiagonal( 'd8', 'b5'), 'assert', ['b5', 'd8'])
+// console.log(bishopDiagonal( 'd8', 'd7'), 'assert', ['d7', 'd8'])
+// console.log(bishopDiagonal( 'd7', 'f5'), 'assert', ['c8', 'h3'])
+// console.log(bishopDiagonal( 'a1', 'h8'), 'assert', ['a1', 'h8'])
+// console.log(bishopDiagonal( 'g3', 'e1'), 'assert', ['e1', 'h4'])
+// console.log(bishopDiagonal( 'b4', 'e7'), 'assert', ['a3', 'f8'])
+
+function whoseTurn(p) {
+	const columns = 'abcdefgh'.split('')
+	const isBlack = p.split(";")
+		.map(p_n => [columns.indexOf(p_n[0]), parseInt(p_n[1]-1)])
+		.map(coord => {
+			return ( 
+				coord[0] % 2 === 0 // even
+					? coord[1] % 2 === 0 // both
+					: coord[1] % 2 === 1 // diff
+			)
+		})
+	console.log('p', p, 'isBlack', isBlack)
+	const isSame = [
+		(isBlack[0] && isBlack[1]) || (!isBlack[0] && !isBlack[1]),
+		(isBlack[2] && isBlack[3]) || (!isBlack[2] && !isBlack[3])
+	]
+	console.log('isSame', isSame)
+	return (isSame[0] && isSame[1]) || (!isSame[0] && !isSame[1]) 
+}
+
+//	algo
+//		positions map to -> color of squares
+//		color of squares map to -> same side squares different or same
+//		if(both players diff/same is the same) return true
+//		else return false
+
+console.log(whoseTurn('b1;g1;b8;g8'), 'assert', true)
