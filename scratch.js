@@ -4014,4 +4014,46 @@ function whoseTurn(p) {
 //		if(both players diff/same is the same) return true
 //		else return false
 
-console.log(whoseTurn('b1;g1;b8;g8'), 'assert', true)
+// console.log(whoseTurn('b1;g1;b8;g8'), 'assert', true)
+
+
+function chessBishopDream(boardSize, initPosition, initDirection, k) {
+	let pos = [...initPosition]
+	let dir = [...initDirection]
+	let testPos = []
+	let testDir = []
+	// console.log('pos 0', pos)
+	for(let i=1; i<= k; i++){
+		for(let j = 0; j<2; j++){
+			if((pos[j] === 0 && dir[j] === -1)|| (pos[j] === boardSize[j]-1 && dir[j] === 1)){  // if reflect top or bottom
+				testPos[j] = pos[j] 		// same vert pos
+				testDir[j] = dir[j] * (-1)	// reflect vert dir
+			}else{
+				// console.log(i)
+				testPos[j] = pos[j] + dir[j]
+				testDir[j] = dir[j]
+			}
+		}
+		dir = [...testDir]
+		pos = [...testPos]
+
+		// Check if looping.  If so jump ahead
+		if( pos[0]===initPosition[0] && dir[0]===initDirection[0] && 
+			pos[1]===initPosition[1] && dir[1]===initDirection[1]){
+				let remaining = k % i
+				i = k - remaining
+			}
+
+		// console.log('pos '+i,pos, 'dir', dir)
+	}
+	return pos
+}
+
+
+// console.log(chessBishopDream([3,7], [1,2], [-1,1], 13), 'assert', [0,1])
+// console.log(chessBishopDream([1,1], [0,0], [1,-1], 1000000000), 'assert', [0,0])
+// console.log(chessBishopDream([2,3], [1,2], [-1,-1], 41), 'assert', [0,2])
+// console.log(chessBishopDream([17,19], [14,8], [1,-1], 239239), 'assert', [4,17])
+// console.log(chessBishopDream([17,19], [16,18], [1,1], 239239239), 'assert', [10,2])
+// console.log(chessBishopDream([], [], [], ), 'assert', [])
+
