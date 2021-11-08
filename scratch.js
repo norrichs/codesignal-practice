@@ -1032,12 +1032,12 @@ Use subfunction
 
 // console.log(digitDegree(5))
 
-// function bishopAndPawn(bishop, pawn) {
-//     const cols = { a: 1, b: 2, c: 3, d: 4, e: 5, f: 6, g: 7, h: 8}
-//     const deltaCols = Math.max(cols[bishop[0]], cols[pawn[0]]) - Math.min(cols[bishop[0]], cols[pawn[0]])
-// 	const deltaRows = Math.max( parseInt(bishop[1]), parseInt(pawn[1]) ) - Math.min( parseInt(bishop[1]), parseInt(pawn[1]) )
-// 	return deltaRows === deltaCols
-// }
+function bishopAndPawn(bishop, pawn) {
+    const cols = { a: 1, b: 2, c: 3, d: 4, e: 5, f: 6, g: 7, h: 8}
+    const deltaCols = Math.max(cols[bishop[0]], cols[pawn[0]]) - Math.min(cols[bishop[0]], cols[pawn[0]])
+	const deltaRows = Math.max( parseInt(bishop[1]), parseInt(pawn[1]) ) - Math.min( parseInt(bishop[1]), parseInt(pawn[1]) )
+	return deltaRows === deltaCols
+}
 
 // console.log(bishopAndPawn('a1', 'c3'))
 
@@ -1181,28 +1181,28 @@ Use subfunction
 
 // console.log(lineEncoding('aaaabbbyxxxxxxccddddd'))
 
-// function chessKnight(cell) {
-// 	const cols = { a: 1, b: 2, c: 3, d: 4, e: 5, f: 6, g: 7, h: 8 };
-// 	const col = cols[cell[0]];
-// 	const row = parseInt(cell[1]);
-// 	const relativeMoves = [
-// 		{ row: 1, col: 2 },
-// 		{ row: 1, col: -2 },
-// 		{ row: -1, col: 2 },
-// 		{ row: -1, col: -2 },
-// 		{ row: 2, col: 1 },
-// 		{ row: 2, col: -1 },
-// 		{ row: -2, col: 1 },
-// 		{ row: -2, col: -1 },
-// 	];
-// 	return relativeMoves
-// 		.map((m) => {
-// 			return { row: m.row + row, col: m.col + col };
-// 		})
-// 		.filter((m) => {
-// 			return m.row > 0 && m.row < 9 && m.col > 0 && m.col < 9;
-// 		}).length;
-// }
+function chessKnight(cell) {
+	const cols = { a: 1, b: 2, c: 3, d: 4, e: 5, f: 6, g: 7, h: 8 };
+	const col = cols[cell[0]];
+	const row = parseInt(cell[1]);
+	const relativeMoves = [
+		{ row: 1, col: 2 },
+		{ row: 1, col: -2 },
+		{ row: -1, col: 2 },
+		{ row: -1, col: -2 },
+		{ row: 2, col: 1 },
+		{ row: 2, col: -1 },
+		{ row: -2, col: 1 },
+		{ row: -2, col: -1 },
+	];
+	return relativeMoves
+		.map((m) => {
+			return { row: m.row + row, col: m.col + col };
+		})
+		.filter((m) => {
+			return m.row > 0 && m.row < 9 && m.col > 0 && m.col < 9;
+		}).length;
+}
 
 // console.log(chessKnight("g6"));
 
@@ -3922,4 +3922,68 @@ function digitDifferenceSort(a) {
 	return a
 }
 
-console.log(digitDifferenceSort( [152, 23, 7, 887, 243] ),'assert',  [7, 887, 23, 243, 152]) // [ [152,3], [23,1], [7,0], [887, 1], [243,2]] -> [7, 887, 23, 243, 152]
+// console.log(digitDifferenceSort( [152, 23, 7, 887, 243] ),'assert',  [7, 887, 23, 243, 152]) // [ [152,3], [23,1], [7,0], [887, 1], [243,2]] -> [7, 887, 23, 243, 152]
+
+function bishopDiagonal(bishop1, bishop2) {
+	const columns = 'abcdefgh'.split('')
+	const pos0 =[
+		[columns.indexOf(bishop1[0]), parseInt(bishop1[1])-1],
+		[columns.indexOf(bishop2[0]), parseInt(bishop2[1])-1]
+	]
+	const delta0 = [pos0[0][0]-pos0[1][0], pos0[0][1] - pos0[1][1]]
+	let positionsFinal = []
+
+	if(Math.abs(delta0[0]) === Math.abs(delta0[1])){
+		let moves = pos0.map((p,i,pos) => {
+			const rowMove = pos[i][0] > pos[(i+1)%2][0]
+				? 7 - pos[i][0]
+				: (-1) * pos[i][0]
+			const colMove = pos[i][1] > pos[(i+1)%2][1]
+				? 7 - pos[i][1]
+				: (-1) * pos[i][1]
+			return (
+				Math.abs(rowMove) < Math.abs(colMove)
+					? [ rowMove, Math.abs(rowMove) * Math.sign(colMove)]
+					: [ Math.abs(colMove) * Math.sign(rowMove), colMove]
+			)
+		})
+		// calc final position and convert to chess notation
+		positionsFinal = pos0.map((p,i) => {
+			return [p[0] + moves[i][0], p[1] + moves[i][1]]
+		}).map(p => columns[p[0]] + (p[1]+1))
+
+
+		// console.log('input', [bishop1,bishop2],'pos0', pos0, 'moves', moves, 'positionsFinal', positionsFinal)
+	}else{
+		// console.log('no change')
+		positionsFinal = [bishop1, bishop2]
+	}
+
+	return positionsFinal.sort((a,b) => {
+		if(a < b) return -1
+		if(a > b) return 1
+		else return 0
+	})
+}
+	// console.log(delta0)
+	// convert chess notation to r,c notation
+	// calculate delta r and delta c.
+	//	if equal
+	//		calculate moves
+	//		highest row# -> increase move row = 8 - position row
+	//		highest col# -> increase move col = 8 - position col
+	//		AND vice versa
+	//		calculate new positions
+	//	if not equal
+	//		new positions = old positions
+	//	sort new positions by lexicographic order
+	//	return sorted
+
+
+
+console.log(bishopDiagonal( 'd8', 'b5'), 'assert', ['b5', 'd8'])
+console.log(bishopDiagonal( 'd8', 'd7'), 'assert', ['d7', 'd8'])
+console.log(bishopDiagonal( 'd7', 'f5'), 'assert', ['c8', 'h3'])
+console.log(bishopDiagonal( 'a1', 'h8'), 'assert', ['a1', 'h8'])
+console.log(bishopDiagonal( 'g3', 'e1'), 'assert', ['e1', 'h4'])
+console.log(bishopDiagonal( 'b4', 'e7'), 'assert', ['a3', 'f8'])
