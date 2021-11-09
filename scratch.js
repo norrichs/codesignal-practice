@@ -1,5 +1,5 @@
 const isEqualRecursive = (arr1, arr2) => {
-	if (arr1 === undefined || arr2 === undefined) return false
+	if (arr1 === undefined || arr2 === undefined) return false;
 	if (arr1.length === arr2.length) {
 		for (let i = 0; i < arr1.length; i++) {
 			if (arr1[i] !== arr2[i]) {
@@ -1033,10 +1033,14 @@ Use subfunction
 // console.log(digitDegree(5))
 
 function bishopAndPawn(bishop, pawn) {
-    const cols = { a: 1, b: 2, c: 3, d: 4, e: 5, f: 6, g: 7, h: 8}
-    const deltaCols = Math.max(cols[bishop[0]], cols[pawn[0]]) - Math.min(cols[bishop[0]], cols[pawn[0]])
-	const deltaRows = Math.max( parseInt(bishop[1]), parseInt(pawn[1]) ) - Math.min( parseInt(bishop[1]), parseInt(pawn[1]) )
-	return deltaRows === deltaCols
+	const cols = { a: 1, b: 2, c: 3, d: 4, e: 5, f: 6, g: 7, h: 8 };
+	const deltaCols =
+		Math.max(cols[bishop[0]], cols[pawn[0]]) -
+		Math.min(cols[bishop[0]], cols[pawn[0]]);
+	const deltaRows =
+		Math.max(parseInt(bishop[1]), parseInt(pawn[1])) -
+		Math.min(parseInt(bishop[1]), parseInt(pawn[1]));
+	return deltaRows === deltaCols;
 }
 
 // console.log(bishopAndPawn('a1', 'c3'))
@@ -3469,11 +3473,11 @@ function starRotation(matrix, width, center, t) {
 // if 0 contour is removed, the outer is i===1, etc
 // shift contours clockwise if i is even, counterclockwise if odd
 function contoursShifting(matrix) {
-	console.log('matrix', matrix)
+	console.log("matrix", matrix);
 	// read contours into array of arrays
 	let width0 = matrix[0].length;
 	let height0 = matrix.length;
-	if( height0 === 1 && width0 === 1) return matrix
+	if (height0 === 1 && width0 === 1) return matrix;
 	if (height0 === 1) {
 		matrix[0].unshift(matrix[0].pop());
 		return matrix;
@@ -3490,18 +3494,17 @@ function contoursShifting(matrix) {
 	const cNum = Math.min(width0 / 2, height0 / 2);
 	let cArray = [];
 	for (let c = 0; c < cNum; c++) {
-		w = width0 - 2*c
-		h = height0 - 2*c
-		console.log('reading in', w, h)
+		w = width0 - 2 * c;
+		h = height0 - 2 * c;
+		console.log("reading in", w, h);
 		if (h === 1) {
-			cArray[c] = matrix[c].slice(c, w + c)
-		}else if (w === 1) {
-			cArray[c] = new Array(h)
-			for( let i = 0; i < h; i++){
-				cArray[c][i] = matrix[c + i][c]
+			cArray[c] = matrix[c].slice(c, w + c);
+		} else if (w === 1) {
+			cArray[c] = new Array(h);
+			for (let i = 0; i < h; i++) {
+				cArray[c][i] = matrix[c + i][c];
 			}
-			
-		}else{
+		} else {
 			top = matrix[c].slice(c, w + c);
 			bottom = matrix[height0 - 1 - c].slice(c, w + c).reverse();
 			left = [];
@@ -3510,19 +3513,19 @@ function contoursShifting(matrix) {
 				right.push(matrix[i][width0 - 1 - c]);
 				left.push(matrix[height0 - 1 - i][c]);
 			}
-			console.log('sides', top, right, bottom, left)
+			console.log("sides", top, right, bottom, left);
 			cArray[c] = [...top, ...right, ...bottom, ...left];
 		}
-		console.log('contour' + c, cArray[c])
+		console.log("contour" + c, cArray[c]);
 	}
 
 	// unshift / splice or push / splice to
 	const shiftedCArray = cArray.map((contour, i) => {
-		if(contour.length === Math.min(width0, height0)){
-			console.log('simple contour', contour)
-			contour.push(contour.shift())
-			console.log('shifted simple contour', contour)
-		}else if (i % 2 === 0) contour.unshift(contour.pop());
+		if (contour.length === Math.min(width0, height0)) {
+			console.log("simple contour", contour);
+			contour.push(contour.shift());
+			console.log("shifted simple contour", contour);
+		} else if (i % 2 === 0) contour.unshift(contour.pop());
 		else contour.push(contour.shift());
 		return contour;
 	});
@@ -3537,11 +3540,15 @@ function contoursShifting(matrix) {
 	for (let c = 0; c < cNum; c++) {
 		w = width0 - 2 * c;
 		h = height0 - 2 * c - 2;
-		if(height0 - 2*c ===1){
-			cArray[c].forEach((el, i) => { r[c][c + i] = el}) 
-		}else if(width0 - 2*c ===1){
-			cArray[c].forEach((el, i) => { r[c + i][c] = el})
-		}else{
+		if (height0 - 2 * c === 1) {
+			cArray[c].forEach((el, i) => {
+				r[c][c + i] = el;
+			});
+		} else if (width0 - 2 * c === 1) {
+			cArray[c].forEach((el, i) => {
+				r[c + i][c] = el;
+			});
+		} else {
 			top = shiftedCArray[c].slice(0, w);
 			right = shiftedCArray[c].slice(w, w + h);
 			bottom = shiftedCArray[c].slice(w + h, w * 2 + h);
@@ -3620,121 +3627,131 @@ function contoursShifting(matrix) {
 // 		[12, 13, 14, 15, 10],
 // 	]
 // ));
-// console.log(contoursShifting([[1,2,3], 
-// 	[4,5,6], 
-// 	[7,8,9], 
-// 	[10,11,12]]), 'assert', [[4,1,2], 
-// 	[7,8,3], 
-// 	[10,5,6], 
+// console.log(contoursShifting([[1,2,3],
+// 	[4,5,6],
+// 	[7,8,9],
+// 	[10,11,12]]), 'assert', [[4,1,2],
+// 	[7,8,3],
+// 	[10,5,6],
 // 	[11,12,9]])
 
-
-
-function gravitation(rows){
+function gravitation(rows) {
 	// 	convert to column arrays
-	let columns = new Array(rows[0].length)
-	columns = columns.fill(null).map((col, i)=>{
-		col = new Array(rows.length)
-		col.fill(null)
+	let columns = new Array(rows[0].length);
+	columns = columns.fill(null).map((col, i) => {
+		col = new Array(rows.length);
+		col.fill(null);
 		return col.map((el, j) => {
-			return rows[j][i]
-		})
-	})
+			return rows[j][i];
+		});
+	});
 
-	
-	console.log('columns', columns)
+	console.log("columns", columns);
 	//	trim top spaces
-	columns = columns.map(col=>{
-		for(let i=0; i<col.length; i++){
-			if(col[i] !== ".") return col.slice(i)
+	columns = columns.map((col) => {
+		for (let i = 0; i < col.length; i++) {
+			if (col[i] !== ".") return col.slice(i);
 		}
-		return []
-	})
-	console.log('trimmed columns', columns)
-	//	splice indexof '.', 
+		return [];
+	});
+	console.log("trimmed columns", columns);
+	//	splice indexof '.',
 	//	at end of each round, filter for no spaces, return indices
-	let counts = columns.map(col => col.reduce((sum, el) => {
-		return  el === "." ? sum + 1 : sum 
-	},0))
-	console.log('counts', counts)
+	let counts = columns.map((col) =>
+		col.reduce((sum, el) => {
+			return el === "." ? sum + 1 : sum;
+		}, 0)
+	);
+	console.log("counts", counts);
 
-	let min = Math.min(...counts)
-	let res = []
+	let min = Math.min(...counts);
+	let res = [];
 	counts.forEach((count, i) => {
-		if(count === min) res.push(i)
-	})
-	return res
+		if (count === min) res.push(i);
+	});
+	return res;
 }
 
-
-// let test = gravitation(["#..#.", 
-// ".##..", 
-// ".#...", 
+// let test = gravitation(["#..#.",
+// ".##..",
+// ".#...",
 // ".#..."])
 // console.log(test, 'assert', [1,4], isEqualRecursive(test,[1,4]))
 
-
 function isInformationConsistent(evidences) {
-    let testimony = 0
-    for(let j=0; j<evidences[0].length; j++){
-        testimony = 0
-        for(let i=0; i<evidences.length; i++){
-			console.log(i,j)
-            if( evidences[i][j] !== 0 && testimony !== 0){
-                if( evidences[i][j] !== testimony) return false
-            }else testimony = testimony === 0 ? evidences[i][j] : testimony
-        }
-    }
-    return true
+	let testimony = 0;
+	for (let j = 0; j < evidences[0].length; j++) {
+		testimony = 0;
+		for (let i = 0; i < evidences.length; i++) {
+			console.log(i, j);
+			if (evidences[i][j] !== 0 && testimony !== 0) {
+				if (evidences[i][j] !== testimony) return false;
+			} else testimony = testimony === 0 ? evidences[i][j] : testimony;
+		}
+	}
+	return true;
 }
 
 // console.log(isInformationConsistent([
-// 	[0,0,-1], 
-// 	[-1,1,-1], 
-// 	[-1,1,0], 
-// 	[0,1,0], 
+// 	[0,0,-1],
+// 	[-1,1,-1],
+// 	[-1,1,0],
+// 	[0,1,0],
 // 	[0,1,1]]), 'assert', false)
 
-
-
 function correctNonogram(size, nonogramField) {
-	let spec = []
-	let stripe = []
-	const specSize = nonogramField.length - size
-	for(let i=0; i<size; i++){
-		spec = nonogramField[ specSize + i].slice(0,specSize)
-		stripe = nonogramField[ specSize + i].slice(specSize)
-		console.log('row '+i,spec, stripe)
+	let spec = [];
+	let stripe = [];
+	const specSize = nonogramField.length - size;
+	for (let i = 0; i < size; i++) {
+		spec = nonogramField[specSize + i].slice(0, specSize);
+		stripe = nonogramField[specSize + i].slice(specSize);
+		console.log("row " + i, spec, stripe);
 
-		specNum = spec.map(s => {return s!=="-"?parseInt(s):false}).filter(s=>s)
-		stripeNum = stripe.join('').split('.').map(run => run.length).filter(r=>r>0)
-		console.log('row '+i,specNum, stripeNum)
+		specNum = spec
+			.map((s) => {
+				return s !== "-" ? parseInt(s) : false;
+			})
+			.filter((s) => s);
+		stripeNum = stripe
+			.join("")
+			.split(".")
+			.map((run) => run.length)
+			.filter((r) => r > 0);
+		console.log("row " + i, specNum, stripeNum);
 
-		if(specNum.length === stripeNum.length){
-			for(let k=0; k<specNum.length; k++){
-				if(specNum[k] !== stripeNum[k]) return false
+		if (specNum.length === stripeNum.length) {
+			for (let k = 0; k < specNum.length; k++) {
+				if (specNum[k] !== stripeNum[k]) return false;
 			}
-		}else return false
-		
-		spec = spec.map((el, j) => nonogramField[j][specSize + i])
-		stripe = stripe.map((el, j) => nonogramField[specSize + j][specSize + i])
-		console.log('col '+i, spec, stripe)
-		
-		specNum = spec.map(s => {return s!=="-"?parseInt(s):false}).filter(s=>s)
-		stripeNum = stripe.join('').split('.').map(run => run.length).filter(r=>r>0)
-		console.log('col '+i,specNum, stripeNum)
-		if(specNum.length === stripeNum.length){
-			for(let k=0; k<specNum.length; k++){
-				if(specNum[k] !== stripeNum[k]) return false
+		} else return false;
+
+		spec = spec.map((el, j) => nonogramField[j][specSize + i]);
+		stripe = stripe.map(
+			(el, j) => nonogramField[specSize + j][specSize + i]
+		);
+		console.log("col " + i, spec, stripe);
+
+		specNum = spec
+			.map((s) => {
+				return s !== "-" ? parseInt(s) : false;
+			})
+			.filter((s) => s);
+		stripeNum = stripe
+			.join("")
+			.split(".")
+			.map((run) => run.length)
+			.filter((r) => r > 0);
+		console.log("col " + i, specNum, stripeNum);
+		if (specNum.length === stripeNum.length) {
+			for (let k = 0; k < specNum.length; k++) {
+				if (specNum[k] !== stripeNum[k]) return false;
 			}
-		}else return false
-		
+		} else return false;
 	}
 
-	return true
-
+	return true;
 }
-
 
 // console.log(correctNonogram(5,[
 // 	["-", "-", "-", "-", "-", "-", "-", "-"],
@@ -3757,18 +3774,20 @@ function correctNonogram(size, nonogramField) {
 // 	["-", "-", "2", ".", ".", ".", "#", "#"]]), 'assert', false)
 
 function shuffledArray(shuffled) {
-	const total = shuffled.reduce((total,n) => {return n + total}, 0)
-	for(let i=0; i<shuffled.length; i++){
-		if(2 * shuffled[i] === total){
-			shuffled.splice(i,1)
-			return shuffled.sort((a,b) => {
-				if(a<b) return -1
-				else if(a>b) return 1
-				else return 0
-			})
+	const total = shuffled.reduce((total, n) => {
+		return n + total;
+	}, 0);
+	for (let i = 0; i < shuffled.length; i++) {
+		if (2 * shuffled[i] === total) {
+			shuffled.splice(i, 1);
+			return shuffled.sort((a, b) => {
+				if (a < b) return -1;
+				else if (a > b) return 1;
+				else return 0;
+			});
 		}
 	}
-	return 'no result'
+	return "no result";
 }
 
 // algos
@@ -3783,12 +3802,14 @@ function shuffledArray(shuffled) {
 // console.log(shuffledArray([1,-3,4,9,5,-2,3,1]))
 
 function sortByHeight(a) {
-	let people = a.filter(n => n!==-1).sort((a,b) => {
-		if(a<b) return -1
-		else if(a>b) return 1
-		else return 0
-	})
-	return a.map(n => n===-1 ? n : people.shift())
+	let people = a
+		.filter((n) => n !== -1)
+		.sort((a, b) => {
+			if (a < b) return -1;
+			else if (a > b) return 1;
+			else return 0;
+		});
+	return a.map((n) => (n === -1 ? n : people.shift()));
 }
 
 // console.log( sortByHeight([-1, 150, 190, 170, -1, -1, 160, 180]))
@@ -3798,27 +3819,29 @@ function boxesPacking(length, width, height) {
 	// sort by largest dimension
 	// 3 loops, checking for d_i > d_i+1
 
-	let boxes = []
-	length.forEach((l,i) => {
-		boxes.push([length[i], width[i], height[i]].sort((a,b) => {
-			if(a<b) return 1
-			if(a>b) return -1
-			else return 0
-		}))
-	})
+	let boxes = [];
+	length.forEach((l, i) => {
+		boxes.push(
+			[length[i], width[i], height[i]].sort((a, b) => {
+				if (a < b) return 1;
+				if (a > b) return -1;
+				else return 0;
+			})
+		);
+	});
 
-	boxes.sort((a,b) => {
-		if(a[0] < b[0]) return 1
-		if(a[0] > b[0]) return -1
-		else return 0
-	})
+	boxes.sort((a, b) => {
+		if (a[0] < b[0]) return 1;
+		if (a[0] > b[0]) return -1;
+		else return 0;
+	});
 
-	for(let i=0; i<boxes.length-1; i++){
-		if(boxes[i][0] <= boxes[i+1][0]) return false
-		if(boxes[i][1] <= boxes[i+1][1]) return false
-		if(boxes[i][2] <= boxes[i+1][2]) return false
+	for (let i = 0; i < boxes.length - 1; i++) {
+		if (boxes[i][0] <= boxes[i + 1][0]) return false;
+		if (boxes[i][1] <= boxes[i + 1][1]) return false;
+		if (boxes[i][2] <= boxes[i + 1][2]) return false;
 	}
-	return true
+	return true;
 }
 
 // console.log(boxesPacking([1,3,2], [1,3,2], [1,3,2]), 'assert', true)
@@ -3826,160 +3849,165 @@ function boxesPacking(length, width, height) {
 // console.log(boxesPacking([3,1,2], [3,1,2], [3,2,1]), 'assert', false)
 
 function maximumSum(a, q) {
-    // algo
-    //  initialize array s of size a.length, filled w/ arrays of [0,i]
-    //  q.forEach add 1 to each array element in indicated range
-    //  sort array by first elements
+	// algo
+	//  initialize array s of size a.length, filled w/ arrays of [0,i]
+	//  q.forEach add 1 to each array element in indicated range
+	//  sort array by first elements
 	//	sort a by largest
 	//  a.reduce()
-    //  result is sum( a[ s[1] ] * s[0]) 
+	//  result is sum( a[ s[1] ] * s[0])
 
-	let scores = new Array(a.length)
-	for(let i = 0; i<scores.length; i++){
-		scores[i] = [0, i]
+	let scores = new Array(a.length);
+	for (let i = 0; i < scores.length; i++) {
+		scores[i] = [0, i];
 	}
-	q.forEach(range => {
-		for(let i = range[0]; i <= range[1]; i++){
-			scores[i][0] += 1
+	q.forEach((range) => {
+		for (let i = range[0]; i <= range[1]; i++) {
+			scores[i][0] += 1;
 		}
-	})
-	scores.sort((a,b) => {
-		if(a[0] > b[0]) return -1
-		if(a[0] < b[0]) return 1
-		return 0 
-	})
-	let aSorted = [...a]
-	aSorted.sort((a,b) => {
-		if(a>b) return -1
-		if(a<b) return 1
-		return 0
-	})
-	
-	console.log('a', a,'aSorted', aSorted, 'scores', scores)
+	});
+	scores.sort((a, b) => {
+		if (a[0] > b[0]) return -1;
+		if (a[0] < b[0]) return 1;
+		return 0;
+	});
+	let aSorted = [...a];
+	aSorted.sort((a, b) => {
+		if (a > b) return -1;
+		if (a < b) return 1;
+		return 0;
+	});
 
-	return aSorted.reduce((sum, x, i) => {return sum + x * scores[i][0]},0)
+	console.log("a", a, "aSorted", aSorted, "scores", scores);
+
+	return aSorted.reduce((sum, x, i) => {
+		return sum + x * scores[i][0];
+	}, 0);
 }
-
 
 // console.log(maximumSum( [9, 7, 2, 4, 4], [[1, 3], [1, 4], [0, 2]]), 'assert', 62) // 20 +  24 + 18 = 62
 
 function rowsRearranging(matrix) {
-	const recursiveCompare = (a,b) => {
-		if(a[0] > b[0]) return 1
-		else if(b[0] > a[0]) return -1
-		else{
-			if(a.length === 1) return 0
-			else return recursiveCompare(a.slice(1), b.slice(1))
+	const recursiveCompare = (a, b) => {
+		if (a[0] > b[0]) return 1;
+		else if (b[0] > a[0]) return -1;
+		else {
+			if (a.length === 1) return 0;
+			else return recursiveCompare(a.slice(1), b.slice(1));
+		}
+	};
+
+	matrix.sort(recursiveCompare);
+
+	for (let i = 0; i < matrix[0].length; i++) {
+		for (let j = 0; j < matrix.length - 1; j++) {
+			if (matrix[j][i] >= matrix[j + 1][i]) return false;
 		}
 	}
-
-	matrix.sort(recursiveCompare)
-
-	for(let i = 0; i < matrix[0].length; i++){
-		for(let j=0; j<matrix.length-1; j++){
-			if(matrix[j][i] >= matrix[j+1][i] ) return false
-		}
-	}
-	return true
+	return true;
 }
 
-
 // console.log(rowsRearranging([
-// 	[3, 0, 1], 
-// 	[3, 1, 3], 
+// 	[3, 0, 1],
+// 	[3, 1, 3],
 // 	[3, 1, 1]]),
 // 	'assert', false)
 // console.log(rowsRearranging([
-// 	[2, 7, 1], 
-// 	[0, 2, 0], 
+// 	[2, 7, 1],
+// 	[0, 2, 0],
 // 	[1, 3, 1]]),
 // 	'assert', false)
 // 	console.log(rowsRearranging([
-// 		[6, 4], 
-// 		[2, 2], 
+// 		[6, 4],
+// 		[2, 2],
 // 		[4, 3]]),
 // 		'assert', true)
 
 function digitDifferenceSort(a) {
-    // sort by difference of largest and smallest digits
-    // if tie, larger index in array comes first
-	a = a.map((el,i) => [el,i])
-	a.sort((a,b) => {
-		let arr = a[0].toString().split('').map(n => parseInt(n))
-		const aDiff = Math.max(...arr) - Math.min(...arr)
-		arr = b[0].toString().split('').map(n => parseInt(n))
-		const bDiff = Math.max(...arr) - Math.min(...arr)
+	// sort by difference of largest and smallest digits
+	// if tie, larger index in array comes first
+	a = a.map((el, i) => [el, i]);
+	a.sort((a, b) => {
+		let arr = a[0]
+			.toString()
+			.split("")
+			.map((n) => parseInt(n));
+		const aDiff = Math.max(...arr) - Math.min(...arr);
+		arr = b[0]
+			.toString()
+			.split("")
+			.map((n) => parseInt(n));
+		const bDiff = Math.max(...arr) - Math.min(...arr);
 
-		if(aDiff > bDiff) return 1
-		if(aDiff < bDiff) return -1
-		else{
-			if(a[1] > b[1]) return -1
-			if(a[1] < b[1]) return 1
-			else return 0
+		if (aDiff > bDiff) return 1;
+		if (aDiff < bDiff) return -1;
+		else {
+			if (a[1] > b[1]) return -1;
+			if (a[1] < b[1]) return 1;
+			else return 0;
 		}
-	})
-	a = a.map(arr => arr[0])
-	return a
+	});
+	a = a.map((arr) => arr[0]);
+	return a;
 }
 
 // console.log(digitDifferenceSort( [152, 23, 7, 887, 243] ),'assert',  [7, 887, 23, 243, 152]) // [ [152,3], [23,1], [7,0], [887, 1], [243,2]] -> [7, 887, 23, 243, 152]
 
 function bishopDiagonal(bishop1, bishop2) {
-	const columns = 'abcdefgh'.split('')
-	const pos0 =[
-		[columns.indexOf(bishop1[0]), parseInt(bishop1[1])-1],
-		[columns.indexOf(bishop2[0]), parseInt(bishop2[1])-1]
-	]
-	const delta0 = [pos0[0][0]-pos0[1][0], pos0[0][1] - pos0[1][1]]
-	let positionsFinal = []
+	const columns = "abcdefgh".split("");
+	const pos0 = [
+		[columns.indexOf(bishop1[0]), parseInt(bishop1[1]) - 1],
+		[columns.indexOf(bishop2[0]), parseInt(bishop2[1]) - 1],
+	];
+	const delta0 = [pos0[0][0] - pos0[1][0], pos0[0][1] - pos0[1][1]];
+	let positionsFinal = [];
 
-	if(Math.abs(delta0[0]) === Math.abs(delta0[1])){
-		let moves = pos0.map((p,i,pos) => {
-			const rowMove = pos[i][0] > pos[(i+1)%2][0]
-				? 7 - pos[i][0]
-				: (-1) * pos[i][0]
-			const colMove = pos[i][1] > pos[(i+1)%2][1]
-				? 7 - pos[i][1]
-				: (-1) * pos[i][1]
-			return (
-				Math.abs(rowMove) < Math.abs(colMove)
-					? [ rowMove, Math.abs(rowMove) * Math.sign(colMove)]
-					: [ Math.abs(colMove) * Math.sign(rowMove), colMove]
-			)
-		})
+	if (Math.abs(delta0[0]) === Math.abs(delta0[1])) {
+		let moves = pos0.map((p, i, pos) => {
+			const rowMove =
+				pos[i][0] > pos[(i + 1) % 2][0]
+					? 7 - pos[i][0]
+					: -1 * pos[i][0];
+			const colMove =
+				pos[i][1] > pos[(i + 1) % 2][1]
+					? 7 - pos[i][1]
+					: -1 * pos[i][1];
+			return Math.abs(rowMove) < Math.abs(colMove)
+				? [rowMove, Math.abs(rowMove) * Math.sign(colMove)]
+				: [Math.abs(colMove) * Math.sign(rowMove), colMove];
+		});
 		// calc final position and convert to chess notation
-		positionsFinal = pos0.map((p,i) => {
-			return [p[0] + moves[i][0], p[1] + moves[i][1]]
-		}).map(p => columns[p[0]] + (p[1]+1))
-
+		positionsFinal = pos0
+			.map((p, i) => {
+				return [p[0] + moves[i][0], p[1] + moves[i][1]];
+			})
+			.map((p) => columns[p[0]] + (p[1] + 1));
 
 		// console.log('input', [bishop1,bishop2],'pos0', pos0, 'moves', moves, 'positionsFinal', positionsFinal)
-	}else{
+	} else {
 		// console.log('no change')
-		positionsFinal = [bishop1, bishop2]
+		positionsFinal = [bishop1, bishop2];
 	}
 
-	return positionsFinal.sort((a,b) => {
-		if(a < b) return -1
-		if(a > b) return 1
-		else return 0
-	})
+	return positionsFinal.sort((a, b) => {
+		if (a < b) return -1;
+		if (a > b) return 1;
+		else return 0;
+	});
 }
-	// console.log(delta0)
-	// convert chess notation to r,c notation
-	// calculate delta r and delta c.
-	//	if equal
-	//		calculate moves
-	//		highest row# -> increase move row = 8 - position row
-	//		highest col# -> increase move col = 8 - position col
-	//		AND vice versa
-	//		calculate new positions
-	//	if not equal
-	//		new positions = old positions
-	//	sort new positions by lexicographic order
-	//	return sorted
-
-
+// console.log(delta0)
+// convert chess notation to r,c notation
+// calculate delta r and delta c.
+//	if equal
+//		calculate moves
+//		highest row# -> increase move row = 8 - position row
+//		highest col# -> increase move col = 8 - position col
+//		AND vice versa
+//		calculate new positions
+//	if not equal
+//		new positions = old positions
+//	sort new positions by lexicographic order
+//	return sorted
 
 // console.log(bishopDiagonal( 'd8', 'b5'), 'assert', ['b5', 'd8'])
 // console.log(bishopDiagonal( 'd8', 'd7'), 'assert', ['d7', 'd8'])
@@ -3989,23 +4017,22 @@ function bishopDiagonal(bishop1, bishop2) {
 // console.log(bishopDiagonal( 'b4', 'e7'), 'assert', ['a3', 'f8'])
 
 function whoseTurn(p) {
-	const columns = 'abcdefgh'.split('')
-	const isBlack = p.split(";")
-		.map(p_n => [columns.indexOf(p_n[0]), parseInt(p_n[1]-1)])
-		.map(coord => {
-			return ( 
-				coord[0] % 2 === 0 // even
-					? coord[1] % 2 === 0 // both
-					: coord[1] % 2 === 1 // diff
-			)
-		})
-	console.log('p', p, 'isBlack', isBlack)
+	const columns = "abcdefgh".split("");
+	const isBlack = p
+		.split(";")
+		.map((p_n) => [columns.indexOf(p_n[0]), parseInt(p_n[1] - 1)])
+		.map((coord) => {
+			return coord[0] % 2 === 0 // even
+				? coord[1] % 2 === 0 // both
+				: coord[1] % 2 === 1; // diff
+		});
+	console.log("p", p, "isBlack", isBlack);
 	const isSame = [
 		(isBlack[0] && isBlack[1]) || (!isBlack[0] && !isBlack[1]),
-		(isBlack[2] && isBlack[3]) || (!isBlack[2] && !isBlack[3])
-	]
-	console.log('isSame', isSame)
-	return (isSame[0] && isSame[1]) || (!isSame[0] && !isSame[1]) 
+		(isBlack[2] && isBlack[3]) || (!isBlack[2] && !isBlack[3]),
+	];
+	console.log("isSame", isSame);
+	return (isSame[0] && isSame[1]) || (!isSame[0] && !isSame[1]);
 }
 
 //	algo
@@ -4016,39 +4043,45 @@ function whoseTurn(p) {
 
 // console.log(whoseTurn('b1;g1;b8;g8'), 'assert', true)
 
-
 function chessBishopDream(boardSize, initPosition, initDirection, k) {
-	let pos = [...initPosition]
-	let dir = [...initDirection]
-	let testPos = []
-	let testDir = []
+	let pos = [...initPosition];
+	let dir = [...initDirection];
+	let testPos = [];
+	let testDir = [];
 	// console.log('pos 0', pos)
-	for(let i=1; i<= k; i++){
-		for(let j = 0; j<2; j++){
-			if((pos[j] === 0 && dir[j] === -1)|| (pos[j] === boardSize[j]-1 && dir[j] === 1)){  // if reflect top or bottom
-				testPos[j] = pos[j] 		// same vert pos
-				testDir[j] = dir[j] * (-1)	// reflect vert dir
-			}else{
+	for (let i = 1; i <= k; i++) {
+		for (let j = 0; j < 2; j++) {
+			if (
+				(pos[j] === 0 && dir[j] === -1) ||
+				(pos[j] === boardSize[j] - 1 && dir[j] === 1)
+			) {
+				// if reflect top or bottom
+				testPos[j] = pos[j]; // same vert pos
+				testDir[j] = dir[j] * -1; // reflect vert dir
+			} else {
 				// console.log(i)
-				testPos[j] = pos[j] + dir[j]
-				testDir[j] = dir[j]
+				testPos[j] = pos[j] + dir[j];
+				testDir[j] = dir[j];
 			}
 		}
-		dir = [...testDir]
-		pos = [...testPos]
+		dir = [...testDir];
+		pos = [...testPos];
 
 		// Check if looping.  If so jump ahead
-		if( pos[0]===initPosition[0] && dir[0]===initDirection[0] && 
-			pos[1]===initPosition[1] && dir[1]===initDirection[1]){
-				let remaining = k % i
-				i = k - remaining
-			}
+		if (
+			pos[0] === initPosition[0] &&
+			dir[0] === initDirection[0] &&
+			pos[1] === initPosition[1] &&
+			dir[1] === initDirection[1]
+		) {
+			let remaining = k % i;
+			i = k - remaining;
+		}
 
 		// console.log('pos '+i,pos, 'dir', dir)
 	}
-	return pos
+	return pos;
 }
-
 
 // console.log(chessBishopDream([3,7], [1,2], [-1,1], 13), 'assert', [0,1])
 // console.log(chessBishopDream([1,1], [0,0], [1,-1], 1000000000), 'assert', [0,0])
@@ -4057,3 +4090,54 @@ function chessBishopDream(boardSize, initPosition, initDirection, k) {
 // console.log(chessBishopDream([17,19], [16,18], [1,1], 239239239), 'assert', [10,2])
 // console.log(chessBishopDream([], [], [], ), 'assert', [])
 
+function chessTriangle(n, m) {
+	const maxDim = Math.max(n, m);
+	const minDim = Math.min(n, m);
+	let count = 0;
+	let rows, columns;
+	if (n * m < 6 || minDim < 2) return count;
+	if (minDim >= 2) {
+		// count 2x3's
+		rows = minDim - 1;
+		columns = maxDim - 2;
+		count += 8 * rows * columns;
+		if (minDim >= 3) {
+			rows = minDim - 2;
+			columns = maxDim - 1;
+			count += 8 * rows * columns;
+		}
+	}
+	if (n >= 4 || m >= 4) {
+		// count 2x4's
+		rows = minDim - 1;
+		columns = maxDim - 3;
+		count += 8 * rows * columns;
+
+		if (minDim >= 4) {
+			rows = minDim - 3;
+			columns = maxDim - 1;
+			count += 8 * rows * columns;
+		}
+	}
+	if (n >= 3 && m >= 3) {
+		// count 3x3's
+		rows = minDim - 3 + 1;
+		columns = maxDim - 3 + 1;
+		count += 16 * rows * columns;
+	}
+	if (minDim >= 3 && maxDim >= 4) {
+		// count 3x4's
+		rows = minDim - 3 + 1
+		columns = maxDim - 4 + 1
+		count += 8 * rows * columns
+		if(minDim >= 4){
+			rows = minDim - 4 + 1
+			columns = maxDim - 3 + 1
+			count += 8 * rows * columns
+		}
+	}
+	return count;
+}
+console.log(chessTriangle(1, 8), "assert", 0);
+console.log(chessTriangle(2, 4), "assert", 24);
+console.log(chessTriangle(8, 8), "assert", 72);
